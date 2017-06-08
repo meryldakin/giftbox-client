@@ -27,7 +27,7 @@ export default function GiftCard(props){
         </Grid.Row>
       </Grid>
     </Segment>
-    <Segment padded color=''>
+    <Segment >
       <Grid >
         <Grid.Row>
           <Grid.Column width={3}>

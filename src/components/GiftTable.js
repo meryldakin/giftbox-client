@@ -4,7 +4,7 @@ import {Icon, Segment, Header, Grid, Container, Button } from 'semantic-ui-react
 
 import GiftCard from './GiftCard'
 
-const GiftTable = () => {
+const GiftTable = (props) => {
   return (
     <div>
       <Grid >
@@ -15,9 +15,9 @@ const GiftTable = () => {
           <Grid.Column floated='right' width={5}>
             <Container>
               <Button.Group compact fluid>
-               <Link to='/amigo/gifts'><Button positive>Gifts</Button></Link>
+               <Link to={`/friends/${props.friend.id}`}><Button positive>Gifts</Button></Link>
                <Button.Or />
-               <Link to='/amigo/events'><Button >Events</Button></Link>
+               <Link to={`/friends/${props.friend.id}/events`}><Button >Events</Button></Link>
              </Button.Group>
             </Container>
           </Grid.Column>

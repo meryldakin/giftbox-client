@@ -7,7 +7,7 @@ export default function FriendList(props){
 
   return (
     <div>
-      
+
       <ul>
         {formattedlist}
       </ul>

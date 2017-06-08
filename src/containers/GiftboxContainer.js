@@ -50,6 +50,7 @@ class GiftboxContainer extends Component {
       <Container>
         <NavBar />
       </Container>
+
         <Switch>
           <Route path="/friends" render={() => <FriendsPage friends={this.state.friends} /> } />
           <Route exact path="/" render={() =>
@@ -84,6 +85,7 @@ class GiftboxContainer extends Component {
                 <Grid.Row>
                   <Grid.Column width={5}>
                     <Link to="/friends"><h2>Friends</h2></Link>
+                    
                     <FriendList friends={this.state.friends}/>
                   </Grid.Column>
 

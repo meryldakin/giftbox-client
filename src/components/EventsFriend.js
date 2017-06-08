@@ -4,7 +4,8 @@ import {Icon, Segment, Header, Grid, Container, Button } from 'semantic-ui-react
 
 import EventCard from './EventCard'
 
-const EventsFriend = () => {
+const EventsFriend = (props) => {
+  console.log(props)
   return (
     <div>
       <Grid >
@@ -15,9 +16,9 @@ const EventsFriend = () => {
           <Grid.Column floated='right' width={5}>
             <Container>
               <Button.Group compact fluid>
-               <Link to='/amigo/gifts'><Button compact>Gifts</Button></Link>
+               <Link to={`/friends/${props.friend.id}`}><Button compact>Gifts</Button></Link>
                <Button.Or />
-               <Link to='/amigo/events'><Button positive>Events</Button></Link>
+               <Link to={`/friends/${props.friend.id}/events`}><Button positive>Events</Button></Link>
              </Button.Group>
             </Container>
           </Grid.Column>

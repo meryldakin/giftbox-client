@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 
 import { Container, Divider, Grid, Header, Icon, Segment } from 'semantic-ui-react'
@@ -40,7 +40,7 @@ export default function Friend(props){
               </Grid.Column>
 
               <Grid.Column width={10}>
-                <Header as="h1">Nathan Johnson</Header>
+                <Header as="h1">{props.friend.firstName} {props.friend.lastName}</Header>
                 <h4>Birthday: 8/13 </h4>
                 <h4>Notes:</h4>
                 <p>Likes ice cream, not into birds</p>
@@ -57,17 +57,18 @@ export default function Friend(props){
               </Grid.Column>
 
               <Grid.Column width={10}>
-                <Switch>
-                  <Route path="/friends/:id/gifts" render={ ({match}) => {
-                    console.log(props)
-                      const friend = props.friend.id
-                      return <GiftTable friend={friend} />
-                    } }/>
-                  <Route path="/friends/:id/events" render={ ({match}) => {
-                      const friend = props.friends.find(friend => friend.id === parseInt(match.params.id))
-                      return <EventsFriend friend={friend} />
-                    } }/>
-                </Switch>
+
+              <Switch>
+                <Route exact path="/friends/:id" render={ ({match}) => {
+                    const friend = props.friend
+                    return <GiftTable friend={friend} />
+                  } }/>
+                <Route exact path="/friends/:id/events" render={ ({match}) => {
+                    const friend = props.friend
+                    return <EventsFriend friend={friend} />
+                  } }/>
+              </Switch>
+
               </Grid.Column>
 
               <Grid.Column width={3}>
