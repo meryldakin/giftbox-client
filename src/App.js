@@ -1,35 +1,43 @@
 import React, { Component } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import './App.css'
 
 import GiftboxContainer from './containers/GiftboxContainer'
+import FriendsPage from './components/FriendsPage'
+import Friend from './components/Friend'
 import Login from './components/Login'
 import { logIn } from './api'
+import isAuthenticated from './components/hocs/isAuthenticated'
 
+const AuthedGiftboxContainer = isAuthenticated(GiftboxContainer)
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.handleLogin = this.handleLogin.bind(this)
   }
 
   handleLogin(params){
     logIn(params)
-      .then(res => {
+    .then(res => {
+        if (res.error) {
+          return
+        }
         localStorage.setItem('jwt', res.token)
-        return <Redirect to="/home"/>
+        this.props.history.push('/home')
       })
   }
 
   render() {
     return (
       <Switch>
-        <Route path="/login" render={() => <Login handleLogin={this.handleLogin} />}/>
-          <Route path="/home" component={GiftboxContainer} />
-          </Switch>
-          )
+        <Route exact path="/login" render={() => <Login handleLogin={this.handleLogin} />}/>
+        <Route path="/" component={AuthedGiftboxContainer} />
+      </Switch>
+    )
   }
 }
 
-export default App
+export default withRouter(App)

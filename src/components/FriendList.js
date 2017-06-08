@@ -1,11 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function FriendList(props){
+  let friendsList = props.friends
+  let formattedlist = friendsList.map( (friend, i) => <li key={i}><Link to={`/friends/${friend.id}`}>{friend.firstName}</Link></li> )
+
   return (
     <div>
-      <h2>Friend List</h2>
+      
       <ul>
-        {props.friends.map( (friend, i) => <li key={i}>{friend.firstName}</li>)}
+        {formattedlist}
       </ul>
     </div>
   )
