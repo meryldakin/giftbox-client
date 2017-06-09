@@ -5,6 +5,7 @@ import Friend from './Friend'
 
 
 export default function FriendsPage(props) {
+  console.log("from friendspage", props)
   if (props.friends.length > 0) {
     return (
       <div>

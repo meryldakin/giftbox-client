@@ -20,3 +20,16 @@ export function logIn(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+export function addFriend(params){
+  console.log(params)
+  return fetch("http://localhost:3000/add_friend", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+  .then(console.log)
+}

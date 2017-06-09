@@ -8,6 +8,7 @@ import GiftTable from './GiftTable'
 import EventsFriend from './EventsFriend'
 
 export default function Friend(props){
+  console.log(props)
     return (
       <div>
 
@@ -41,9 +42,9 @@ export default function Friend(props){
 
               <Grid.Column width={10}>
                 <Header as="h1">{props.friend.firstName} {props.friend.lastName}</Header>
-                <h4>Birthday: 8/13 </h4>
+                <h4>Birthday: {props.friend.birthday}</h4>
                 <h4>Notes:</h4>
-                <p>Likes ice cream, not into birds</p>
+                <p>{props.friend.notes}</p>
               </Grid.Column>
 
               <Grid.Column width={3}>

@@ -16,7 +16,7 @@ export default function Notifications(props){
             <Feed.Summary>
               <Feed.User>Elliot Fu</Feed.User> added you as a friend
               <Feed.Date>1 Hour Ago</Feed.Date>
-            </Feed.Summary>
+            </Feed.Summary>npm
           </Feed.Content>
         </Feed.Event>
 
