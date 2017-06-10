@@ -8,7 +8,10 @@ import GiftTable from './GiftTable'
 import EventsFriend from './EventsFriend'
 
 export default function Friend(props){
-  console.log(props)
+  let friend = props.friend.friend
+  let celebrations = props.friend.celebrations
+  let events = celebrations.map( celebration => celebration.event ).filter( event => !!event )
+
     return (
       <div>
 
@@ -41,10 +44,10 @@ export default function Friend(props){
               </Grid.Column>
 
               <Grid.Column width={10}>
-                <Header as="h1">{props.friend.firstName} {props.friend.lastName}</Header>
-                <h4>Birthday: {props.friend.birthday}</h4>
+                <Header as="h1">{friend.firstName} {friend.lastName}</Header>
+                <h4>Birthday: {friend.birthday}</h4>
                 <h4>Notes:</h4>
-                <p>{props.friend.notes}</p>
+                <p>{friend.notes}</p>
               </Grid.Column>
 
               <Grid.Column width={3}>
@@ -61,12 +64,10 @@ export default function Friend(props){
 
               <Switch>
                 <Route exact path="/friends/:id" render={ ({match}) => {
-                    const friend = props.friend
-                    return <GiftTable friend={friend} />
+                    return <GiftTable friend={friend} celebrations={celebrations} handlePurchasedGifts={props.handlePurchasedGifts}/>
                   } }/>
                 <Route exact path="/friends/:id/events" render={ ({match}) => {
-                    const friend = props.friend
-                    return <EventsFriend friend={friend} />
+                    return <EventsFriend friend={friend} events={events} />
                   } }/>
               </Switch>
 

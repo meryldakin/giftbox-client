@@ -3,7 +3,7 @@ export function fetchGifts(){
     .then( res => res.json() )
 }
 export function fetchFriends(){
-  return fetch("http://localhost:3000/users")
+  return fetch("http://localhost:3000/users/1")
     .then( res => res.json() )
 }
 export function fetchEvents(){

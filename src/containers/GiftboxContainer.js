@@ -23,9 +23,11 @@ class GiftboxContainer extends Component {
     super()
     this.state = {
       gifts: [],
-      friends: [],
-      events: []
+      friendships: [],
+      events: [],
+      purchasedGifts: []
     }
+    this.handlePurchasedGifts = this.handlePurchasedGifts.bind(this)
   }
 
   componentDidMount(){
@@ -34,8 +36,9 @@ class GiftboxContainer extends Component {
         gifts: data.gifts
       }))
     fetchFriends()
+      // .then(res => console.log("fetch friends, ", res.user.friendships))
       .then( data => this.setState({
-        friends: data.users
+        friendships: data.user.friendships
       }))
     fetchEvents()
       .then( data => this.setState({
@@ -43,8 +46,14 @@ class GiftboxContainer extends Component {
       }))
   }
 
+  handlePurchasedGifts = (e, props) => {
+    console.log(e, props.value)
+    this.state.purchasedGifts.push(props.value)
+    console.log(this.state)
+  }
+
   render(){
-    console.log('state: ', this.state.friends) // array of objects
+    console.log('state: ', this.state.purchasedGifts) // array of objects
     return (
       <div>
       <Container>
@@ -52,7 +61,8 @@ class GiftboxContainer extends Component {
       </Container>
 
         <Switch>
-          <Route path="/friends" render={() => <FriendsPage friends={this.state.friends} /> } />
+
+          <Route path="/friends" render={() => <FriendsPage friendships={this.state.friendships} handlePurchasedGifts={this.handlePurchasedGifts} /> } />
           <Route exact path="/" render={() =>
             <Container>
               <Grid columns={1}>
@@ -85,8 +95,8 @@ class GiftboxContainer extends Component {
                 <Grid.Row>
                   <Grid.Column width={5}>
                     <Link to="/friends"><h2>Friends</h2></Link>
-                    
-                    <FriendList friends={this.state.friends}/>
+
+                    <FriendList friends={this.state.friendships}/>
                   </Grid.Column>
 
                   <Grid.Column width={6}>

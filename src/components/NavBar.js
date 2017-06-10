@@ -24,9 +24,7 @@ export default class NavBar extends Component {
           <Menu.Item>
             <Icon name="add"/>Gift
           </Menu.Item>
-          <Menu.Item>
-            <Icon name="add"/>Event List
-          </Menu.Item>
+
 
           <Dropdown item text='See my'>
             <Dropdown.Menu>
