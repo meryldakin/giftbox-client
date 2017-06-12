@@ -18,7 +18,7 @@ class GiftTable extends Component {
 
     let celebrations = this.props.celebrations
     let exchanges = celebrations.map( celebration => celebration.exchanges.concat(celebration.event) ).filter( exchange => !!exchange[0] && !!exchange[1])
-    let mappedGifts = exchanges.map( singleExchange => <GiftCard handleEditGift={this.props.handleEditGift} friend={this.props.friend} exchanges= {singleExchange} handlePurchasedGifts={this.props.handlePurchasedGifts}/> )
+    let mappedGifts = exchanges.map( singleExchange => <GiftCard handleDeleteGift={this.props.handleDeleteGift} handleEditGift={this.props.handleEditGift} friend={this.props.friend} exchanges= {singleExchange} handlePurchasedGifts={this.props.handlePurchasedGifts}/> )
 
     return (
       <div>

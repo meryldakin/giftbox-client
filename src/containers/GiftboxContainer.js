@@ -10,7 +10,7 @@ import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
 
 
-import { fetchGifts, fetchFriends, fetchEvents, addFriend, editFriend, deleteFriend, addGift, editGift } from '../api'
+import { fetchGifts, fetchFriends, fetchEvents, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -90,7 +90,6 @@ class GiftboxContainer extends Component {
   }
 
   handleEditGift = (state, friendID) => {
-    console.log("state from editGIFT in giftbox", state)
     editGift(state)
     .then( data => {
       // console.log(data) })
@@ -101,6 +100,18 @@ class GiftboxContainer extends Component {
       })
       this.props.history.push(`/friends/${friendID}`)
 
+    })
+  }
+
+  handleDeleteGift = (exchange_id) => {
+    console.log("exchange_id from deleete GIFT", exchange_id)
+    deleteGift(exchange_id)
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          friendships: data.users
+        }
+      })
     })
   }
 
@@ -124,6 +135,7 @@ class GiftboxContainer extends Component {
               handleDelete={this.handleDeleteFriend.bind(this)}
               handleAddGift={this.handleAddGift}
               handleEditGift={this.handleEditGift}
+              handleDeleteGift={this.handleDeleteGift}
             /> } />
           <Route exact path="/" render={() =>
             <Container>

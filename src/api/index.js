@@ -74,3 +74,14 @@ export function editGift(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+export function deleteGift(params){
+  return fetch('http://localhost:3000/delete_gift', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}

@@ -63,7 +63,9 @@ class Friend extends React.Component {
                             celebrations={celebrations}
                             handleAddGift={this.props.handleAddGift}
                             handlePurchasedGifts={this.props.handlePurchasedGifts}
-                            handleEditGift={this.props.handleEditGift}/>
+                            handleEditGift={this.props.handleEditGift}
+                            handleDeleteGift={this.props.handleDeleteGift}/>
+
                         } }/>
                         <Route exact path="/friends/:id/edit" render={ ({match}) => {
                           return <FriendEditForm friend={friend}  onSubmit={this.props.handleEdit} />

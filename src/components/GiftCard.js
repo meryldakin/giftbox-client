@@ -5,6 +5,7 @@ import {Icon, Segment, Header, Grid, Container, Checkbox, Form } from 'semantic-
 import GiftEditModal from './GiftEditModal'
 
 export default function GiftCard (props) {
+  console.log(props)
     let giftFromProps = props.exchanges.filter( exchange => !!exchange.gift ).map( exchange => exchange.gift )
     let eventFromProps = props.exchanges.filter( exchange => !!exchange.name )
     let completedFromProps = props.exchanges.map( exchange => exchange.completed )
@@ -16,6 +17,12 @@ export default function GiftCard (props) {
     let exchange_id = idFromProps[0]
 
     const completedExchanges = true
+
+    // function handleDeleteGift(e){
+    //   console.log("did this hit")
+    //   e.preventDefault()
+    //   props.handleDeleteGift(exchange_id)
+    // }
 
     return (
       <div>
@@ -36,14 +43,16 @@ export default function GiftCard (props) {
               </Container>
             </Grid.Column>
             <Grid.Column width={3}>
-              <span><GiftEditModal
+            <GiftEditModal
                 exchange_id={exchange_id}
                 gift={gift}
                 event={event}
                 completed={completed}
                 handleEditGift={props.handleEditGift}
-                friend={props.friend} /><a href="#">
-              <Icon name="delete"/></a></span>
+                friend={props.friend} />
+
+                <a href="#" onClick={function(){props.handleDeleteGift({exchange_id: exchange_id})}}><Icon name="delete"/></a>
+
               </Grid.Column>
           </Grid.Row>
         </Grid>
