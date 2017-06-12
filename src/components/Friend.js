@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 
-import { Grid, Header, Form, Button } from 'semantic-ui-react'
+import { Grid, Header, Form, Button, Icon } from 'semantic-ui-react'
 
 import GiftTable from './GiftTable'
 import EventsFriend from './EventsFriend'
@@ -36,20 +36,13 @@ class Friend extends React.Component {
                   <Grid.Column width={3}>
                   </Grid.Column>
                   <Grid.Column width={10}>
+                  <Link to={`/friends/${friend.id}/edit`}><Icon name="edit"/>Edit Friend</Link> <a href="#" onClick={this.handleDelete}><Icon name="delete"/>Delete Friend</a>
                     <Header as="h1">{friend.firstName} {friend.lastName}</Header>
                     <h4>Birthday: {friend.birthday}</h4>
                     <h4>Notes:</h4>
                     <p>{friend.notes}</p>
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Link to={`/friends/${friend.id}/edit`}><Button content="Edit Friend"  /></Link>
-                    <br/>
-                    <br/>
-                    <Form onSubmit={this.handleDelete}>
-                      <Form.Group>
-                        <Button content="Delete Friend"/>
-                      </Form.Group>
-                    </Form>
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>

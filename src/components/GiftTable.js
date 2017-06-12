@@ -25,7 +25,8 @@ class GiftTable extends Component {
         <Grid >
           <Grid.Row>
             <Grid.Column floated='left' width={5}>
-              <Header as='h2'>Gifts</Header>
+              <Header as='h2'>Gifts </Header>
+              <AddGiftModal friend={this.props.friend} handleAddGift={this.props.handleAddGift} />
             </Grid.Column>
             <Grid.Column floated='right' width={5}>
               <Container>
@@ -39,7 +40,6 @@ class GiftTable extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-            <AddGiftModal friend={this.props.friend} handleAddGift={this.props.handleAddGift} />
               {mappedGifts}
             </Grid.Column>
           </Grid.Row>

@@ -51,7 +51,7 @@ export default function GiftCard (props) {
                 handleEditGift={props.handleEditGift}
                 friend={props.friend} />
 
-                <a href="#" onClick={function(){props.handleDeleteGift({exchange_id: exchange_id})}}><Icon name="delete"/></a>
+            <a href="#" onClick={function(){props.handleDeleteGift({exchange_id: exchange_id})}}><Icon name="delete"/></a>
 
               </Grid.Column>
           </Grid.Row>
