@@ -5,7 +5,6 @@ import LoaderThing from './LoaderThing'
 
 export default function FriendList(props){
   if (props.friends){
-    console.log("props from friend list,", props)
     let friendsList = props.friends.map( friendship => friendship.friend )
     let formattedlist = friendsList.map( (friend, i) => {
       if (!!friend){
@@ -14,7 +13,6 @@ export default function FriendList(props){
         return <LoaderThing/>
       }
     })
-    console.log("props from friend list", props)
     return (
       <div className="scrollable">
       <ul >

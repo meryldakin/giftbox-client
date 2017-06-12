@@ -31,7 +31,6 @@ class AddFriendForm extends Component {
 
   render() {
     const { first_name, last_name, birthday, notes, events } = this.state
-    console.log("state from friend form", this.state)
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>

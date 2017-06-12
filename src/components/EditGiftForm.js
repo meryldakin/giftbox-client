@@ -2,16 +2,40 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
-
-class AddGiftForm extends Component {
+// props from parent;
+// exchange_id={exchange_id}
+// gift={gift}
+// event={event}
+// completed={completed}
+// friend={this.props.friend}
+// onSubmit={this.props.handleAddGift}
+// onClick={this.close.bind(this)}/>
+class EditGiftForm extends Component {
   constructor(){
     super()
-    this.state = { item: "", category: "", event_id: "", price: "", link: "", friend_id: 0 }
+    this.state = {
+      item: "",
+      category: "",
+      event_id: "",
+      price: "",
+      link: "",
+      friend_id: 0,
+      exchange_id: 0,
+      gift_id: ""
+
+     }
   }
 
   componentDidMount(){
     this.setState({
-      friend_id: this.props.friend.id
+      item: this.props.gift.item,
+      category: this.props.gift.category,
+      event_id: this.props.event.id,
+      price: this.props.gift.price,
+      link: this.props.gift.link,
+      friend_id: this.props.friend.id,
+      exchange_id: this.props.exchange_id,
+      gift_id: this.props.gift.id
     })
   }
 
@@ -21,19 +45,9 @@ class AddGiftForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state, this.state.friend_id)
     this.props.onClick()
   }
-
-  // handleCheckboxes = (e) => {
-  //   let eventsArray = this.state.events
-  //   let targetEvent = e.target.innerHTML
-  //   if (eventsArray.includes(targetEvent)){
-  //     return eventsArray.splice(eventsArray.indexOf(targetEvent), 1)
-  //   } else {
-  //     return eventsArray.push(targetEvent)
-  //   }
-  // }
 
   render() {
     const { item, category, event_id, price, link } = this.state
@@ -62,4 +76,4 @@ class AddGiftForm extends Component {
   }
 }
 
-export default withRouter(AddGiftForm)
+export default withRouter(EditGiftForm)

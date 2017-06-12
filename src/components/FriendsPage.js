@@ -18,7 +18,6 @@ class FriendsPage extends React.Component {
   }
 
   // componentWillReceiveProps(nextProps) {
-  //   console.log("next props friendspage," , nextProps)
   //  this.setState({
   //    friendships: nextProps.friendships
   //    });
@@ -26,7 +25,6 @@ class FriendsPage extends React.Component {
 
   render(){
     if(this.props.friendships){
-      console.log("friendspage this.props: ", this.props)
       if (this.props.friendships.length > 0) {
         return (
           <div>
@@ -40,9 +38,14 @@ class FriendsPage extends React.Component {
                   </Grid.Column>
                   <Grid.Column width={12}>
                     <Route render={ ({match}) => {
-                      console.log("match from friends page," , this.props.match)
                       const friend = this.props.friendships.find(friendship => friendship.friend.id === parseInt(this.props.match.params.id))
-                      return <Friend friend={friend} handleAddGift={this.props.handleAddGift} handleDelete={this.props.handleDelete} handlePurchasedGifts={this.props.handlePurchasedGifts} handleEdit={this.props.handleEdit}/>
+                      return <Friend
+                        friend={friend}
+                        handleAddGift={this.props.handleAddGift}
+                        handleDelete={this.props.handleDelete}
+                        handlePurchasedGifts={this.props.handlePurchasedGifts}
+                        handleEdit={this.props.handleEdit}
+                        handleEditGift={this.props.handleEditGift} />
                     } }/>
                   </Grid.Column>
                 </Grid.Row>

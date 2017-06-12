@@ -5,7 +5,6 @@ import { Header, Grid, Container, Button } from 'semantic-ui-react'
 import EventCard from './EventCard'
 
 const EventsFriend = (props) => {
-  console.log(props)
   return (
     <div>
       <Grid >

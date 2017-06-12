@@ -21,7 +21,6 @@ class FriendEditForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log("state fom edit: ", this.state)
     this.props.onSubmit(this.state, this.state.id)
 
   }
@@ -31,7 +30,6 @@ class FriendEditForm extends Component {
   }
 
   render() {
-    console.log("props from edit form: ", this.props)
     const { id, firstName, lastName, birthday, notes, events } = this.state
     return (
 

@@ -15,7 +15,6 @@ import LoaderThing from './LoaderThing'
 class Friend extends React.Component {
 
   handleDelete = (e) => {
-    // console.log(this.props.friend.friend.id)
     e.preventDefault()
     this.props.handleDelete({id: this.props.friend.friend.id})
   }
@@ -23,7 +22,6 @@ class Friend extends React.Component {
 
 
   render(){
-    console.log("friend page props: ", this.props.friend)
     if(this.props.friend){
       if (this.props.friend.friend.id === 0){
         return (<LoaderThing/>)
@@ -60,7 +58,12 @@ class Friend extends React.Component {
                   <Grid.Column width={10}>
                     <Switch>
                       <Route exact path="/friends/:id" render={ ({match}) => {
-                          return <GiftTable friend={friend} celebrations={celebrations} handleAddGift={this.props.handleAddGift} handlePurchasedGifts={this.props.handlePurchasedGifts}/>
+                          return <GiftTable
+                            friend={friend}
+                            celebrations={celebrations}
+                            handleAddGift={this.props.handleAddGift}
+                            handlePurchasedGifts={this.props.handlePurchasedGifts}
+                            handleEditGift={this.props.handleEditGift}/>
                         } }/>
                         <Route exact path="/friends/:id/edit" render={ ({match}) => {
                           return <FriendEditForm friend={friend}  onSubmit={this.props.handleEdit} />

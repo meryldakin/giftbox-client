@@ -10,7 +10,6 @@ export default class NavBar extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    console.log("navbar props", this.props)
     const { activeItem } = this.state
 
     return (

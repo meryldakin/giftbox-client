@@ -1,14 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {Icon, Segment, Header, Grid, Container, Checkbox, Form } from 'semantic-ui-react'
 
-export default function GiftCard (props) {
+import GiftEditModal from './GiftEditModal'
 
+export default function GiftCard (props) {
     let giftFromProps = props.exchanges.filter( exchange => !!exchange.gift ).map( exchange => exchange.gift )
     let eventFromProps = props.exchanges.filter( exchange => !!exchange.name )
     let completedFromProps = props.exchanges.map( exchange => exchange.completed )
+    let idFromProps = props.exchanges.map( exchange => exchange.id )
+
     let gift = giftFromProps[0]
     let event = eventFromProps[0]
     let completed = completedFromProps[0]
+    let exchange_id = idFromProps[0]
 
     const completedExchanges = true
 
@@ -18,7 +23,7 @@ export default function GiftCard (props) {
         <Grid >
           <Grid.Row>
             <Grid.Column width={8}>
-              <Header as='h3'>{gift.item}</Header>
+              <a href={gift.link}><Header as='h3'>{gift.item}</Header></a>
               <p>Price: {gift.price}</p>
             </Grid.Column>
             <Grid.Column width={5}>
@@ -31,9 +36,15 @@ export default function GiftCard (props) {
               </Container>
             </Grid.Column>
             <Grid.Column width={3}>
-            <Icon name="delete"/>
-            <Icon name="write"/>
-            </Grid.Column>
+              <span><GiftEditModal
+                exchange_id={exchange_id}
+                gift={gift}
+                event={event}
+                completed={completed}
+                handleEditGift={props.handleEditGift}
+                friend={props.friend} /><a href="#">
+              <Icon name="delete"/></a></span>
+              </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
