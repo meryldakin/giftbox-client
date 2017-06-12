@@ -5,8 +5,6 @@ import { withRouter } from 'react-router'
 import './App.css'
 
 import GiftboxContainer from './containers/GiftboxContainer'
-import FriendsPage from './components/FriendsPage'
-import Friend from './components/Friend'
 import Login from './components/Login'
 import { logIn } from './api'
 import isAuthenticated from './components/hocs/isAuthenticated'

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
 
-import AddFriendForm from './AddFriendForm'
+import AddGiftForm from './AddGiftForm'
 
-class AddFriendModal extends Component {
+class AddGiftModal extends Component {
   state = { open: false }
 
   show = (dimmer) => () => this.setState({ dimmer, open: true })
@@ -11,16 +11,17 @@ class AddFriendModal extends Component {
 
   render() {
     const { open, dimmer } = this.state
+    console.log("props from gift modal: ", this.props)
     return (
       <div>
-        <Button onClick={this.show('inverted')}><Icon name="add"/>Friend</Button>
+        <Button onClick={this.show('inverted')}><Icon name="add"/>Gift</Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
-          <Modal.Header>Add a Friend</Modal.Header>
+          <Modal.Header>Add a Gift</Modal.Header>
           <Modal.Content image>
             <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
             <Modal.Description>
               <Header>Details</Header>
-              <AddFriendForm onSubmit={this.props.addFriend} onClick={this.close.bind(this)}/>
+              <AddGiftForm friend={this.props.friend} onSubmit={this.props.handleAddGift} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
@@ -34,4 +35,4 @@ class AddFriendModal extends Component {
   }
 }
 
-export default AddFriendModal
+export default AddGiftModal

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon, Segment, Header, Grid, Button, Container, Checkbox, Form } from 'semantic-ui-react'
+import {Icon, Segment, Header, Grid, Container, Checkbox, Form } from 'semantic-ui-react'
 
 export default function GiftCard (props) {
 
@@ -17,9 +17,6 @@ export default function GiftCard (props) {
       <Segment padded color='green'>
         <Grid >
           <Grid.Row>
-            <Grid.Column width={3}>
-              <Icon name="calendar"/>
-            </Grid.Column>
             <Grid.Column width={8}>
               <Header as='h3'>{gift.item}</Header>
               <p>Price: {gift.price}</p>
@@ -29,9 +26,13 @@ export default function GiftCard (props) {
               <p>{event.date}</p>
               <Container>
             <Form>
-              <Checkbox label='Purchased' checked={completedExchanges} toggle value={gift.id} onChange={props.handlePurchasedGifts}/>
+              <Checkbox label='Purchased' toggle value={gift.id} onChange={props.handlePurchasedGifts}/>
             </Form>
               </Container>
+            </Grid.Column>
+            <Grid.Column width={3}>
+            <Icon name="delete"/>
+            <Icon name="write"/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

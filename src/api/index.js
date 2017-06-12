@@ -54,3 +54,15 @@ export function deleteFriend(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+export function addGift(params){
+  console.log(params)
+  return fetch("http://localhost:3000/add_gift", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}

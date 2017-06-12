@@ -22,6 +22,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: large;
 }
 
+.scrollable{
+  width: 200px;
+  height: 300px;
+  background-color: #DCDCDC;
+  overflow: scroll; /* showing scrollbars */
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

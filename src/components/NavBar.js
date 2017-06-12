@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Dropdown, Menu, Icon } from 'semantic-ui-react'
+import { Button, Menu, Icon } from 'semantic-ui-react'
 
 import AddFriendModal from './AddFriendModal'
 
@@ -16,25 +16,12 @@ export default class NavBar extends Component {
     return (
       <div>
       <Menu size='huge' color='teal'>
-        <Link to='/'><Menu.Item name='Dashboard' active={activeItem === 'Dashboard'} onClick={this.handleItemClick} /></Link>
+        <Link to='/'><Menu.Item name='Homepage' active={activeItem === 'Dashboard'} onClick={this.handleItemClick} /></Link>
 
         <Menu.Menu position='right'>
           <Menu.Item>
             <AddFriendModal addFriend={this.props.addFriend}/>
           </Menu.Item>
-          <Menu.Item>
-            <Icon name="add"/>Gift
-          </Menu.Item>
-
-
-          <Dropdown item text='See my'>
-            <Dropdown.Menu>
-              <Link to='/friends'><Dropdown.Item>Friends</Dropdown.Item></Link>
-              <Link to='/events'><Dropdown.Item>Events</Dropdown.Item></Link>
-              <Link to='/gifts'><Dropdown.Item>Gifts</Dropdown.Item></Link>
-            </Dropdown.Menu>
-          </Dropdown>
-
           <Menu.Item>
             <Button >Log Out</Button>
           </Menu.Item>

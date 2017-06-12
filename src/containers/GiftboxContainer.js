@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route} from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { Container, Divider, Grid, Header } from 'semantic-ui-react'
+import { Container, Grid, Header, Segment } from 'semantic-ui-react'
 
 import EventList from '../components/EventList'
 import FriendList from '../components/FriendList'
 import GiftList from '../components/GiftList'
 import FriendsPage from '../components/FriendsPage'
-import Friend from '../components/Friend'
 import NavBar from '../components/NavBar'
-import Notifications from '../components/Notifications'
-import GiftTable from '../components/GiftTable'
-import EventsFriend from '../components/EventsFriend'
 
-import { fetchGifts, fetchFriends, fetchEvents, addFriend, editFriend, deleteFriend } from '../api'
-import isAuthenticated from '../components/hocs/isAuthenticated'
 
-const AuthedFriendsPage = isAuthenticated(FriendsPage)
+import { fetchGifts, fetchFriends, fetchEvents, addFriend, editFriend, deleteFriend, addGift } from '../api'
+// import isAuthenticated from '../components/hocs/isAuthenticated'
+//
+// const AuthedFriendsPage = isAuthenticated(FriendsPage)
 
 class GiftboxContainer extends Component {
   constructor(){
@@ -71,25 +68,38 @@ class GiftboxContainer extends Component {
             friendships: data.users
           }
       }, this.props.history.push(`/friends/${data.users[data.users.length-1].friend.id}`)
-    )
-      })
+    )})
     }
 
   handleDeleteFriend(id){
     deleteFriend(id)
     .then( data => {
+      // return console.log(data)
       this.setState(prevState => {
         return {
           friendships: data.users
         }
-    }, this.props.history.push(`/friends`)
-  )
+      }, this.props.history.push(`/friends/${data.users[0].friend.id}}`))
     })
+  }
+
+  handleAddGift = (state) => {
+    console.log("state from addGIFT in gift box, ", state)
+    addGift(state)
+    // .then(data => console.log("data from addGIFT in giftbox", data))
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          friendships: data.users
+        }
+    }, this.props.history.push(`/friends/${state.friend_id}`)
+  )})
   }
 
   handlePurchasedGifts(e, props){
     this.state.purchasedGifts.push(props.value)
   }
+
 
   render(){
     console.log('state from giftbox container: ', this.state) // array of objects
@@ -99,12 +109,13 @@ class GiftboxContainer extends Component {
         <NavBar addFriend={this.handleAddFriend.bind(this)} />
       </Container>
         <Switch>
-          <Route path="/friends" render={() =>
+          <Route path="/friends/:id" children={() =>
             <FriendsPage
               friendships={this.state.friendships}
               handleEdit={this.handleEditSubmit.bind(this)}
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDelete={this.handleDeleteFriend.bind(this)}
+              handleAddGift={this.handleAddGift}
             /> } />
           <Route exact path="/" render={() =>
             <Container>
@@ -115,38 +126,39 @@ class GiftboxContainer extends Component {
               <Grid columns={1}>
                 <Grid.Row>
                   <Grid.Column>
-                      <Header as='h1'></Header>
+                      <Header as="h1">Giftbox</Header>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
-              <Grid celled='internally'>
+              <Grid >
                 <Grid.Row>
-                  <Grid.Column width={3}>
-
+                  <Grid.Column width={2}>
+                  </Grid.Column>
+                  <Grid.Column width={12}>
+                    <Segment>
+                      <Header as="h2">Hey, Meryl!</Header>
+                      <p>This is where you will have notifications for upcoming events! And it will look so cool!</p>
+                    </Segment>
+                  </Grid.Column>
+                  <Grid.Column width={2}>
                   </Grid.Column>
 
-                  <Grid.Column width={10}>
-                    <Header as="h1">Giftbox Home Page</Header>
-
-
-                  </Grid.Column>
-
-                  <Grid.Column width={3}>
-
-                  </Grid.Column>
                 </Grid.Row>
-                <Grid.Row>
+                </Grid>
+                <Grid columns='equal'>
+                <Grid.Row stretched>
                   <Grid.Column width={5}>
-                    <Link to="/friends"><h2>Friends</h2></Link>
-
+                    <h2>Friends</h2>
                     <FriendList friends={this.state.friendships}/>
                   </Grid.Column>
 
                   <Grid.Column width={6}>
+                  <h2>Gifts</h2>
                     <GiftList gifts={this.state.gifts}/>
                   </Grid.Column>
 
                   <Grid.Column width={5}>
+                  <h2>Events</h2>
                     <EventList events={this.state.events} />
                   </Grid.Column>
                 </Grid.Row>
@@ -162,19 +174,3 @@ class GiftboxContainer extends Component {
 
 }
 export default withRouter(GiftboxContainer)
-
-
-
-
-
-
-
-
-
-
-
-
-// <Route exact path="/friends/:id" render={ ({match}) => {
-//   const friend = this.props.friends.find(friend => friend.id === parseInt(match.params.id))
-//   return <Friend friend={friend} onDelete={ this.props.onDelete }/>
-// } }/>

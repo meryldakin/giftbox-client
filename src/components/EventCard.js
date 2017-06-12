@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon, Segment, Header, Grid, Button, Container } from 'semantic-ui-react'
+import {Icon, Segment, Header, Grid, Form, Checkbox } from 'semantic-ui-react'
 
 export default function EventCard(props){
   return (
@@ -18,13 +18,11 @@ export default function EventCard(props){
           </Grid.Column>
           <Grid.Column width={5}>
             <Header as='h3'>8/13/17</Header>
-            <Container>
-              <Button.Group compact fluid>
-               <Button >Incomplete</Button>
-               <Button.Or />
-               <Button positive>Complete</Button>
-             </Button.Group>
-           </Container>
+
+            <Form>
+              <Checkbox label='Completed' toggle />
+            </Form>
+
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -44,13 +42,10 @@ export default function EventCard(props){
           </Grid.Column>
           <Grid.Column width={5}>
             <Header as='h3'>12/25/17</Header>
-            <Container>
-              <Button.Group compact fluid>
-               <Button positive>Incomplete</Button>
-               <Button.Or />
-               <Button >Complete</Button>
-             </Button.Group>
-           </Container>
+            <Form>
+              <Checkbox label='Completed' toggle />
+            </Form>
+           
           </Grid.Column>
         </Grid.Row>
       </Grid>

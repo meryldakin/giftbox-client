@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Icon, Segment, Header, Grid, Container, Button } from 'semantic-ui-react'
+import {Header, Grid, Container, Button, Icon } from 'semantic-ui-react'
 
 import GiftCard from './GiftCard'
+import AddGiftModal from './AddGiftModal'
 
 class GiftTable extends Component {
   constructor(){
@@ -39,6 +40,7 @@ class GiftTable extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
+            <AddGiftModal friend={this.props.friend} handleAddGift={this.props.handleAddGift} />
               {mappedGifts}
             </Grid.Column>
           </Grid.Row>

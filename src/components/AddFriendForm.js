@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
-import { addFriend } from '../api'
-
 
 class AddFriendForm extends Component {
   constructor(){
@@ -22,12 +20,18 @@ class AddFriendForm extends Component {
   }
 
   handleCheckboxes = (e) => {
-    this.state.events.push(e.target.innerHTML)
+    let eventsArray = this.state.events
+    let targetEvent = e.target.innerHTML
+    if (eventsArray.includes(targetEvent)){
+      return eventsArray.splice(eventsArray.indexOf(targetEvent), 1)
+    } else {
+      return eventsArray.push(targetEvent)
+    }
   }
 
   render() {
     const { first_name, last_name, birthday, notes, events } = this.state
-
+    console.log("state from friend form", this.state)
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>

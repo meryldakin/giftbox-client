@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
-import { editFriend } from '../api'
-
 
 class FriendEditForm extends Component {
   constructor(props){

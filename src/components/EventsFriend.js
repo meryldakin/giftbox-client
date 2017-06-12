@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import {Icon, Segment, Header, Grid, Container, Button } from 'semantic-ui-react'
+import { Header, Grid, Container, Button } from 'semantic-ui-react'
 
 import EventCard from './EventCard'
 
