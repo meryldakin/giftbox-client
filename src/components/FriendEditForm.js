@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
-import { addFriend } from '../api'
+import { editFriend } from '../api'
 
 
-class AddFriendForm extends Component {
-  constructor(){
-    super()
-    this.state = { first_name: '', last_name: '', birthday: '', notes: '', events: [] }
+class FriendEditForm extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      id: props.friend.id,
+      firstName: props.friend.firstName,
+      lastName: props.friend.lastName,
+      birthday: props.friend.birthday,
+      notes: props.friend.notes,
+      events: props.events
+    }
   }
 
   handleChange = (e, { name, value }) => {
@@ -17,8 +23,9 @@ class AddFriendForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.onSubmit(this.state)
-    this.props.onClick()
+    console.log("state fom edit: ", this.state)
+    this.props.onSubmit(this.state, this.state.id)
+
   }
 
   handleCheckboxes = (e) => {
@@ -26,14 +33,15 @@ class AddFriendForm extends Component {
   }
 
   render() {
-    const { first_name, last_name, birthday, notes, events } = this.state
-
+    console.log("props from edit form: ", this.props)
+    const { id, firstName, lastName, birthday, notes, events } = this.state
     return (
+
       <div>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit.bind(this)}>
           <Form.Group widths='equal'>
-            <Form.Input placeholder='First Name' name='first_name' value={first_name} onChange={this.handleChange} />
-            <Form.Input placeholder='Last Name' name='last_name' value={last_name} onChange={this.handleChange} />
+            <Form.Input placeholder='First Name' name='firstName' value={firstName} onChange={this.handleChange} />
+            <Form.Input placeholder='Last Name' name='lastName' value={lastName} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Input placeholder='Birthday (mm/dd/yyyy)' name='birthday' value={birthday} onChange={this.handleChange} />
@@ -64,4 +72,4 @@ class AddFriendForm extends Component {
   }
 }
 
-export default withRouter(AddFriendForm)
+export default FriendEditForm

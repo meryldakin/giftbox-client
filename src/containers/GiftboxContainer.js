@@ -13,7 +13,7 @@ import Notifications from '../components/Notifications'
 import GiftTable from '../components/GiftTable'
 import EventsFriend from '../components/EventsFriend'
 
-import { fetchGifts, fetchFriends, fetchEvents } from '../api'
+import { fetchGifts, fetchFriends, fetchEvents, addFriend, editFriend, deleteFriend } from '../api'
 import isAuthenticated from '../components/hocs/isAuthenticated'
 
 const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -36,7 +36,6 @@ class GiftboxContainer extends Component {
         gifts: data.gifts
       }))
     fetchFriends()
-      // .then(res => console.log("fetch friends, ", res.user.friendships))
       .then( data => this.setState({
         friendships: data.user.friendships
       }))
@@ -46,23 +45,67 @@ class GiftboxContainer extends Component {
       }))
   }
 
-  handlePurchasedGifts = (e, props) => {
-    console.log(e, props.value)
+  handleEditSubmit(state, friendID){
+    console.log("handleEditSubmit state,", state)
+    editFriend(state)
+    // .then(data => console.log("data after edit friend,", data.users))
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          friendships: data.users
+        }
+      })
+      this.props.history.push(`/friends/${friendID}`)
+
+    })
+  }
+
+
+  handleAddFriend(state){
+      // console.log("state from add friend in gift box, ", state)
+      addFriend(state)
+      // .then(data => console.log("data from addFriend", data.users[data.users.length-1].friend.id))
+      .then( data => {
+        this.setState(prevState => {
+          return {
+            friendships: data.users
+          }
+      }, this.props.history.push(`/friends/${data.users[data.users.length-1].friend.id}`)
+    )
+      })
+    }
+
+  handleDeleteFriend(id){
+    deleteFriend(id)
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          friendships: data.users
+        }
+    }, this.props.history.push(`/friends`)
+  )
+    })
+  }
+
+  handlePurchasedGifts(e, props){
     this.state.purchasedGifts.push(props.value)
-    console.log(this.state)
   }
 
   render(){
-    console.log('state: ', this.state.purchasedGifts) // array of objects
+    console.log('state from giftbox container: ', this.state) // array of objects
     return (
       <div>
       <Container>
-        <NavBar />
+        <NavBar addFriend={this.handleAddFriend.bind(this)} />
       </Container>
-
         <Switch>
-
-          <Route path="/friends" render={() => <FriendsPage friendships={this.state.friendships} handlePurchasedGifts={this.handlePurchasedGifts} /> } />
+          <Route path="/friends" render={() =>
+            <FriendsPage
+              friendships={this.state.friendships}
+              handleEdit={this.handleEditSubmit.bind(this)}
+              handlePurchasedGifts={this.handlePurchasedGifts}
+              handleDelete={this.handleDeleteFriend.bind(this)}
+            /> } />
           <Route exact path="/" render={() =>
             <Container>
               <Grid columns={1}>

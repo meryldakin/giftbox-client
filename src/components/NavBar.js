@@ -10,6 +10,7 @@ export default class NavBar extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
+    console.log("navbar props", this.props)
     const { activeItem } = this.state
 
     return (
@@ -19,7 +20,7 @@ export default class NavBar extends Component {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            <AddFriendModal />
+            <AddFriendModal addFriend={this.props.addFriend}/>
           </Menu.Item>
           <Menu.Item>
             <Icon name="add"/>Gift

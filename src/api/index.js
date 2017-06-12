@@ -31,5 +31,26 @@ export function addFriend(params){
     method: 'POST',
     body: JSON.stringify(params)
   }).then( res => res.json() )
-  .then(console.log)
+}
+export function editFriend(params){
+  console.log(params)
+  return fetch("http://localhost:3000/edit_friend", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+
+export function deleteFriend(params){
+  return fetch('http://localhost:3000/delete_friend', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
 }

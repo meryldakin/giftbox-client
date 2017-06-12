@@ -11,7 +11,6 @@ class AddFriendModal extends Component {
 
   render() {
     const { open, dimmer } = this.state
-
     return (
       <div>
         <Button onClick={this.show('inverted')}><Icon name="add"/>Friend</Button>
@@ -21,12 +20,12 @@ class AddFriendModal extends Component {
             <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
             <Modal.Description>
               <Header>Details</Header>
-              <AddFriendForm />
+              <AddFriendForm onSubmit={this.props.addFriend} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
             <Button color='black' onClick={this.close}>
-              Done
+              Cancel
             </Button>
           </Modal.Actions>
         </Modal>
