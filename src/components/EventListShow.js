@@ -8,6 +8,7 @@ import { Grid, Header, Form, Button, Icon, Segment } from 'semantic-ui-react'
 
 import LoaderThing from './LoaderThing'
 import GiftCard from './GiftCard'
+import AddFriendToListModal from './AddFriendToListModal'
 
 
 
@@ -15,6 +16,7 @@ class EventListShow extends React.Component {
 
 
   render(){
+
     if(this.props){
 
       console.log("props from EventListShow", this.props)
@@ -36,7 +38,7 @@ class EventListShow extends React.Component {
       return (
         <div>
         <Header as="h2">{this.props.event.name}</Header>
-        <Header as="h4">Add Friends to List</Header>
+        <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
         <div>{this.props.event.day}/{this.props.event.month}</div>
         <div>{friendsOnList}</div>
         </div>

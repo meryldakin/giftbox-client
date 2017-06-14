@@ -11,7 +11,7 @@ import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
 
-import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift, addEvent } from '../api'
+import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift, addEvent, findOrCreateCelebrations } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -125,6 +125,11 @@ class GiftboxContainer extends Component {
     .then(data => console.log("data after add Event", data))
   }
 
+  handleAddFriendsToEventList = (state) => {
+    findOrCreateCelebrations(state)
+    .then(data => console.log(data))
+  }
+
 
   render(){
     console.log("state from giftbox: ", this.state)
@@ -149,6 +154,8 @@ class GiftboxContainer extends Component {
               events={this.state.eventLists}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
+              friendships={this.state.friendships}
+              handleAddFriendsToEventList={this.handleAddFriendsToEventList}
             /> } />
           <Route exact path="/" render={() =>
             <Container>

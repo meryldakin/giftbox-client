@@ -97,3 +97,14 @@ export function addEvent(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+export function findOrCreateCelebrations(params){
+  return fetch('http://localhost:3000/celebrations', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
