@@ -13,7 +13,7 @@ class AddGiftModal extends Component {
     const { open, dimmer } = this.state
     return (
       <div>
-        <Button  circular icon='add' onClick={this.show('inverted')} />
+        <Header as='h2'>Gift <Button  circular icon='add' onClick={this.show('inverted')} /></Header>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add a Gift</Modal.Header>
           <Modal.Content image>

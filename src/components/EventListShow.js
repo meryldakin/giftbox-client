@@ -36,6 +36,7 @@ class EventListShow extends React.Component {
       return (
         <div>
         <Header as="h2">{this.props.event.name}</Header>
+        <Header as="h4">Add Friends to List</Header>
         <div>{this.props.event.day}/{this.props.event.month}</div>
         <div>{friendsOnList}</div>
         </div>

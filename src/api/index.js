@@ -10,6 +10,7 @@ export function fetchEventLists(){
   return fetch("http://localhost:3000/event_lists")
     .then( res => res.json() )
 }
+
 export function logIn(params){
   return fetch("http://localhost:3000/auth", {
     headers: {
@@ -82,6 +83,17 @@ export function deleteGift(params){
       'Content-Type': 'application/json'
     },
     method: 'DELETE',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+
+export function addEvent(params){
+  return fetch('http://localhost:3000/event_lists', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }

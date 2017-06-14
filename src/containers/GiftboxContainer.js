@@ -11,7 +11,7 @@ import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
 
-import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift } from '../api'
+import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift, addEvent } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -52,7 +52,6 @@ class GiftboxContainer extends Component {
         }
       })
       this.props.history.push(`/friends/${friendID}`)
-
     })
   }
 
@@ -120,13 +119,19 @@ class GiftboxContainer extends Component {
     this.state.purchasedGifts.push(props.value)
   }
 
+  handleAddEvent = (eventState) => {
+    console.log("event state from giftbox", eventState)
+    addEvent(eventState)
+    .then(data => console.log("data after add Event", data))
+  }
+
 
   render(){
     console.log("state from giftbox: ", this.state)
     return (
       <div>
       <Container>
-        <NavBar addFriend={this.handleAddFriend.bind(this)} />
+        <NavBar addFriend={this.handleAddFriend.bind(this)} handleAddEvent={this.handleAddEvent} />
       </Container>
         <Switch>
           <Route path="/friends/:id" children={() =>

@@ -2,14 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
-// props from parent;
-// exchange_id={exchange_id}
-// gift={gift}
-// event={event}
-// completed={completed}
-// friend={this.props.friend}
-// onSubmit={this.props.handleAddGift}
-// onClick={this.close.bind(this)}/>
 class EditGiftForm extends Component {
   constructor(){
     super()

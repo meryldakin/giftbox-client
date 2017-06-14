@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
+import { Form, Button, TextArea, Radio, Message } from 'semantic-ui-react'
 
 
 class AddEventForm extends Component {
   constructor(){
     super()
-    this.state = { first_name: '', last_name: '', birthday: '', notes: '', events: [] }
+    this.state = { name: '', date: '', category: '', user_id: 1 } //passing User ID as 1 for now
   }
 
   handleChange = (e, { name, value }) => {
@@ -19,48 +19,66 @@ class AddEventForm extends Component {
     this.props.onClick()
   }
 
-  handleCheckboxes = (e) => {
-    let eventsArray = this.state.events
-    let targetEvent = e.target.innerHTML
-    if (eventsArray.includes(targetEvent)){
-      return eventsArray.splice(eventsArray.indexOf(targetEvent), 1)
-    } else {
-      return eventsArray.push(targetEvent)
-    }
-  }
 
   render() {
-    const { first_name, last_name, birthday, notes, events } = this.state
+    const { name, date, category } = this.state
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths='equal'>
-            <Form.Input placeholder='First Name' name='first_name' value={first_name} onChange={this.handleChange} />
-            <Form.Input placeholder='Last Name' name='last_name' value={last_name} onChange={this.handleChange} />
+            <Form.Input placeholder='Event List Name' name='name' value={name} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Input placeholder='Birthday (mm/dd/yyyy)' name='birthday' value={birthday} onChange={this.handleChange} />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input control={TextArea} placeholder='Notes' name='notes' value={notes} onChange={this.handleChange}  />
+            <Form.Input placeholder='Date' name='date' value={date} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group grouped >
-            Add friend to existing event list:
-            <Form.Field label='Birthday' control={Checkbox} onChange={this.handleCheckboxes}/>
-            <Form.Field label='Christmas' control={Checkbox}  onChange={this.handleCheckboxes}/>
+          Choose a category:
+            <Form.Field>
+              <Radio label='Just Because/Other' name='category' value='Just Because/Other' checked={this.state.category === 'Just Because/Other'} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Birthday' name='category' value='Birthday' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Christmas' name='category' value='Christmas' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Hanukkah' name='category' value='Hanukkah' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Wedding' name='category' value='Wedding' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Graduation' name='category' value='Graduation' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label="Mother's Day" name='category' value="Mother's Day" onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label="Father's Day" name='category' value="Father's Day" onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label="Valentine's Day" name='category' value="Valentine's Day" onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label="Anniversary" name='category' value='Anniversary' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='New Baby' name='category' value='New Baby' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Easter' name='category' value='Easter' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Passover' name='category' value='Passover' onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+              <Radio label='Easter' name='category' value='Easter' onChange={this.handleChange} />
+            </Form.Field>
           </Form.Group>
           <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Save Friend" onClick={this.close} />
+            <Button positive icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
           </Form.Group>
-          <Message
-            success
-            header='Friend Added!'
-          />
-          <Message
-            error
-            header='Friend not yet added...'
-            content='Check your inputs and retry!'
-          />
         </Form>
       </div>
     )

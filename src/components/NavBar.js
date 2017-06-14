@@ -21,7 +21,7 @@ export default class NavBar extends Component {
         <Menu.Menu position='right'>
           <Menu.Item>
             <AddFriendModal addFriend={this.props.addFriend}/>
-            <AddEventModal />
+            <AddEventModal handleAddEvent={this.props.handleAddEvent}  />
           </Menu.Item>
           <Menu.Item>
             <Button >Log Out</Button>

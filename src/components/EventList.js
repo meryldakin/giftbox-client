@@ -4,7 +4,6 @@ import LoaderThing from './LoaderThing'
 
 
 export default function EventList(props){
-  console.log("events props,", props.events)
   if (props.events){
     let formattedlist = props.events.map( (event, i) => {
       if (!!event){
@@ -14,8 +13,22 @@ export default function EventList(props){
       }
     })
 
+    // const categories = [
+    //   "Just Because/Other",
+    //   "Anniversary",
+    //   "Birthday",
+    //   "New Baby",
+    //   "Graduation",
+    //   "Wedding",
+    //   "Valentine's Day",
+    //   "Passover",
+    //   "Easter",
+    //   "Mother's Day",
+    //   "Father's Day",
+    //   "Hanukkah",
+    //   "Christmas"
+    // ]
 
-    console.log("formatted list " , formattedlist)
     return (
       <div className="scrollable">
       <ul >
