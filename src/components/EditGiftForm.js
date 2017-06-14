@@ -16,7 +16,7 @@ class EditGiftForm extends Component {
     this.state = {
       item: "",
       category: "",
-      event_id: "",
+      event_list_id: "",
       price: "",
       link: "",
       friend_id: 0,
@@ -30,7 +30,7 @@ class EditGiftForm extends Component {
     this.setState({
       item: this.props.gift.item,
       category: this.props.gift.category,
-      event_id: this.props.event.id,
+      event_list_id: this.props.event.id,
       price: this.props.gift.price,
       link: this.props.gift.link,
       friend_id: this.props.friend.id,
@@ -50,7 +50,8 @@ class EditGiftForm extends Component {
   }
 
   render() {
-    const { item, category, event_id, price, link } = this.state
+    console.log("edit gift form props", this.props)
+    const { item, category, event_list_id, price, link } = this.state
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -59,7 +60,7 @@ class EditGiftForm extends Component {
             <Form.Input placeholder='Category' name='category' value={category} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Input placeholder='Event ID' name='event_id' value={event_id} onChange={this.handleChange} />
+            <Form.Input placeholder='Event ID' name='event_list_id' value={event_list_id} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Input placeholder='Price' name='price' value={price} onChange={this.handleChange} />

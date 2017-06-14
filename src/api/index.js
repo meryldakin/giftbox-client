@@ -6,8 +6,8 @@ export function fetchFriends(){
   return fetch("http://localhost:3000/users/1")
     .then( res => res.json() )
 }
-export function fetchEvents(){
-  return fetch("http://localhost:3000/events")
+export function fetchEventLists(){
+  return fetch("http://localhost:3000/event_lists")
     .then( res => res.json() )
 }
 export function logIn(params){

@@ -6,7 +6,7 @@ import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 class AddGiftForm extends Component {
   constructor(){
     super()
-    this.state = { item: "", category: "", event_id: "", price: "", link: "", friend_id: 0 }
+    this.state = { item: "", category: "", event_list_id: "", price: "", link: "", friend_id: 0 }
   }
 
   componentDidMount(){
@@ -36,7 +36,7 @@ class AddGiftForm extends Component {
   // }
 
   render() {
-    const { item, category, event_id, price, link } = this.state
+    const { item, category, event_list_id, price, link } = this.state
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -45,7 +45,7 @@ class AddGiftForm extends Component {
             <Form.Input placeholder='Category' name='category' value={category} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Input placeholder='Event ID' name='event_id' value={event_id} onChange={this.handleChange} />
+            <Form.Input placeholder='Event ID' name='event_list_id' value={event_list_id} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Input placeholder='Price' name='price' value={price} onChange={this.handleChange} />

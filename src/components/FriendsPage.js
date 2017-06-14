@@ -12,17 +12,8 @@ import Friend from './Friend'
 class FriendsPage extends React.Component {
   constructor(){
     super()
-    this.state ={
-      friendships: []
-    }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //  this.setState({
-  //    friendships: nextProps.friendships
-  //    });
-  //  }
-
+  
   render(){
     if(this.props.friendships){
       if (this.props.friendships.length > 0) {

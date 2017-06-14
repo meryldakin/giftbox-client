@@ -8,9 +8,10 @@ import FriendList from '../components/FriendList'
 import GiftList from '../components/GiftList'
 import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
+import EventsPage from '../components/EventsPage'
 
 
-import { fetchGifts, fetchFriends, fetchEvents, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift } from '../api'
+import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -21,7 +22,7 @@ class GiftboxContainer extends Component {
     this.state = {
       gifts: [],
       friendships: [],
-      events: [],
+      eventLists: [],
       purchasedGifts: []
     }
     this.handlePurchasedGifts = this.handlePurchasedGifts.bind(this)
@@ -36,9 +37,9 @@ class GiftboxContainer extends Component {
       .then( data => this.setState({
         friendships: data.user.friendships
       }))
-    fetchEvents()
+    fetchEventLists()
       .then( data => this.setState({
-        events: data.events
+        eventLists: data.event_lists
       }))
   }
 
@@ -98,7 +99,7 @@ class GiftboxContainer extends Component {
           friendships: data.users
         }
       })
-      this.props.history.push(`/friends/${friendID}`)
+      // this.props.history.push(`/friends/${friendID}`)
 
     })
   }
@@ -121,6 +122,7 @@ class GiftboxContainer extends Component {
 
 
   render(){
+    console.log("state from giftbox: ", this.state)
     return (
       <div>
       <Container>
@@ -134,6 +136,12 @@ class GiftboxContainer extends Component {
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDelete={this.handleDeleteFriend.bind(this)}
               handleAddGift={this.handleAddGift}
+              handleEditGift={this.handleEditGift}
+              handleDeleteGift={this.handleDeleteGift}
+            /> } />
+          <Route path="/events" children={() =>
+            <EventsPage
+              events={this.state.eventLists}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
             /> } />
@@ -179,7 +187,7 @@ class GiftboxContainer extends Component {
 
                   <Grid.Column width={5}>
                   <h2>Events</h2>
-                    <EventList events={this.state.events} />
+                    <EventList events={this.state.eventLists} />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

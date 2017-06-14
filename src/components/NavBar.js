@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Menu, Icon } from 'semantic-ui-react'
 
 import AddFriendModal from './AddFriendModal'
+import AddEventModal from './AddEventModal'
 
 export default class NavBar extends Component {
   state = { activeItem: 'Dashboard' }
@@ -20,6 +21,7 @@ export default class NavBar extends Component {
         <Menu.Menu position='right'>
           <Menu.Item>
             <AddFriendModal addFriend={this.props.addFriend}/>
+            <AddEventModal />
           </Menu.Item>
           <Menu.Item>
             <Button >Log Out</Button>
