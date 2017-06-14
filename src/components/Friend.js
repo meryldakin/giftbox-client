@@ -22,6 +22,10 @@ class Friend extends React.Component {
 
 
   render(){
+
+
+  
+    console.log("PROPS FROM FRIEND", this.props)
     if(this.props.friend){
       if (this.props.friend.friend.id === 0){
         return (<LoaderThing/>)

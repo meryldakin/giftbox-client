@@ -36,7 +36,14 @@ class AddGiftForm extends Component {
   // }
 
   render() {
+    console.log("ADD GIFT FORM PROPS", this.props)
     const { item, category, event_list_id, price, link } = this.state
+    // let friendNames = this.props.friendships.map( friendship => {
+    //   let fullName = `${friendship.friend.firstName} ${friendship.friend.lastName}`
+    //   return (
+    //     <Form.Field label={fullName} name="friend_id" value={friendship.friend.id} control={Checkbox} onChange={this.handleChange}/>
+    //   )
+    // })
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>

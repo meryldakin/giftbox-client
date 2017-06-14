@@ -13,8 +13,9 @@ class FriendsPage extends React.Component {
   constructor(){
     super()
   }
-  
+
   render(){
+    console.log("PROPS FRIENDPAGE", this.props)
     if(this.props.friendships){
       if (this.props.friendships.length > 0) {
         return (
@@ -31,6 +32,7 @@ class FriendsPage extends React.Component {
                     <Route render={ ({match}) => {
                       const friend = this.props.friendships.find(friendship => friendship.friend.id === parseInt(this.props.match.params.id))
                       return <Friend
+                        celebrations={this.props.friendships.map( friendship => friendship.celebrations )}
                         friend={friend}
                         handleAddGift={this.props.handleAddGift}
                         handleDelete={this.props.handleDelete}
