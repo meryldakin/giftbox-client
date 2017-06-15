@@ -37,20 +37,20 @@ class EventsPage extends React.Component {
                     </Grid.Column>
                     <Grid.Column width={12}>
                     <Route exact path='/events/category/:category' render={ ({match}) => {
-                      console.log("match object from events page," , match)
                       const category = eventsList.find(event => event.category === match.params.category)
                       const eventsInCategory = eventsList.filter(event => event.category === match.params.category)
-                      console.log("events category from events page", eventsInCategory)
                       return (<EventCategory
                         eventsInCategory={eventsInCategory}
                         category={category}
                         />)
                       }}/>
                       <Route exact path='/events/:id' render={ ({match}) => {
-                        console.log("match from events for events show page", match)
+
                         const event = eventsList.find(event => event.id === parseInt(match.params.id))
                         return (<EventListShow
+                          events={this.props.events}
                           event={event}
+                          handleAddGift={this.props.handleAddGift}
                           handleEditGift={this.props.handleEditGift}
                           handleDeleteGift={this.props.handleDeleteGift}
                           friendships={this.props.friendships}

@@ -25,6 +25,8 @@ class GiftEditModal extends Component {
             <Modal.Description>
               <Header>Details</Header>
               <EditGiftForm
+                events={this.props.events}
+                celebration={this.props.celebration}
                 exchange_id={this.props.exchange_id}
                 gift={this.props.gift}
                 event={this.props.event}

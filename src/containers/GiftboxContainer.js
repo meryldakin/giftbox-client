@@ -10,8 +10,7 @@ import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
-
-import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift, deleteGift, addEvent, findOrCreateCelebrations } from '../api'
+import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift,  editExchange, editCelebration, deleteGift, addEvent, findOrCreateCelebrations } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -82,7 +81,7 @@ class GiftboxContainer extends Component {
 
     addGift(stateFromAddGift)
     .then( data => {
-      console.log(data)
+      console.log("data from ADD GIFT" , data.friendships, data.event_lists)
       this.setState(prevState => {
         return {
           friendships: data.users
@@ -91,16 +90,17 @@ class GiftboxContainer extends Component {
   )})
   }
 
-  handleEditGift = (state, friendID) => {
-    editGift(state)
+  handleEditGift = (stateFromEditGiftForm, friendID) => {
+    editGift(stateFromEditGiftForm)
+    editExchange(stateFromEditGiftForm)
     .then( data => {
-      // console.log(data) })
+      // console.log("DATA FROM EDIT GIFT API", data) })
       this.setState(prevState => {
         return {
-          friendships: data.users
+          friendships: data.exchanges
         }
       })
-      // this.props.history.push(`/friends/${friendID}`)
+      this.props.history.push(`/friends/${friendID}`)
 
     })
   }
@@ -173,6 +173,9 @@ class GiftboxContainer extends Component {
               handleDeleteGift={this.handleDeleteGift}
               friendships={this.state.friendships}
               handleAddFriendsToEventList={this.handleAddFriendsToEventList}
+              handleAddGift={this.handleAddGift}
+              handleEditGift={this.handleEditGift}
+              handleDeleteGift={this.handleDeleteGift}
             /> } />
           <Route exact path="/" render={() =>
             <Container>

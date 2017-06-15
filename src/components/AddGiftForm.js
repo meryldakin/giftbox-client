@@ -41,9 +41,7 @@ class AddGiftForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths='equal'>
             <Form.Input placeholder='Item' name='item' value={item} onChange={this.handleChange} />
-
           </Form.Group>
-
           <Form.Group>
             <Form.Input placeholder='Price' name='price' value={price} onChange={this.handleChange} />
           </Form.Group>

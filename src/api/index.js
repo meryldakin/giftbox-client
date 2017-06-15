@@ -66,7 +66,27 @@ export function addGift(params){
 }
 
 export function editGift(params){
-  return fetch("http://localhost:3000/edit_gift", {
+  return fetch(`http://localhost:3000/gifts/${params.gift_id}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+export function editExchange(params){
+  return fetch(`http://localhost:3000/exchanges/${params.exchange_id}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+export function editCelebration(params){
+  return fetch(`http://localhost:3000/celebrations/${params.celebration_id}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

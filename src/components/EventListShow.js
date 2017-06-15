@@ -8,6 +8,7 @@ import { Grid, Header, Form, Button, Icon, Segment } from 'semantic-ui-react'
 
 import LoaderThing from './LoaderThing'
 import GiftCard from './GiftCard'
+import AddGiftModal from './AddGiftModal'
 import AddFriendToListModal from './AddFriendToListModal'
 
 
@@ -17,30 +18,45 @@ class EventListShow extends React.Component {
 
   render(){
 
-    if(this.props){
-
-      console.log("props from EventListShow", this.props)
-      let friendsOnList = this.props.event.friendships.map( (friendship, i) => {
-        console.log("friendship", friendship)
-        let exchange = friendship.celebrations[0].exchanges[0]
-        let eventList = friendship.celebrations[0].event_list
-        let friend = friendship.friend
-        let giftCardData = {exchanges: [exchange, eventList], friend: friend}
-
-        return (
-          <div>
-          <Segment><Header as='h3'><Link to={`/friends/${friendship.friend.id}`}>{friendship.friend.firstName} {friendship.friend.lastName}</Link></Header>
-          {!!exchange ? <GiftCard handleEditGift={this.props.handleEditGift} handleDeleteGift={this.props.handleDeleteGift} exchanges={[exchange, eventList]} friend={friend}/> : null}</Segment>
+    console.log("props from EventListShow", this.props)
+    if(this.props.event){
+      let event = this.props.event
+      let celebrations = this.props.event.celebrations
+      let friends = this.props.event.friends.map( f => {
+        let giftCards = celebrations.map( c => {
+          if (c.friendship.friend_id === f.id) {
+            return c.exchanges.map( e => {
+              return (
+                <GiftCard
+                celebration={c}
+                events={this.props.events}
+                gift={e.gift}
+                eventList={event}
+                event={event}
+                friend={f}
+                exchange_id={e.id}
+                exchange={e}
+                handleEditGift={this.props.handleEditGift}
+                handleDeleteGift={this.props.handleDeleteGift} />
+              )
+            })
+          }
+        })
+        return (<div>
+          <Segment>
+          <Header as='h3'><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link></Header>
+          <AddGiftModal events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
+          {giftCards}</Segment>
           </div>
         )
       })
 
       return (
         <div>
-        <Header as="h2">{this.props.event.name}</Header>
+        <Header as="h2">{event.name}</Header>
         <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
-        <div>{this.props.event.day}/{this.props.event.month}</div>
-        <div>{friendsOnList}</div>
+        <div>{friends}</div>
+        <div></div>
         </div>
 
       )

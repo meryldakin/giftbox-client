@@ -16,9 +16,28 @@ class GiftTable extends Component {
 
   render(){
     console.log("props from GIFTTABLE", this.props)
-    let celebrations = this.props.celebrations
-    let exchanges = celebrations.map( celebration => celebration.exchanges.concat(celebration.event_list) ).filter( exchange => !!exchange[0] && !!exchange[1])
-    let mappedGifts = exchanges.map( singleExchange => <GiftCard celebrations={celebrations} handleDeleteGift={this.props.handleDeleteGift} handleEditGift={this.props.handleEditGift} friend={this.props.friend} exchanges= {singleExchange} handlePurchasedGifts={this.props.handlePurchasedGifts}/> )
+    let celebrations = this.props.celebrations.filter( c => {
+      return c.exchanges.length > 0
+    })
+
+    let giftCards = celebrations.map( c => {
+       return c.exchanges.map( e => {
+          return (
+            <GiftCard
+            celebration={c}
+            events={this.props.events}
+            exchange={e}
+            gift={e.gift}
+            eventList={c.event_list}
+            handleDeleteGift={this.props.handleDeleteGift}
+            handleEditGift={this.props.handleEditGift}
+            friend={this.props.friend}
+            handlePurchasedGifts={this.props.handlePurchasedGifts}/>
+          )
+        })
+      })
+
+    console.log("CELEBRATIONS", giftCards)
 
     return (
       <div>
@@ -40,7 +59,7 @@ class GiftTable extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              {mappedGifts}
+              {giftCards}
             </Grid.Column>
           </Grid.Row>
         </Grid>

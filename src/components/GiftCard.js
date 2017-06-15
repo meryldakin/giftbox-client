@@ -7,16 +7,11 @@ import LoaderThing from './LoaderThing'
 
 export default function GiftCard (props) {
   console.log("props from GIFTCARD"  , props)
-  if (props && props.exchanges){
-    let giftFromProps = props.exchanges.filter( exchange => !!exchange && !!exchange.gift ).map( exchange => exchange.gift )
-    let eventFromProps = props.exchanges.filter( exchange => !!exchange && !!exchange.name )
-    let completedFromProps = props.exchanges.filter( exchange => !!exchange ).map( exchange => exchange.completed )
-    let idFromProps = props.exchanges.filter( exchange => !!exchange ).map( exchange => exchange.id )
-
-    let gift = giftFromProps[0]
-    let event = eventFromProps[0]
-    let completed = completedFromProps[0]
-    let exchange_id = idFromProps[0]
+  if (props){
+    let gift = props.gift
+    let event = props.eventList
+    let exchange_id = props.exchange.id
+    let completed = props.exchange.completed
 
     const completedExchanges = true
 
@@ -30,7 +25,7 @@ export default function GiftCard (props) {
                 <p>Price: {gift.price}</p>
               </Grid.Column>
             <Grid.Column width={5}>
-              <Header as='h3'>{event.name}</Header>
+              <Header as='h3'><Link to={`/events/${event.id}`}>{event.name}</Link></Header>
               <p>{event.date}</p>
               <Container>
                 <Form>
@@ -40,6 +35,8 @@ export default function GiftCard (props) {
             </Grid.Column>
             <Grid.Column width={3}>
               <GiftEditModal
+              celebration={props.celebration}
+              events={props.events}
               exchange_id={exchange_id}
               gift={gift}
               event={event}
