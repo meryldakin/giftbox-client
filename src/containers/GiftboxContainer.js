@@ -10,7 +10,7 @@ import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
-import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift,  editExchange, editCelebration, deleteGift, addEvent, findOrCreateCelebrations } from '../api'
+import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift,  editExchange, editCelebration, deleteGift, addEvent, findOrCreateCelebrations, deleteFriendFromList } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -86,7 +86,7 @@ class GiftboxContainer extends Component {
         return {
           friendships: data.users
         }
-    }, this.props.history.push(`/friends/${stateFromAddGift.friend_id}`)
+    }
   )})
   }
 
@@ -100,7 +100,7 @@ class GiftboxContainer extends Component {
           friendships: data.exchanges
         }
       })
-      this.props.history.push(`/friends/${friendID}`)
+      // this.props.history.push(`/friends/${friendID}`)
 
     })
   }
@@ -146,6 +146,17 @@ class GiftboxContainer extends Component {
     })
   }
 
+handleDeleteFriendFromList = (celebration_id) => {
+  deleteFriendFromList(celebration_id)
+  .then( data => {
+    // console.log("DELETE CELEBRATION", data)
+    this.setState(prevState => {
+    return {
+      eventLists: data.celebrations
+      }
+    })
+  })
+}
 
   render(){
     console.log("state from giftbox: ", this.state)
@@ -176,6 +187,7 @@ class GiftboxContainer extends Component {
               handleAddGift={this.handleAddGift}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
+              handleDeleteFriendFromList={this.handleDeleteFriendFromList}
             /> } />
           <Route exact path="/" render={() =>
             <Container>

@@ -128,3 +128,13 @@ export function findOrCreateCelebrations(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+export function deleteFriendFromList(params){
+  return fetch(`http://localhost:3000/celebrations/${params.celebration_id}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}

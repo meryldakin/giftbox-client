@@ -69,7 +69,8 @@ class Friend extends React.Component {
                           return <FriendEditForm friend={friend}  onSubmit={this.props.handleEdit} />
                         } }/>
                       <Route exact path="/friends/:id/events" render={ ({match}) => {
-                          return <EventsFriend friend={friend} />
+                          return <EventsFriend
+                          friend={friend} />
                         } }/>
                     </Switch>
                   </Grid.Column>

@@ -22,11 +22,12 @@ class EventListShow extends React.Component {
     if(this.props.event){
       let event = this.props.event
       let celebrations = this.props.event.celebrations
+      let handleRemove = this.props.handleDeleteFriendFromList
       let friends = this.props.event.friends.map( f => {
         let giftCards = celebrations.map( c => {
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
-              return (
+              return (<div>
                 <GiftCard
                 celebration={c}
                 events={this.props.events}
@@ -37,14 +38,20 @@ class EventListShow extends React.Component {
                 exchange_id={e.id}
                 exchange={e}
                 handleEditGift={this.props.handleEditGift}
-                handleDeleteGift={this.props.handleDeleteGift} />
+                handleDeleteGift={this.props.handleDeleteGift} /></div>
               )
             })
           }
         })
+
+        let friendCelebration = celebrations.find( c =>  c.friendship.friend_id === f.id )
+
         return (<div>
           <Segment>
+          <a href="#" onClick={function(){handleRemove ({celebration_id: friendCelebration.id})}} ><Icon name="delete"/>Remove from this list</a>
           <Header as='h3'><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link></Header>
+
+
           <AddGiftModal events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
           {giftCards}</Segment>
           </div>
