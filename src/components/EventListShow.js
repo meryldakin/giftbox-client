@@ -14,8 +14,6 @@ import AddFriendToListModal from './AddFriendToListModal'
 
 
 class EventListShow extends React.Component {
-
-
   render(){
 
     console.log("props from EventListShow", this.props)

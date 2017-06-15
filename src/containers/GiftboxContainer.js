@@ -86,8 +86,13 @@ class GiftboxContainer extends Component {
         return {
           friendships: data.users
         }
-    }
-  )})
+      })
+    })
+    fetchEventLists()
+      .then( data => this.setState({
+        eventLists: data.event_lists
+      }))
+
   }
 
   handleEditGift = (stateFromEditGiftForm, friendID) => {
@@ -100,9 +105,11 @@ class GiftboxContainer extends Component {
           friendships: data.exchanges
         }
       })
-      // this.props.history.push(`/friends/${friendID}`)
-
     })
+    fetchEventLists()
+      .then( data => this.setState({
+        eventLists: data.event_lists
+      }))
   }
 
   handleDeleteGift = (exchange_id) => {
@@ -115,6 +122,10 @@ class GiftboxContainer extends Component {
         }
       })
     })
+    fetchEventLists()
+      .then( data => this.setState({
+        eventLists: data.event_lists
+      }))
   }
 
   handlePurchasedGifts(e, props){
@@ -131,6 +142,10 @@ class GiftboxContainer extends Component {
         }
       })
     })
+    fetchFriends()
+      .then( data => this.setState({
+        friendships: data.user.friendships
+      }))
   }
 
   handleAddFriendsToEventList = (eventListParams) => {
@@ -144,6 +159,10 @@ class GiftboxContainer extends Component {
         }
       })
     })
+    fetchFriends()
+      .then( data => this.setState({
+        friendships: data.user.friendships
+      }))
   }
 
 handleDeleteFriendFromList = (celebration_id) => {
@@ -156,6 +175,10 @@ handleDeleteFriendFromList = (celebration_id) => {
       }
     })
   })
+  fetchFriends()
+    .then( data => this.setState({
+      friendships: data.user.friendships
+    }))
 }
 
   render(){

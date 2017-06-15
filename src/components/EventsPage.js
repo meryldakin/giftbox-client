@@ -16,7 +16,6 @@ class EventsPage extends React.Component {
     console.log("eventspage props", this.props)
     if(this.props){
 
-
       if(this.props.events){
         let eventsList = this.props.events
 
