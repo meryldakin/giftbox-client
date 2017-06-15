@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
+import { Form, Button, Dropdown} from 'semantic-ui-react'
 
 
 class AddGiftForm extends Component {
   constructor(){
     super()
-    this.state = { item: "", category: "", event_list_id: "", price: "", link: "", friend_id: 0 }
+    this.state = { item: "", category: "", event_list_id: 0, price: "", link: "", friend_id: 0 }
   }
 
   componentDidMount(){
@@ -16,7 +16,9 @@ class AddGiftForm extends Component {
   }
 
   handleChange = (e, { name, value }) => {
+    console.log(e, { name, value })
     this.setState({ [name]: value })
+    console.log("state of addgift", this.state)
   }
 
   handleSubmit = e => {
@@ -25,40 +27,31 @@ class AddGiftForm extends Component {
     this.props.onClick()
   }
 
-  // handleCheckboxes = (e) => {
-  //   let eventsArray = this.state.events
-  //   let targetEvent = e.target.innerHTML
-  //   if (eventsArray.includes(targetEvent)){
-  //     return eventsArray.splice(eventsArray.indexOf(targetEvent), 1)
-  //   } else {
-  //     return eventsArray.push(targetEvent)
-  //   }
-  // }
-
   render() {
     console.log("ADD GIFT FORM PROPS", this.props)
     const { item, category, event_list_id, price, link } = this.state
-    // let friendNames = this.props.friendships.map( friendship => {
-    //   let fullName = `${friendship.friend.firstName} ${friendship.friend.lastName}`
-    //   return (
-    //     <Form.Field label={fullName} name="friend_id" value={friendship.friend.id} control={Checkbox} onChange={this.handleChange}/>
-    //   )
-    // })
+    let eventList = this.props.events.map( event => {
+
+      return ( Object.assign({}, { key: event.id, value: event.id, text: event.name }) )
+    })
+
+
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths='equal'>
             <Form.Input placeholder='Item' name='item' value={item} onChange={this.handleChange} />
-            <Form.Input placeholder='Category' name='category' value={category} onChange={this.handleChange} />
+
           </Form.Group>
-          <Form.Group>
-            <Form.Input placeholder='Event ID' name='event_list_id' value={event_list_id} onChange={this.handleChange} />
-          </Form.Group>
+
           <Form.Group>
             <Form.Input placeholder='Price' name='price' value={price} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Input placeholder='Link' name='link' value={link} onChange={this.handleChange}  />
+          </Form.Group>
+          <Form.Group>
+            <Dropdown placeholder='Select Event List' name='event_list_id' fluid search selection options={eventList} onChange={this.handleChange}/>
           </Form.Group>
           <Form.Group>
             <Button positive icon='checkmark' labelPosition='right' content="Save Gift" onClick={this.close} />

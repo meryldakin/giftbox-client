@@ -32,6 +32,7 @@ class FriendsPage extends React.Component {
                     <Route render={ ({match}) => {
                       const friend = this.props.friendships.find(friendship => friendship.friend.id === parseInt(this.props.match.params.id))
                       return <Friend
+                        events={this.props.events}
                         celebrations={this.props.friendships.map( friendship => friendship.celebrations )}
                         friend={friend}
                         handleAddGift={this.props.handleAddGift}

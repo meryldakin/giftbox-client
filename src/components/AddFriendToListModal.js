@@ -21,7 +21,7 @@ class AddFriendToListModal extends Component {
             <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
             <Modal.Description>
               <Header>Pick some friends!</Header>
-              <AddFriendToListForm event={this.props.event} friendArray={[]} friendships={this.props.friendships} onSubmit={this.props.handleAddFriendsToEventList} onClick={this.close.bind(this)}/>
+              <AddFriendToListForm event={this.props.event}  friendships={this.props.friendships} onSubmit={this.props.handleAddFriendsToEventList} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

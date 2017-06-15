@@ -18,19 +18,26 @@ class AddFriendToListForm extends Component {
     })
   }
 
-  handleChange = (e, { name, value }) =>  {
-    let friendsArray = this.props.friendArray
-    let targetFriend = value
-    if (friendsArray.includes(targetFriend)){
-      friendsArray.splice(friendsArray.indexOf(targetFriend), 1)
+  handleChange = (friendId) =>  {
+    var friendIndex = this.state.friend_ids.indexOf(friendId)
+
+    if (friendIndex === -1) {
+      // add friend
+      this.setState(prevState => {
+        return {friend_ids: [...prevState.friend_ids, friendId]}
+      })
+
     } else {
-      friendsArray.push(targetFriend)
+      //remove friend
+      this.setState(prevState => {
+        return {
+          friend_ids: [
+            ...prevState.friend_ids.slice(0, friendIndex),
+            ...prevState.friend_ids.slice(friendIndex + 1)
+          ]
+        }
+      })
     }
-    console.log("handle change hit")
-    this.setState({
-      friend_ids: friendsArray
-    })
-    console.log('state from friend list form', this.state)
   }
 
   handleSubmit = e => {
@@ -46,7 +53,7 @@ class AddFriendToListForm extends Component {
     let friendNames = this.props.friendships.map( friendship => {
       let fullName = `${friendship.friend.firstName} ${friendship.friend.lastName}`
       return (
-        <Form.Field label={fullName} name="friend_id" value={friendship.friend.id} control={Checkbox} onChange={this.handleChange}/>
+        <Form.Field label={fullName} name="friend_id" value={friendship.friend.id} control={Checkbox} onChange={() => this.handleChange(friendship.friend.id)}/>
       )
     })
     const { name, date, category } = this.state

@@ -20,7 +20,7 @@ class AddGiftModal extends Component {
             <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
             <Modal.Description>
               <Header>Details</Header>
-              <AddGiftForm friend={this.props.friend} onSubmit={this.props.handleAddGift} onClick={this.close.bind(this)}/>
+              <AddGiftForm events={this.props.events} friend={this.props.friend} onSubmit={this.props.handleAddGift} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

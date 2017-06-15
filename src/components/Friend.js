@@ -24,7 +24,7 @@ class Friend extends React.Component {
   render(){
 
 
-  
+
     console.log("PROPS FROM FRIEND", this.props)
     if(this.props.friend){
       if (this.props.friend.friend.id === 0){
@@ -32,7 +32,7 @@ class Friend extends React.Component {
       } else {
         let friend = this.props.friend.friend
         let celebrations = this.props.friend.celebrations
-        // let events = celebrations.map( celebration => celebration.event ).filter( event => !!event )
+
         return (
           <div>
               <Grid celled='internally'>
@@ -56,6 +56,7 @@ class Friend extends React.Component {
                     <Switch>
                       <Route exact path="/friends/:id" render={ ({match}) => {
                           return <GiftTable
+                            events={this.props.events}
                             friend={friend}
                             celebrations={celebrations}
                             handleAddGift={this.props.handleAddGift}

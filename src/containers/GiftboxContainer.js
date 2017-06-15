@@ -78,14 +78,16 @@ class GiftboxContainer extends Component {
     })
   }
 
-  handleAddGift = (state) => {
-    addGift(state)
+  handleAddGift = (stateFromAddGift) => {
+
+    addGift(stateFromAddGift)
     .then( data => {
+      console.log(data)
       this.setState(prevState => {
         return {
           friendships: data.users
         }
-    }, this.props.history.push(`/friends/${state.friend_id}`)
+    }, this.props.history.push(`/friends/${stateFromAddGift.friend_id}`)
   )})
   }
 
@@ -122,12 +124,26 @@ class GiftboxContainer extends Component {
   handleAddEvent = (eventState) => {
     console.log("event state from giftbox", eventState)
     addEvent(eventState)
-    .then(data => console.log("data after add Event", data))
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          eventLists: data.celebrations
+        }
+      })
+    })
   }
 
-  handleAddFriendsToEventList = (state) => {
-    findOrCreateCelebrations(state)
-    .then(data => console.log(data))
+  handleAddFriendsToEventList = (eventListParams) => {
+    findOrCreateCelebrations(eventListParams)
+
+    .then( data => {
+      // console.log("data from add friend list" , data)
+      this.setState(prevState => {
+        return {
+          eventLists: data.celebrations
+        }
+      })
+    })
   }
 
 
@@ -141,6 +157,7 @@ class GiftboxContainer extends Component {
         <Switch>
           <Route path="/friends/:id" children={() =>
             <FriendsPage
+              events={this.state.eventLists}
               friendships={this.state.friendships}
               handleEdit={this.handleEditSubmit.bind(this)}
               handlePurchasedGifts={this.handlePurchasedGifts}
