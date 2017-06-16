@@ -10,7 +10,7 @@ import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
-import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift,  editExchange, editCelebration, deleteGift, addEvent, findOrCreateCelebrations, deleteFriendFromList } from '../api'
+import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift,  editExchange, editCelebration, deleteGift, addEvent, findOrCreateCelebrations, deleteFriendFromList, editExchangeCompleted } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -22,9 +22,8 @@ class GiftboxContainer extends Component {
       gifts: [],
       friendships: [],
       eventLists: [],
-      purchasedGifts: []
     }
-    this.handlePurchasedGifts = this.handlePurchasedGifts.bind(this)
+
   }
 
   componentDidMount(){
@@ -78,10 +77,8 @@ class GiftboxContainer extends Component {
   }
 
   handleAddGift = (stateFromAddGift) => {
-
     addGift(stateFromAddGift)
     .then( data => {
-      console.log("data from ADD GIFT" , data.friendships, data.event_lists)
       this.setState(prevState => {
         return {
           friendships: data.users
@@ -99,7 +96,6 @@ class GiftboxContainer extends Component {
     editGift(stateFromEditGiftForm)
     editExchange(stateFromEditGiftForm)
     .then( data => {
-      // console.log("DATA FROM EDIT GIFT API", data) })
       this.setState(prevState => {
         return {
           friendships: data.exchanges
@@ -128,12 +124,22 @@ class GiftboxContainer extends Component {
       }))
   }
 
-  handlePurchasedGifts(e, props){
-    this.state.purchasedGifts.push(props.value)
+  handlePurchasedGifts = (event, propsFromGift) => {
+    let checked = propsFromGift.checked
+    let exchange_id = propsFromGift.value
+    editExchangeCompleted({exchange_id: exchange_id, checked: checked})
+    .then( data => {
+      this.setState({
+        eventLists: data.exchanges
+      })
+    })
+    fetchFriends()
+      .then( data => this.setState({
+        friendships: data.user.friendships
+      }))
   }
 
   handleAddEvent = (eventState) => {
-    console.log("event state from giftbox", eventState)
     addEvent(eventState)
     .then( data => {
       this.setState(prevState => {
@@ -150,9 +156,7 @@ class GiftboxContainer extends Component {
 
   handleAddFriendsToEventList = (eventListParams) => {
     findOrCreateCelebrations(eventListParams)
-
     .then( data => {
-      // console.log("data from add friend list" , data)
       this.setState(prevState => {
         return {
           eventLists: data.celebrations
@@ -168,7 +172,6 @@ class GiftboxContainer extends Component {
 handleDeleteFriendFromList = (celebration_id) => {
   deleteFriendFromList(celebration_id)
   .then( data => {
-    // console.log("DELETE CELEBRATION", data)
     this.setState(prevState => {
     return {
       eventLists: data.celebrations
@@ -182,7 +185,6 @@ handleDeleteFriendFromList = (celebration_id) => {
 }
 
   render(){
-    console.log("state from giftbox: ", this.state)
     return (
       <div>
       <Container>
@@ -210,6 +212,7 @@ handleDeleteFriendFromList = (celebration_id) => {
               handleAddGift={this.handleAddGift}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
+              handlePurchasedGifts={this.handlePurchasedGifts}
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
             /> } />
           <Route exact path="/" render={() =>

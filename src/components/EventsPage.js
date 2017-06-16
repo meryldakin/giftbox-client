@@ -52,6 +52,7 @@ class EventsPage extends React.Component {
                           handleAddGift={this.props.handleAddGift}
                           handleEditGift={this.props.handleEditGift}
                           handleDeleteGift={this.props.handleDeleteGift}
+                          handlePurchasedGifts={this.props.handlePurchasedGifts}
                           friendships={this.props.friendships}
                           handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}
                           handleDeleteFriendFromList={this.props.handleDeleteFriendFromList}

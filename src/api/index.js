@@ -138,3 +138,15 @@ export function deleteFriendFromList(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+export function editExchangeCompleted(params){
+
+  return fetch(`http://localhost:3000/exchanges/${params.exchange_id}/complete`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
