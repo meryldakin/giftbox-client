@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 class FriendEditForm extends Component {
@@ -9,11 +13,17 @@ class FriendEditForm extends Component {
       id: props.friend.id,
       firstName: props.friend.firstName,
       lastName: props.friend.lastName,
-      birthday: props.friend.birthday,
+      birthday: moment(props.friend.birthday),
       notes: props.friend.notes,
       events: props.events
     }
   }
+  handleDate = (date) => {
+   this.setState({
+     birthday: date
+   })
+  }
+
 
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value })
@@ -40,7 +50,8 @@ class FriendEditForm extends Component {
             <Form.Input placeholder='Last Name' name='lastName' value={lastName} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Input placeholder='Birthday (mm/dd/yyyy)' name='birthday' value={birthday} onChange={this.handleChange} />
+          Birthday:
+          <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
           </Form.Group>
           <Form.Group>
             <Form.Input control={TextArea} placeholder='Notes' name='notes' value={notes} onChange={this.handleChange}  />

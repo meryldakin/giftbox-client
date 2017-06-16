@@ -5,6 +5,11 @@ import {Icon, Segment, Header, Grid, Container, Checkbox, Form } from 'semantic-
 import GiftEditModal from './GiftEditModal'
 import LoaderThing from './LoaderThing'
 
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 export default class GiftCard extends React.Component {
   constructor(){
     super()
@@ -43,7 +48,7 @@ export default class GiftCard extends React.Component {
                 </Grid.Column>
               <Grid.Column width={5}>
                 <Header as='h3'><Link to={`/events/${event.id}`}>{event.name}</Link></Header>
-                <p>{event.date}</p>
+                <p>{moment(event.date).format("M/DD/YYYY")}</p>
                 <Container>
                   <Form>
                     <Checkbox

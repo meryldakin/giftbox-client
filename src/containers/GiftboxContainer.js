@@ -10,7 +10,23 @@ import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
-import { fetchGifts, fetchFriends, fetchEventLists, addFriend, editFriend, deleteFriend, addGift, editGift,  editExchange, editCelebration, deleteGift, addEvent, findOrCreateCelebrations, deleteFriendFromList, editExchangeCompleted } from '../api'
+import {
+  fetchGifts,
+  fetchFriends,
+  fetchEventLists,
+  addFriend,
+  editFriend,
+  deleteFriend,
+  addGift,
+  editGift,
+  editExchange,
+  editCelebration,
+  deleteGift,
+  addEvent,
+  editEvent,
+  findOrCreateCelebrations,
+  deleteFriendFromList,
+  editExchangeCompleted } from '../api'
 // import isAuthenticated from '../components/hocs/isAuthenticated'
 //
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
@@ -154,6 +170,23 @@ class GiftboxContainer extends Component {
       }))
   }
 
+  handleEditEvent = (eventState) => {
+    // console.log("HANDLE EDIT EVENT", eventState)
+    editEvent(eventState)
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          eventLists: data.event_lists
+        }
+      })
+    })
+    fetchFriends()
+      .then( data => this.setState({
+        friendships: data.user.friendships
+      }))
+
+    }
+
   handleAddFriendsToEventList = (eventListParams) => {
     findOrCreateCelebrations(eventListParams)
     .then( data => {
@@ -214,6 +247,7 @@ handleDeleteFriendFromList = (celebration_id) => {
               handleDeleteGift={this.handleDeleteGift}
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
+              handleEditEvent={this.handleEditEvent}
             /> } />
           <Route exact path="/" render={() =>
             <Container>

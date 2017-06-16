@@ -117,6 +117,16 @@ export function addEvent(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+export function editEvent(params){
+  return fetch(`http://localhost:3000/event_lists/${params.id}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
 
 export function findOrCreateCelebrations(params){
   return fetch('http://localhost:3000/celebrations', {

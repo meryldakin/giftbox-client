@@ -2,8 +2,8 @@ import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-
 import { Grid, Header, Form, Button, Icon } from 'semantic-ui-react'
+import moment from 'moment';
 
 import GiftTable from './GiftTable'
 import EventsFriend from './EventsFriend'
@@ -23,8 +23,6 @@ class Friend extends React.Component {
 
   render(){
 
-
-
     console.log("PROPS FROM FRIEND", this.props)
     if(this.props.friend){
       if (this.props.friend.friend.id === 0){
@@ -42,7 +40,7 @@ class Friend extends React.Component {
                   <Grid.Column width={10}>
                   <Link to={`/friends/${friend.id}/edit`}><Icon name="edit"/>Edit Friend</Link> <a href="#" onClick={this.handleDelete}><Icon name="delete"/>Delete Friend</a>
                     <Header as="h1">{friend.firstName} {friend.lastName}</Header>
-                    <h4>Birthday: {friend.birthday}</h4>
+                    <h4>Birthday: {moment(friend.birthday).format("MMMM Do, YYYY")}</h4>
                     <h4>Notes:</h4>
                     <p>{friend.notes}</p>
                   </Grid.Column>

@@ -3,10 +3,21 @@ import { withRouter } from 'react-router'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
 
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 class AddFriendForm extends Component {
   constructor(){
     super()
-    this.state = { first_name: '', last_name: '', birthday: '', notes: '', events: [] }
+    this.state = { first_name: '', last_name: '', birthday: moment(), notes: '', events: [] }
+  }
+
+  handleDate = (date) => {
+   this.setState({
+     birthday: date
+   })
   }
 
   handleChange = (e, { name, value }) => {
@@ -39,7 +50,8 @@ class AddFriendForm extends Component {
             <Form.Input placeholder='Last Name' name='last_name' value={last_name} onChange={this.handleChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Input placeholder='Birthday (mm/dd/yyyy)' name='birthday' value={birthday} onChange={this.handleChange} />
+            Birthday:
+            <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
           </Form.Group>
           <Form.Group>
             <Form.Input control={TextArea} placeholder='Notes' name='notes' value={notes} onChange={this.handleChange}  />

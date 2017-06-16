@@ -3,12 +3,15 @@ import { Switch, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import { Grid, Header, Form, Button, Icon, Segment } from 'semantic-ui-react'
+import moment from 'moment';
+
 
 import LoaderThing from './LoaderThing'
 import ListComplete from './ListComplete'
 import GiftCard from './GiftCard'
 import AddGiftModal from './AddGiftModal'
 import AddFriendToListModal from './AddFriendToListModal'
+import EditEventListModal from './EditEventListModal'
 
 
 
@@ -22,6 +25,7 @@ class EventListShow extends React.Component {
   }
 
   render(){
+    console.log("EVENTLIST SHOW PROPS", this.props)
     if(this.props.event){
       let event = this.props.event
       let celebrations = this.props.event.celebrations
@@ -70,15 +74,24 @@ class EventListShow extends React.Component {
           return ex.completed === false ? false : true  } )
           : false } ).reduce( (cum, curr) => {
             return cum.concat(curr)
-          })
+          }, [])
 
-      let completedList = exchangeCompletedArray.includes(false) ? false : true
+      let completedList = exchangeCompletedArray.includes(false) || exchangeCompletedArray.length === 0 ? false : true
 
       // END LOGIC FOR LIST COMPLETED
 
       return (
         <div>
+        <EditEventListModal
+          event_name={event.name}
+          event_date={event.date}
+          event_category={event.category}
+          event_id={event.id}
+          handleEditEvent={this.props.handleEditEvent}/>
+
           <Header as="h2">{event.name}</Header>
+          <Header as="h2">{moment(event.date).format("dddd, MMMM Do, YYYY")}</Header>
+
           <ListComplete completedList={completedList}/>
           <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
           <div>{friends}</div>

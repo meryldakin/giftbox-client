@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "moment": "^2.18.1",
     "react": "^15.5.4",
+    "react-date-picker": "^5.3.28",
+    "react-datepicker": "^0.47.0",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "semantic-ui-react": "^0.68.5"
