@@ -57,6 +57,7 @@ class EventsPage extends React.Component {
                           handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}
                           handleDeleteFriendFromList={this.props.handleDeleteFriendFromList}
                           handleEditEvent={this.props.handleEditEvent}
+                          handleDeleteEvent={this.props.handleDeleteEvent}
                           />)
                       }}/>
                     </Grid.Column>

@@ -24,6 +24,7 @@ import {
   deleteGift,
   addEvent,
   editEvent,
+  deleteEvent,
   findOrCreateCelebrations,
   deleteFriendFromList,
   editExchangeCompleted } from '../api'
@@ -187,6 +188,22 @@ class GiftboxContainer extends Component {
 
     }
 
+  handleDeleteEvent = (event_id) => {
+    deleteEvent(event_id)
+    .then( data => {
+      this.setState(prevState => {
+        return {
+          eventLists: data.event_lists
+        }
+      })
+    })
+    fetchFriends()
+      .then( data => this.setState({
+        friendships: data.user.friendships
+      }))
+
+  }
+
   handleAddFriendsToEventList = (eventListParams) => {
     findOrCreateCelebrations(eventListParams)
     .then( data => {
@@ -248,6 +265,7 @@ handleDeleteFriendFromList = (celebration_id) => {
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
               handleEditEvent={this.handleEditEvent}
+              handleDeleteEvent={this.handleDeleteEvent}
             /> } />
           <Route exact path="/" render={() =>
             <Container>

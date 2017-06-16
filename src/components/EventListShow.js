@@ -24,6 +24,11 @@ class EventListShow extends React.Component {
     }
   }
 
+  handleDeleteEvent = (e) => {
+    e.preventDefault()
+    this.props.handleDeleteEvent({event_id: this.props.event.id})
+  }
+
   render(){
     console.log("EVENTLIST SHOW PROPS", this.props)
     if(this.props.event){

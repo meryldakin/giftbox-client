@@ -24,7 +24,6 @@ class FriendEditForm extends Component {
    })
   }
 
-
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value })
   }
@@ -32,7 +31,6 @@ class FriendEditForm extends Component {
   handleSubmit = e => {
     e.preventDefault()
     this.props.onSubmit(this.state, this.state.id)
-
   }
 
   handleCheckboxes = (e) => {
