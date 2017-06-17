@@ -24,11 +24,6 @@ class EventListShow extends React.Component {
     }
   }
 
-  handleDeleteEvent = (e) => {
-    e.preventDefault()
-    this.props.handleDeleteEvent({event_id: this.props.event.id})
-  }
-
   render(){
     console.log("EVENTLIST SHOW PROPS", this.props)
     if(this.props.event){
@@ -97,7 +92,7 @@ class EventListShow extends React.Component {
           <Header as="h2">{event.name}</Header>
           <Header as="h2">{moment(event.date).format("dddd, MMMM Do, YYYY")}</Header>
 
-          <ListComplete completedList={completedList}/>
+          <ListComplete completedList={completedList} handleCompletedList={this.props.handleCompletedList}/>
           <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
           <div>{friends}</div>
         </div>

@@ -10,7 +10,6 @@ class AddFriendToListModal extends Component {
   close = () => this.setState({ open: false })
 
   render() {
-    console.log("props from friendlist modal", this.props)
     const { open, dimmer } = this.state
     return (
       <div>

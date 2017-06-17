@@ -128,6 +128,17 @@ export function editEvent(params){
   }).then( res => res.json() )
 }
 
+export function editCompletedList(params){
+  return fetch(`http://localhost:3000/event_lists/${params.event_list_id}/completed`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+
 export function findOrCreateCelebrations(params){
   return fetch('http://localhost:3000/celebrations', {
     headers: {
