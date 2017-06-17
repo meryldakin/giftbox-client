@@ -6,7 +6,8 @@ import './App.css'
 
 import GiftboxContainer from './containers/GiftboxContainer'
 import Login from './components/Login'
-import { logIn } from './api'
+import SignUp from './components/SignUp'
+import { logIn, decodeToken, signUp } from './api'
 import isAuthenticated from './components/hocs/isAuthenticated'
 
 const AuthedGiftboxContainer = isAuthenticated(GiftboxContainer)
@@ -14,25 +15,68 @@ const AuthedGiftboxContainer = isAuthenticated(GiftboxContainer)
 class App extends Component {
   constructor(props){
     super(props)
-    this.handleLogin = this.handleLogin.bind(this)
+
+    this.state = {
+      current_user_id: ''
+    }
+
   }
 
-  handleLogin(params){
+  handleLogin = (params) => {
     logIn(params)
     .then(res => {
         if (res.error) {
           return
         }
         localStorage.setItem('jwt', res.token)
-        this.props.history.push('/home')
+        console.log("data from login" , res)
+        this.setState({
+            current_user_id: res.user.id
+          })
+        this.props.history.push('/')
+      })
+
+  }
+
+  handleSignUp = (params) => {
+    signUp(params)
+    .then( res => {
+        if (res.error) {
+          return
+        }
+        localStorage.setItem('jwt', res.token)
+        console.log("data from login" , res)
+        this.setState({
+            current_user_id: res.user.id
+          })
+        this.props.history.push('/')
       })
   }
 
+  componentDidMount(){
+    if (localStorage.jwt && this.state.current_user_id === '') {
+       decodeToken({token: localStorage.jwt})
+       .then( data => {
+         console.log("decoder data", data)
+         this.setState({
+           current_user_id: data
+         })
+        }
+       )
+    }
+  }
+
   render() {
+
     return (
       <Switch>
-        <Route exact path="/login" render={() => <Login handleLogin={this.handleLogin} />}/>
-        <Route path="/" component={AuthedGiftboxContainer} />
+        <Route exact path="/login" render={() =>
+          <div>
+          <Login handleLogin={this.handleLogin} />
+          <SignUp handleSignUp={this.handleSignUp}/>
+          </div>
+        }/>
+        <Route path="/" render={() => <AuthedGiftboxContainer current_user_id={this.state.current_user_id}/>} />
       </Switch>
     )
   }

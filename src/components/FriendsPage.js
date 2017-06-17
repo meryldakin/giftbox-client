@@ -40,7 +40,8 @@ class FriendsPage extends React.Component {
                         handlePurchasedGifts={this.props.handlePurchasedGifts}
                         handleEdit={this.props.handleEdit}
                         handleEditGift={this.props.handleEditGift}
-                        handleDeleteGift={this.props.handleDeleteGift}/>
+                        handleDeleteGift={this.props.handleDeleteGift}
+                        current_user_id={this.props.current_user_id}/>
                     } }/>
                   </Grid.Column>
                 </Grid.Row>

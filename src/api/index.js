@@ -1,14 +1,14 @@
-export function fetchGifts(){
-  return fetch("http://localhost:3000/gifts")
-    .then( res => res.json() )
-}
-export function fetchFriends(){
-  return fetch("http://localhost:3000/users/1")
-    .then( res => res.json() )
-}
-export function fetchEventLists(){
-  return fetch("http://localhost:3000/event_lists")
-    .then( res => res.json() )
+export function decodeToken(params){
+  console.log(params)
+  return fetch(`http://localhost:3000/decode_token`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  })
+  .then( res => res.json() )
 }
 
 export function logIn(params){
@@ -21,6 +21,32 @@ export function logIn(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+export function signUp(params){
+  return fetch("http://localhost:3000/accounts", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+
+
+export function fetchGifts(){
+  return fetch("http://localhost:3000/gifts")
+    .then( res => res.json() )
+}
+export function fetchFriends(params){
+  return fetch(`http://localhost:3000/users/${params}`)
+    .then( res => res.json() )
+}
+export function fetchEventLists(){
+  return fetch("http://localhost:3000/event_lists")
+    .then( res => res.json() )
+}
+
 
 export function addFriend(params){
   return fetch("http://localhost:3000/add_friend", {

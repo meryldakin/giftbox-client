@@ -60,7 +60,8 @@ class Friend extends React.Component {
                             handleAddGift={this.props.handleAddGift}
                             handlePurchasedGifts={this.props.handlePurchasedGifts}
                             handleEditGift={this.props.handleEditGift}
-                            handleDeleteGift={this.props.handleDeleteGift}/>
+                            handleDeleteGift={this.props.handleDeleteGift}
+                            current_user_id={this.props.current_user_id}/>
 
                         } }/>
                         <Route exact path="/friends/:id/edit" render={ ({match}) => {

@@ -11,6 +11,7 @@ import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
 import {
+  decodeToken,
   fetchGifts,
   fetchFriends,
   fetchEventLists,
@@ -33,32 +34,32 @@ import {
 // const AuthedFriendsPage = isAuthenticated(FriendsPage)
 
 class GiftboxContainer extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       gifts: [],
       friendships: [],
       eventLists: [],
+      current_user_id: props.current_user_id
     }
 
   }
 
-  componentDidMount(){
-    fetchGifts()
-      .then( data => this.setState({
-        gifts: data.gifts
-      }))
-    fetchFriends()
-      .then( data => this.setState({
-        friendships: data.user.friendships
-      }))
-    fetchEventLists()
-      .then( data => this.setState({
-        eventLists: data.event_lists
-      }))
+  makeFetches = (res) => {
+    fetchGifts().then( data => this.setState({ gifts: data.gifts }))
+    fetchFriends(res).then( data => this.setState({ friendships: data.user.friendships }))
+    fetchEventLists().then( data => this.setState({ eventLists: data.event_lists }))
   }
 
-  handleEditSubmit(state, friendID){
+  componentDidMount(){
+    decodeToken({token: localStorage.jwt})
+    .then( res => {
+      console.log(res)
+      this.makeFetches(res)
+    })
+  }
+
+  handleEditSubmit = (state, friendID) => {
     editFriend(state)
     .then( data => {
       this.setState(prevState => {
@@ -71,7 +72,7 @@ class GiftboxContainer extends Component {
   }
 
 
-  handleAddFriend(state){
+  handleAddFriend = (state) => {
       addFriend(state)
       .then( data => {
         this.setState(prevState => {
@@ -82,7 +83,7 @@ class GiftboxContainer extends Component {
     )})
     }
 
-  handleDeleteFriend(id){
+  handleDeleteFriend = (id) => {
     deleteFriend(id)
     .then( data => {
       this.setState(prevState => {
@@ -235,10 +236,11 @@ handleCompletedList = (completedBoolean, event_id) => {
 }
 
   render(){
+    console.log("props from GIFTBOX", this.props, this.state)
     return (
       <div>
       <Container>
-        <NavBar addFriend={this.handleAddFriend.bind(this)} handleAddEvent={this.handleAddEvent} />
+        <NavBar addFriend={this.handleAddFriend.bind(this)} handleAddEvent={this.handleAddEvent} current_user_id={this.props.current_user_id}/>
       </Container>
         <Switch>
           <Route path="/friends/:id" children={() =>
@@ -251,6 +253,7 @@ handleCompletedList = (completedBoolean, event_id) => {
               handleAddGift={this.handleAddGift}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
+              current_user_id={this.props.current_user_id}
             /> } />
           <Route path="/events" children={() =>
             <EventsPage
@@ -266,6 +269,7 @@ handleCompletedList = (completedBoolean, event_id) => {
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
               handleEditEvent={this.handleEditEvent}
               handleCompletedList={this.handleCompletedList}
+              current_user_id={this.state.current_user_id}
             /> } />
           <Route exact path="/" render={() =>
             <Container>
@@ -286,7 +290,7 @@ handleCompletedList = (completedBoolean, event_id) => {
                   </Grid.Column>
                   <Grid.Column width={12}>
                     <Segment>
-                      <Header as="h2">Hey, Meryl!</Header>
+                      <Header as="h2">Hey, {this.props.current_user_id}!</Header>
                       <p>This is where you will have notifications for upcoming events! And it will look so cool!</p>
                     </Segment>
                   </Grid.Column>

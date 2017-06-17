@@ -9,9 +9,9 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class AddFriendForm extends Component {
-  constructor(){
-    super()
-    this.state = { first_name: '', last_name: '', birthday: moment(), notes: '', events: [] }
+  constructor(props){
+    super(props)
+    this.state = { first_name: '', last_name: '', birthday: moment(), notes: '', events: [], current_user_id: props.current_user_id }
   }
 
   handleDate = (date) => {

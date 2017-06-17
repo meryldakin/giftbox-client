@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+
 import { Button, Menu, Icon } from 'semantic-ui-react'
 
 import AddFriendModal from './AddFriendModal'
 import AddEventModal from './AddEventModal'
 
-export default class NavBar extends Component {
+class NavBar extends Component {
   state = { activeItem: 'Dashboard' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  logout = () => {
+    localStorage.clear()
+    this.props.history.push('/')
+  }
 
   render() {
     const { activeItem } = this.state
@@ -20,11 +27,11 @@ export default class NavBar extends Component {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            <AddFriendModal addFriend={this.props.addFriend}/>
+            <AddFriendModal addFriend={this.props.addFriend} current_user_id={this.props.current_user_id}/>
             <AddEventModal handleAddEvent={this.props.handleAddEvent}  />
           </Menu.Item>
           <Menu.Item>
-            <Button >Log Out</Button>
+            <Button onClick={this.logout} >Log Out</Button>
           </Menu.Item>
         </Menu.Menu>
       </Menu>
@@ -32,3 +39,5 @@ export default class NavBar extends Component {
     )
   }
 }
+
+export default withRouter(NavBar)
