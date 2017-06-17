@@ -36,7 +36,8 @@ class EventListShow extends React.Component {
         let giftCards = celebrations.map( c => {
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
-              return (<div>
+              return (
+                <Grid.Row>
                 <GiftCard
                 celebration={c}
                 events={this.props.events}
@@ -48,16 +49,18 @@ class EventListShow extends React.Component {
                 exchange={e}
                 handleEditGift={this.props.handleEditGift}
                 handlePurchasedGifts={this.props.handlePurchasedGifts}
-                handleDeleteGift={this.props.handleDeleteGift} /></div>
+                handleDeleteGift={this.props.handleDeleteGift} />
+                </Grid.Row>
               )
             })
           }
         })
+
         let friendCelebration = celebrations.find( c =>  c.friendship.friend_id === f.id )
         return (<div>
           <Segment>
           <a href="#" onClick={function(){handleRemove ({celebration_id: friendCelebration.id})}} ><Icon name="delete"/>Remove from this list</a>
-          <Header as='h3'><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link></Header>
+          <h3><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link></h3>
           <AddGiftModal events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
           {giftCards}</Segment>
           </div>
@@ -82,19 +85,31 @@ class EventListShow extends React.Component {
 
       return (
         <div>
-        <EditEventListModal
-          event_name={event.name}
-          event_date={event.date}
-          event_category={event.category}
-          event_id={event.id}
-          handleEditEvent={this.props.handleEditEvent}/>
+        <Grid>
+          <Grid.Row>
+          <EditEventListModal
+            event_name={event.name}
+            event_date={event.date}
+            event_category={event.category}
+            event_id={event.id}
+            handleEditEvent={this.props.handleEditEvent}/>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={10}>
+                <h2>{event.name}</h2>
+                <h2>{moment(event.date).format("dddd, MMMM Do, YYYY")}</h2>
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <ListComplete completedList={completedList} handleCompletedList={this.props.handleCompletedList}/>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
+            </Grid.Row>
 
-          <Header as="h2">{event.name}</Header>
-          <Header as="h2">{moment(event.date).format("dddd, MMMM Do, YYYY")}</Header>
+              <div>{friends}</div>
 
-          <ListComplete completedList={completedList} handleCompletedList={this.props.handleCompletedList}/>
-          <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
-          <div>{friends}</div>
+          </Grid>
         </div>
 
       )

@@ -49,11 +49,7 @@ class GiftTable extends Component {
             </Grid.Column>
             <Grid.Column floated='right' width={5}>
               <Container>
-                <Button.Group compact fluid>
-                 <Link to={`/friends/${this.props.friend.id}`}><Button positive>Gifts</Button></Link>
-                 <Button.Or />
-                 <Link to={`/friends/${this.props.friend.id}/events`}><Button >Events</Button></Link>
-               </Button.Group>
+
               </Container>
             </Grid.Column>
           </Grid.Row>
@@ -67,5 +63,11 @@ class GiftTable extends Component {
     )
   }
 }
+
+// <Button.Group compact fluid>
+//  <Link to={`/friends/${this.props.friend.id}`}><Button positive>Gifts</Button></Link>
+//  <Button.Or />
+//  <Link to={`/friends/${this.props.friend.id}/events`}><Button >Events</Button></Link>
+// </Button.Group>
 
 export default GiftTable

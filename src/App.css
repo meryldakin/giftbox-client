@@ -1,5 +1,15 @@
-h1, h2, h3, h4, h5, h6 {
-  /*font-family: 'Alegreya Sans SC', sans-serif;*/
+h1 {
+  font-family: 'Poiret One', cursive;
+  font-size: 600%
+}
+
+
+p, h2, h3, h4, h5, h6, li {
+  font-family: 'Dosis', sans-serif;
+}
+
+.watercolor-background {
+  background-image: url("http://cdn.mysitemyway.com/etc-mysitemyway/backgrounds/legacy-previews/backgrounds/watercolor-grunge/watercolor-grunge-000063-powder-blue.jpg");
 }
 
 .App {

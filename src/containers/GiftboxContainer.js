@@ -238,7 +238,7 @@ handleCompletedList = (completedBoolean, event_id) => {
   render(){
     console.log("props from GIFTBOX", this.props, this.state)
     return (
-      <div>
+      <div  className="watercolor-background">
       <Container>
         <NavBar addFriend={this.handleAddFriend.bind(this)} handleAddEvent={this.handleAddEvent} current_user_id={this.props.current_user_id}/>
       </Container>
@@ -277,12 +277,8 @@ handleCompletedList = (completedBoolean, event_id) => {
                 <Grid.Column>
                 </Grid.Column>
               </Grid>
-              <Grid columns={1}>
-                <Grid.Row>
-                  <Grid.Column>
-                      <Header as="h1">Giftbox</Header>
-                  </Grid.Column>
-                </Grid.Row>
+              <Grid >
+                <h1 className="center" >GIFTBOX</h1>
               </Grid>
               <Grid >
                 <Grid.Row>

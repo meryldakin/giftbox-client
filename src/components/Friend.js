@@ -39,7 +39,7 @@ class Friend extends React.Component {
                   </Grid.Column>
                   <Grid.Column width={10}>
                   <Link to={`/friends/${friend.id}/edit`}><Icon name="edit"/>Edit Friend</Link> <a href="#" onClick={this.handleDelete}><Icon name="delete"/>Delete Friend</a>
-                    <Header as="h1">{friend.firstName} {friend.lastName}</Header>
+                    <h2>{friend.firstName} {friend.lastName}</h2>
                     <h4>Birthday: {moment(friend.birthday).format("MMMM Do, YYYY")}</h4>
                     <h4>Notes:</h4>
                     <p>{friend.notes}</p>

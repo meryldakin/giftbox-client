@@ -43,11 +43,11 @@ export default class GiftCard extends React.Component {
             <Grid >
               <Grid.Row>
                 <Grid.Column width={8}>
-                <Header as='h3'>{gift.item}</Header>
+                <h3>{gift.item}</h3>
                   <p>Price: {gift.price}</p>
                 </Grid.Column>
               <Grid.Column width={5}>
-                <Header as='h3'><Link to={`/events/${event.id}`}>{event.name}</Link></Header>
+                <h3><Link to={`/events/${event.id}`}>{event.name}</Link></h3>
                 <p>{moment(event.date).format("M/DD/YYYY")}</p>
                 <Container>
                   <Form>
