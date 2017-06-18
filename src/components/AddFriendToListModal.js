@@ -13,7 +13,7 @@ class AddFriendToListModal extends Component {
     const { open, dimmer } = this.state
     return (
       <div>
-        <Button fluid inverted onClick={this.show('inverted')}><Icon name="add"/>Add Friends To list</Button>
+        <Button fluid basic onClick={this.show('inverted')}><Icon name="add"/>Add Friends To list</Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add Friends to Event List</Modal.Header>
           <Modal.Content image>

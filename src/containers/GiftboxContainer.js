@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route} from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { Container, Grid, Header, Segment, Button } from 'semantic-ui-react'
+import { Container, Grid, Header, Segment, Button, Sidebar, Menu, Icon, Image } from 'semantic-ui-react'
 
 import EventList from '../components/EventList'
 import FriendList from '../components/FriendList'
@@ -40,7 +40,9 @@ class GiftboxContainer extends Component {
       gifts: [],
       friendships: [],
       eventLists: [],
-      current_user_id: props.current_user_id
+      current_user_id: props.current_user_id,
+      events_visible: false,
+      friends_visible: false
     }
 
   }
@@ -234,7 +236,11 @@ handleCompletedList = (completedBoolean, event_id) => {
     }))
 }
 
+toggleEventVisibility = () => this.setState({ events_visible: !this.state.events_visible })
+toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.friends_visible })
+
   render(){
+    const { friends_visible, events_visible } = this.state
     console.log("props from GIFTBOX", this.props, this.state)
     return (
       <Container>
@@ -272,26 +278,48 @@ handleCompletedList = (completedBoolean, event_id) => {
             /> } />
           <Route exact path="/" render={() =>
 
-          <Grid>
-            <Grid.Row>
-              <Grid.Column verticalAlign='middle' floated='right' width={10}>
-                <Segment basic textAlign='center'>
-                <div>
-                <h1 className="title">GIFTBOX</h1>
-                <Grid.Row columns={2}>
-                  <Grid.Column >
-                  <Button inverted >See All Friends</Button>
-                  </Grid.Column>
-                  </Grid.Row>
-                </div>
-                </Segment>
-              </Grid.Column>
-              <Grid.Column floated='right' width={6}>
-                <EventList events={this.state.eventLists}/>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-
+          <div>
+                <Sidebar.Pushable>
+                  <Sidebar
+                    animation='overlay'
+                    width='wide'
+                    direction='right'
+                    visible={events_visible}
+                    icon='labeled' >
+                    <EventList events={this.state.eventLists}/>
+                  </Sidebar>
+                  <Sidebar
+                    animation='overlay'
+                    width='wide'
+                    direction='left'
+                    visible={friends_visible}
+                    icon='labeled' >
+                    <FriendList friends={this.state.friendships}/>
+                  </Sidebar>
+                <Sidebar.Pusher>
+                    <Segment basic padded>
+                    </Segment>
+                    <Segment basic padded textAlign='center'>
+                      <h1 className="title">GIFTBOX</h1>
+                    <div>
+                    <Button.Group>
+                      <Button basic onClick={this.toggleFriendVisibility}>Friends</Button>
+                      <Button.Or />
+                      <Button basic onClick={this.toggleEventVisibility}>Event Lists</Button>
+                    </Button.Group>
+                    </div>
+                    <Segment basic padded>
+                    </Segment>
+                    <Segment basic padded>
+                    </Segment>
+                    <Segment basic padded>
+                    </Segment>
+                    <Segment basic padded>
+                    </Segment>
+                    </Segment>
+                  </Sidebar.Pusher>
+                  </Sidebar.Pushable>
+            </div>
          }/>
         </Switch>
       </Container>

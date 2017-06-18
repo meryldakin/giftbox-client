@@ -30,7 +30,7 @@ export default function EventList(props){
     })
     return (
       <div>
-        <Segment floated='right' className="scrollable">
+        <Segment floated='right' >
         <h1>Upcoming Events</h1>
         {formattedlist}
         </Segment>
