@@ -39,18 +39,20 @@ class AddEventForm extends Component {
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths='equal'>
+            <Form.Field>
+            <label>Event List Name</label>
             <Form.Input placeholder='Event List Name' name='name' value={name} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+            <label>Event Date</label>
+            <DatePicker  onChange={this.handleDate} />
+            </Form.Field>
           </Form.Group>
-          <Form.Group>
-            <DatePicker selected={this.state.date} onChange={this.handleDate} />
-          </Form.Group>
-          Current category: {this.state.category}
-          <Form.Group>
-            <Dropdown placeholder='Choose Category' name='category' fluid search selection options={eventCategories} onChange={this.handleChange}/>
-          </Form.Group>
-          <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
-          </Form.Group>
+          <Form.Field>
+          <Dropdown placeholder='Choose Category' name='category' fluid search selection options={eventCategories} onChange={this.handleChange}/>
+          </Form.Field>
+          <Button positive icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
+
         </Form>
       </div>
     )

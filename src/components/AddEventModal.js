@@ -17,7 +17,7 @@ class AddEventModal extends Component {
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add Event List</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
+            <Image wrapped size='medium' src='http://worldartsme.com/images/gold-sparkle-clipart-1.jpg' />
             <Modal.Description>
               <Header>Details</Header>
               <AddEventForm onSubmit={this.props.handleAddEvent} onClick={this.close.bind(this)}/>
