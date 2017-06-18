@@ -13,7 +13,7 @@ class AddEventModal extends Component {
     const { open, dimmer } = this.state
     return (
       <div>
-        <Button onClick={this.show('inverted')}><Icon name="add"/>Event List</Button>
+        <a href="#" onClick={this.show('inverted')}><Icon name="add"/>Event List</a>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add Event List</Modal.Header>
           <Modal.Content image>

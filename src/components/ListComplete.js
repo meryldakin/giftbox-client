@@ -11,12 +11,12 @@ export default class ListComplete extends React.Component {
       if (this.props.completedList === true){
         // this.props.handleCompletedList(true, this.props.event_id)
         return (
-          <div><img src="https://www.simplycook.com/lib/img/gifts/subscriptions/present.png"/></div>
+          <div>{this.props.name} <Icon name="check"/></div>
         )
       } else {
         // this.props.handleCompletedList(false, this.props.event_id)
         return(
-          <div><Header as="h4">Add purchased gifts to your friends to complete this list</Header></div>
+          <div>{this.props.name} <Icon name="square outline"/></div>
         )
       }
 

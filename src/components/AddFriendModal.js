@@ -13,7 +13,7 @@ class AddFriendModal extends Component {
     const { open, dimmer } = this.state
     return (
       <div>
-        <Button onClick={this.show('inverted')}><Icon name="add"/>Friend</Button>
+        <a href="#" onClick={this.show('inverted')}><Icon name="add"/>Friend</a>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add a Friend</Modal.Header>
           <Modal.Content image>

@@ -37,7 +37,7 @@ class EventListShow extends React.Component {
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
               return (
-                <Grid.Row>
+
                 <GiftCard
                 celebration={c}
                 events={this.props.events}
@@ -50,20 +50,28 @@ class EventListShow extends React.Component {
                 handleEditGift={this.props.handleEditGift}
                 handlePurchasedGifts={this.props.handlePurchasedGifts}
                 handleDeleteGift={this.props.handleDeleteGift} />
-                </Grid.Row>
+
               )
             })
           }
         })
-
         let friendCelebration = celebrations.find( c =>  c.friendship.friend_id === f.id )
-        return (<div>
-          <Segment>
-          <a href="#" onClick={function(){handleRemove ({celebration_id: friendCelebration.id})}} ><Icon name="delete"/>Remove from this list</a>
-          <h3><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link></h3>
-          <AddGiftModal events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
-          {giftCards}</Segment>
-          </div>
+        return (
+          <Segment padded>
+            <div className="float-right">
+              <a href="#" textAlign="right" onClick={function(){handleRemove ({celebration_id: friendCelebration.id})}} ><Icon name="delete"/></a>
+            </div>
+            <div className="float-left">
+            <h2><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link> </h2>
+            </div>
+            <div className="float-right">
+            <AddGiftModal events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
+            </div>
+            <br/>
+            <br/>
+            {giftCards}
+          </Segment>
+
         )
       })
       // END OF RENDERING OUT GIFT CARDS
@@ -85,31 +93,21 @@ class EventListShow extends React.Component {
 
       return (
         <div>
-        <Grid>
-          <Grid.Row>
+        <Segment basic padded>
+          <Segment basic compact floated="right">
           <EditEventListModal
-            event_name={event.name}
-            event_date={event.date}
-            event_category={event.category}
-            event_id={event.id}
-            handleEditEvent={this.props.handleEditEvent}/>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column width={10}>
-                <h2>{event.name}</h2>
-                <h2>{moment(event.date).format("dddd, MMMM Do, YYYY")}</h2>
-              </Grid.Column>
-              <Grid.Column width={6}>
-                <ListComplete completedList={completedList} handleCompletedList={this.props.handleCompletedList}/>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
-            </Grid.Row>
+          event_name={event.name}
+          event_date={event.date}
+          event_category={event.category}
+          event_id={event.id}
+          handleEditEvent={this.props.handleEditEvent}/>
+          </Segment>
+          <h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1>
+          <h3><Icon name="calendar"/>{moment(event.date).format("dddd, MMMM Do, YYYY")}</h3>
+        </Segment>
+        <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
+        {friends}
 
-              <div>{friends}</div>
-
-          </Grid>
         </div>
 
       )

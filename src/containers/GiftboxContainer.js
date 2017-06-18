@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route} from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { Container, Grid, Header, Segment } from 'semantic-ui-react'
+import { Container, Grid, Header, Segment, Button } from 'semantic-ui-react'
 
 import EventList from '../components/EventList'
 import FriendList from '../components/FriendList'
@@ -189,7 +189,6 @@ class GiftboxContainer extends Component {
 
     }
 
-
   handleAddFriendsToEventList = (eventListParams) => {
     findOrCreateCelebrations(eventListParams)
     .then( data => {
@@ -238,10 +237,10 @@ handleCompletedList = (completedBoolean, event_id) => {
   render(){
     console.log("props from GIFTBOX", this.props, this.state)
     return (
-      <div  className="watercolor-background">
       <Container>
+
         <NavBar addFriend={this.handleAddFriend.bind(this)} handleAddEvent={this.handleAddEvent} current_user_id={this.props.current_user_id}/>
-      </Container>
+
         <Switch>
           <Route path="/friends/:id" children={() =>
             <FriendsPage
@@ -272,51 +271,30 @@ handleCompletedList = (completedBoolean, event_id) => {
               current_user_id={this.state.current_user_id}
             /> } />
           <Route exact path="/" render={() =>
-            <Container>
-              <Grid columns={1}>
-                <Grid.Column>
-                </Grid.Column>
-              </Grid>
-              <Grid >
-                <h1 className="center" >GIFTBOX</h1>
-              </Grid>
-              <Grid >
-                <Grid.Row>
-                  <Grid.Column width={2}>
-                  </Grid.Column>
-                  <Grid.Column width={12}>
-                    <Segment>
-                      <Header as="h2">Hey, {this.props.current_user_id}!</Header>
-                      <p>This is where you will have notifications for upcoming events! And it will look so cool!</p>
-                    </Segment>
-                  </Grid.Column>
-                  <Grid.Column width={2}>
-                  </Grid.Column>
 
-                </Grid.Row>
-                </Grid>
-                <Grid columns='equal'>
-                <Grid.Row stretched>
-                  <Grid.Column width={5}>
-                    <h2>Friends</h2>
-                    <FriendList friends={this.state.friendships}/>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column verticalAlign='middle' floated='right' width={10}>
+                <Segment basic textAlign='center'>
+                <div>
+                <h1 className="title">GIFTBOX</h1>
+                <Grid.Row columns={2}>
+                  <Grid.Column >
+                  <Button inverted >See All Friends</Button>
                   </Grid.Column>
+                  </Grid.Row>
+                </div>
+                </Segment>
+              </Grid.Column>
+              <Grid.Column floated='right' width={6}>
+                <EventList events={this.state.eventLists}/>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
 
-                  <Grid.Column width={6}>
-                  <h2>Gifts</h2>
-                    <GiftList gifts={this.state.gifts}/>
-                  </Grid.Column>
-
-                  <Grid.Column width={5}>
-                  <h2>Events</h2>
-                    <EventList events={this.state.eventLists} />
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            </Container>
          }/>
         </Switch>
-      </div>
+      </Container>
     )
 
   }

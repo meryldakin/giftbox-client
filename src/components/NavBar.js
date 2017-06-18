@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Button, Menu, Icon } from 'semantic-ui-react'
+import { Button, Menu, Icon, Segment } from 'semantic-ui-react'
 
 import AddFriendModal from './AddFriendModal'
 import AddEventModal from './AddEventModal'
@@ -22,19 +22,21 @@ class NavBar extends Component {
 
     return (
       <div>
-      <Menu size='huge' color='teal'>
-        <Link to='/'><Menu.Item name='Homepage' active={activeItem === 'Dashboard'} onClick={this.handleItemClick} /></Link>
+      <Segment inverted>
+        <Menu size='huge' inverted secondary>
+          <Link to='/'><Menu.Item name='Homepage' active={activeItem === 'Dashboard'} onClick={this.handleItemClick} /></Link>
 
-        <Menu.Menu position='right'>
-          <Menu.Item>
-            <AddFriendModal addFriend={this.props.addFriend} current_user_id={this.props.current_user_id}/>
-            <AddEventModal handleAddEvent={this.props.handleAddEvent}  />
-          </Menu.Item>
-          <Menu.Item>
-            <Button onClick={this.logout} >Log Out</Button>
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position='right'>
+            <Menu.Item>
+              <AddFriendModal addFriend={this.props.addFriend} current_user_id={this.props.current_user_id}/>
+              <AddEventModal handleAddEvent={this.props.handleAddEvent}  />
+            </Menu.Item>
+            <Menu.Item>
+              <Button onClick={this.logout} >Log Out</Button>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </Segment>
       </div>
     )
   }
