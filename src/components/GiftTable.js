@@ -41,33 +41,15 @@ class GiftTable extends Component {
 
     return (
       <div>
-        <Grid >
-          <Grid.Row>
-            <Grid.Column floated='left' width={5}>
 
-              <AddGiftModal events={this.props.events} friend={this.props.friend} handleAddGift={this.props.handleAddGift} />
-            </Grid.Column>
-            <Grid.Column floated='right' width={5}>
-              <Container>
+      <AddGiftModal events={this.props.events} friend={this.props.friend} handleAddGift={this.props.handleAddGift} />
+      {giftCards}
 
-              </Container>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              {giftCards}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
       </div>
     )
   }
 }
 
-// <Button.Group compact fluid>
-//  <Link to={`/friends/${this.props.friend.id}`}><Button positive>Gifts</Button></Link>
-//  <Button.Or />
-//  <Link to={`/friends/${this.props.friend.id}/events`}><Button >Events</Button></Link>
-// </Button.Group>
+
 
 export default GiftTable

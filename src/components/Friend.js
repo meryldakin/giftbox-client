@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Grid, Header, Form, Button, Icon } from 'semantic-ui-react'
+import { Grid, Header, Form, Button, Icon, Segment, Item } from 'semantic-ui-react'
 import moment from 'moment';
 
 import GiftTable from './GiftTable'
@@ -10,16 +10,12 @@ import EventsFriend from './EventsFriend'
 import FriendEditForm from './FriendEditForm'
 import LoaderThing from './LoaderThing'
 
-
-
 class Friend extends React.Component {
 
   handleDelete = (e) => {
     e.preventDefault()
     this.props.handleDelete({id: this.props.friend.friend.id})
   }
-
-
 
   render(){
 
@@ -33,22 +29,30 @@ class Friend extends React.Component {
 
         return (
           <div>
-              <Grid celled='internally'>
+              <Grid >
                 <Grid.Row>
-                  <Grid.Column width={3}>
+                  <Grid.Column width={2}>
                   </Grid.Column>
                   <Grid.Column width={10}>
-                  <Link to={`/friends/${friend.id}/edit`}><Icon name="edit"/>Edit Friend</Link> <a href="#" onClick={this.handleDelete}><Icon name="delete"/>Delete Friend</a>
-                    <h2>{friend.firstName} {friend.lastName}</h2>
-                    <h4>Birthday: {moment(friend.birthday).format("MMMM Do, YYYY")}</h4>
-                    <h4>Notes:</h4>
-                    <p>{friend.notes}</p>
+                  <Item.Group>
+                    <Item>
+                      <Item.Image size='small' src='https://s-media-cache-ak0.pinimg.com/736x/c2/b6/c1/c2b6c1af10cbbd8df560495fd7fa5415.jpg' />
+                      <Item.Content verticalAlign='middle'>
+                        <Item.Extra>
+                        <div className="float-right"><Link to={`/friends/${friend.id}/edit`}><Icon name="edit"/></Link> <a href="#" onClick={this.handleDelete}><Icon name="delete"/></a></div>
+                        </Item.Extra>
+                        <Item.Header><h1>{friend.firstName} {friend.lastName}</h1></Item.Header>
+                        <Item.Description><h3>Birthday: {moment(friend.birthday).format("MMMM Do, YYYY")}</h3>
+                        <h3>Notes:</h3><p>{friend.notes}</p> </Item.Description>
+                      </Item.Content>
+                    </Item>
+                  </Item.Group>
                   </Grid.Column>
-                  <Grid.Column width={3}>
+                  <Grid.Column width={4}>
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                  <Grid.Column width={3}>
+                  <Grid.Column width={2}>
                   </Grid.Column>
                   <Grid.Column width={10}>
                     <Switch>
@@ -72,6 +76,8 @@ class Friend extends React.Component {
                           friend={friend} />
                         } }/>
                     </Switch>
+                  </Grid.Column>
+                  <Grid.Column width={4}>
                   </Grid.Column>
               </Grid.Row>
             </Grid>
