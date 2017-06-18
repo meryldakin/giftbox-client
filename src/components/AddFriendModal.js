@@ -17,7 +17,7 @@ class AddFriendModal extends Component {
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add a Friend</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
+            <Image wrapped size='medium' src='https://react.semantic-ui.com/assets/images/avatar/large/daniel.jpg' />
             <Modal.Description>
               <Header>Details</Header>
               <AddFriendForm onSubmit={this.props.addFriend} current_user_id={this.props.current_user_id} onClick={this.close.bind(this)}/>

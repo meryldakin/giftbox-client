@@ -17,7 +17,7 @@ class AddGiftModal extends Component {
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add a Gift</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
+            <Image wrapped size='medium' src='http://www.bills.com.au/wp-content/themes/bills/images/gift-img.png' />
             <Modal.Description>
               <Header>Details</Header>
               <AddGiftForm events={this.props.events} friend={this.props.friend} onSubmit={this.props.handleAddGift} onClick={this.close.bind(this)}/>

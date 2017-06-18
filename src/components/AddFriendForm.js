@@ -46,33 +46,25 @@ class AddFriendForm extends Component {
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths='equal'>
-            <Form.Input placeholder='First Name' name='first_name' value={first_name} onChange={this.handleChange} />
-            <Form.Input placeholder='Last Name' name='last_name' value={last_name} onChange={this.handleChange} />
+            <Form.Field>
+            <label>First Name</label>
+            <Form.Input name='first_name' value={first_name} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+            <label>Last Name</label>
+            <Form.Input name='last_name' value={last_name} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+            <label>Birthday</label>
+            <DatePicker placeholder='Birthday' onChange={this.handleDate} />
+            </Form.Field>
           </Form.Group>
-          <Form.Group>
-            Birthday:
-            <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input control={TextArea} placeholder='Notes' name='notes' value={notes} onChange={this.handleChange}  />
-          </Form.Group>
-          <Form.Group grouped >
-            Add friend to existing event list:
-            <Form.Field label='Birthday' control={Checkbox} onChange={this.handleCheckboxes}/>
-            <Form.Field label='Christmas' control={Checkbox}  onChange={this.handleCheckboxes}/>
-          </Form.Group>
-          <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Save Friend" onClick={this.close} />
-          </Form.Group>
-          <Message
-            success
-            header='Friend Added!'
-          />
-          <Message
-            error
-            header='Friend not yet added...'
-            content='Check your inputs and retry!'
-          />
+
+            <Form.TextArea placeholder='Notes (likes, interests, etc.)' name='notes' value={notes} onChange={this.handleChange}  />
+
+
+            <Button color="blue" icon='checkmark' labelPosition='right' content="Save Friend" onClick={this.close} />
+          
         </Form>
       </div>
     )

@@ -27,8 +27,9 @@ class EventsPage extends React.Component {
           return (
             <div>
                 <Grid>
-                  <Grid.Row>
-                    <Grid.Column width={10}>
+                  <Grid.Column floated="right" width={2}>
+                  </Grid.Column>
+                  <Grid.Column floated="right" width={8}>
                     <Route exact path='/events/category/:category' render={ ({match}) => {
                       const category = eventsList.find(event => event.category === match.params.category)
                       const eventsInCategory = eventsList.filter(event => event.category === match.params.category)
@@ -56,12 +57,11 @@ class EventsPage extends React.Component {
                           />)
                       }}/>
                     </Grid.Column>
-                    <Grid.Column floated='right' width={6}>
+                    <Grid.Column floated="right" width={6}>
                       <div>
                         <EventList events={eventsList}/>
                       </div>
                     </Grid.Column>
-                  </Grid.Row>
                 </Grid>
 
             </div>

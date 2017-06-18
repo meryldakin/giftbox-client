@@ -16,7 +16,7 @@ class EditEventListModal extends Component {
     const { open, dimmer } = this.state
     return (
       <div>
-        <Button inverted onClick={this.show('inverted') } icon="write"/>
+        <Button basic onClick={this.show('inverted') } icon="write"/>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Edit Event List</Modal.Header>
           <Modal.Content image>

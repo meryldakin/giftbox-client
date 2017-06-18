@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Grid, Header, Form, Button, Icon, Segment } from 'semantic-ui-react'
+import { Grid, Header, Form, Button, Icon, Segment, Item } from 'semantic-ui-react'
 import moment from 'moment';
 
 
@@ -57,7 +57,7 @@ class EventListShow extends React.Component {
         })
         let friendCelebration = celebrations.find( c =>  c.friendship.friend_id === f.id )
         return (
-          <Segment padded>
+          <Segment >
             <div className="float-right">
               <a href="#" textAlign="right" onClick={function(){handleRemove ({celebration_id: friendCelebration.id})}} ><Icon name="delete"/></a>
             </div>
@@ -93,21 +93,28 @@ class EventListShow extends React.Component {
 
       return (
         <div>
-        <Segment basic padded>
-          <Segment basic compact floated="right">
-          <EditEventListModal
-          event_name={event.name}
-          event_date={event.date}
-          event_category={event.category}
-          event_id={event.id}
-          handleEditEvent={this.props.handleEditEvent}/>
-          </Segment>
-          <h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1>
-          <h3><Icon name="calendar"/>{moment(event.date).format("dddd, MMMM Do, YYYY")}</h3>
+        <Segment basic>
+          <Item.Group>
+            <Item>
+              <Item.Image size='small' src='http://worldartsme.com/images/gold-sparkle-clipart-1.jpg' />
+              <Item.Content verticalAlign='middle'>
+                <Item.Extra>
+                <div className="float-right"><EditEventListModal
+                event_name={event.name}
+                event_date={event.date}
+                event_category={event.category}
+                event_id={event.id}
+                handleEditEvent={this.props.handleEditEvent}/></div>
+                </Item.Extra>
+                <Item.Header><h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1></Item.Header>
+                <Item.Description><h3><Icon name="calendar"/>{moment(event.date).format("dddd, MMMM Do, YYYY")}</h3>
+                </Item.Description>
+              </Item.Content>
+            </Item>
+          </Item.Group>
         </Segment>
         <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
         {friends}
-
         </div>
 
       )
