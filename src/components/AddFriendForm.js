@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+
+
+
 import { withRouter } from 'react-router'
 import { Form, Button, TextArea, Checkbox, Message } from 'semantic-ui-react'
 
@@ -58,13 +61,15 @@ class AddFriendForm extends Component {
             <label>Birthday</label>
             <DatePicker placeholder='Birthday' onChange={this.handleDate} />
             </Form.Field>
+
+
           </Form.Group>
 
             <Form.TextArea placeholder='Notes (likes, interests, etc.)' name='notes' value={notes} onChange={this.handleChange}  />
 
 
             <Button color="blue" icon='checkmark' labelPosition='right' content="Save Friend" onClick={this.close} />
-          
+
         </Form>
       </div>
     )

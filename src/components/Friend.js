@@ -42,7 +42,7 @@ class Friend extends React.Component {
                         <div className="float-right"><Link to={`/friends/${friend.id}/edit`}><Icon name="edit"/></Link> <a href="#" onClick={this.handleDelete}><Icon name="delete"/></a></div>
                         </Item.Extra>
                         <Item.Header><h1>{friend.firstName} {friend.lastName}</h1></Item.Header>
-                        <Item.Description><h3>Birthday: {moment(friend.birthday).format("MMMM Do, YYYY")}</h3>
+                        <Item.Description><h3>{friend.birthday ? `Birthday: ${moment(friend.birthday).format("MMMM Do, YYYY")}` : `No birthday added. Edit ${friend.firstName}'s profile to add birthday!`}</h3>
                         <h3>Notes:</h3><p>{friend.notes}</p> </Item.Description>
                       </Item.Content>
                     </Item>

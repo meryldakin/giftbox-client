@@ -51,7 +51,7 @@ class AddEventForm extends Component {
           <Form.Field>
           <Dropdown placeholder='Choose Category' name='category' fluid search selection options={eventCategories} onChange={this.handleChange}/>
           </Form.Field>
-          <Button positive icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
+          <Button color="blue" icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
 
         </Form>
       </div>

@@ -44,33 +44,25 @@ class FriendEditForm extends Component {
       <div>
         <Form onSubmit={this.handleSubmit.bind(this)}>
           <Form.Group widths='equal'>
+            <Form.Field>
+            <label>First Name</label>
             <Form.Input placeholder='First Name' name='firstName' value={firstName} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+            <label>Last Name</label>
             <Form.Input placeholder='Last Name' name='lastName' value={lastName} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field>
+            <label>Birthday:</label>
+            <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
+            </Form.Field>
           </Form.Group>
+          <Form.Field>
+          <Form.TextArea placeholder='Notes' name='notes' value={notes} onChange={this.handleChange}  />
+          </Form.Field>
           <Form.Group>
-          Birthday:
-          <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
+            <Button color="blue" icon='checkmark' labelPosition='right' content="Save Friend" onClick={this.close} />
           </Form.Group>
-          <Form.Group>
-            <Form.Input control={TextArea} placeholder='Notes' name='notes' value={notes} onChange={this.handleChange}  />
-          </Form.Group>
-          <Form.Group grouped >
-            Add friend to existing event list:
-            <Form.Field label='Birthday' control={Checkbox} onChange={this.handleCheckboxes}/>
-            <Form.Field label='Christmas' control={Checkbox}  onChange={this.handleCheckboxes}/>
-          </Form.Group>
-          <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Save Friend" onClick={this.close} />
-          </Form.Group>
-          <Message
-            success
-            header='Friend Added!'
-          />
-          <Message
-            error
-            header='Friend not yet added...'
-            content='Check your inputs and retry!'
-          />
         </Form>
       </div>
     )
