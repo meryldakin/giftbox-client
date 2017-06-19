@@ -15,8 +15,8 @@ class EditEventListForm extends Component {
       name: props.event_name,
       date: moment(props.event_date),
       category: props.event_category,
-      user_id: 1
-    } //passing User ID as 1 for now
+      current_user_id: props.current_user_id
+    }
   }
 
   handleDate = (date) => {
@@ -60,7 +60,7 @@ class EditEventListForm extends Component {
             <Dropdown placeholder='Change Category' name='category' fluid search selection options={eventCategories} onChange={this.handleChange}/>
           </Form.Group>
           <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
+            <Button color="blue" icon='checkmark' labelPosition='right' content="Save Event List" onClick={this.close} />
           </Form.Group>
         </Form>
       </div>

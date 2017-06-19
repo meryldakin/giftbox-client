@@ -9,21 +9,22 @@ const CLOUDINARY_UPLOAD_PRESET = 'enh1i5c6';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/meryl/upload';
 
 class AddGiftForm extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       item: "",
       category: "",
       event_list_id: 0,
-      price: "",
       link: "",
       friend_id: 0,
-      uploadedFileCloudinaryUrl: '' }
+      image: '',
+      current_user_id: props.current_user_id}
   }
 
   componentDidMount(){
     this.setState({
-      friend_id: this.props.friend.id
+      friend_id: this.props.friend.id,
+      current_user_id: this.props.current_user_id
     })
   }
 
@@ -59,15 +60,15 @@ class AddGiftForm extends Component {
 
       if (response.body.secure_url !== '') {
         this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
+          image: response.body.secure_url
         });
       }
     });
   }
 
   render() {
-    console.log("ADD GIFT FORM PROPS", this.props)
-    const { item, category, event_list_id, price, link } = this.state
+    console.log("ADD GIFT FORM PROPS", this.props, this.state)
+    const { item, category, event_list_id, image, link } = this.state
     let eventList = this.props.events.map( event => {
       return ( Object.assign({}, { key: event.id, value: event.id, text: event.name }) )
     })
@@ -79,9 +80,7 @@ class AddGiftForm extends Component {
 
             <Form.Input placeholder='Item' name='item' value={item} onChange={this.handleChange} />
 
-            <Form.Input placeholder='Price' name='price' value={price} onChange={this.handleChange} />
-
-            <Form.Input placeholder='Link' name='link' value={link} onChange={this.handleChange}  />
+            <Form.Input placeholder='Link or Store' name='link' value={link} onChange={this.handleChange}  />
             <Form.Field>
 
             <Dropdown placeholder='Select Event List' name='event_list_id' fluid search selection options={eventList} onChange={this.handleChange}/>
@@ -95,10 +94,10 @@ class AddGiftForm extends Component {
 
             </Form.Field>
             <div>
-              {this.state.uploadedFileCloudinaryUrl === '' ? null :
+              {this.state.image === '' ? null :
               <div>
                 <p>{this.state.uploadedFile.name}</p>
-                <img src={this.state.uploadedFileCloudinaryUrl} />
+                <img src={this.state.image} />
               </div>}
             </div>
             <br/>

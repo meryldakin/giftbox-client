@@ -32,7 +32,9 @@ class GiftTable extends Component {
             handleDeleteGift={this.props.handleDeleteGift}
             handleEditGift={this.props.handleEditGift}
             friend={this.props.friend}
-            handlePurchasedGifts={this.props.handlePurchasedGifts}/>
+            handlePurchasedGifts={this.props.handlePurchasedGifts}
+            current_user_id={this.props.current_user_id}
+            />
           )
         })
       })
@@ -42,7 +44,11 @@ class GiftTable extends Component {
     return (
       <div>
 
-      <AddGiftModal events={this.props.events} friend={this.props.friend} handleAddGift={this.props.handleAddGift} />
+      <AddGiftModal
+        current_user_id={this.props.current_user_id}
+        events={this.props.events}
+        friend={this.props.friend}
+        handleAddGift={this.props.handleAddGift} />
       {giftCards}
 
       </div>

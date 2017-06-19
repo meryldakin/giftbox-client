@@ -20,7 +20,7 @@ class AddGiftModal extends Component {
             <Image wrapped size='medium' src='http://www.bills.com.au/wp-content/themes/bills/images/gift-img.png' />
             <Modal.Description>
               <Header>Details</Header>
-              <AddGiftForm events={this.props.events} friend={this.props.friend} onSubmit={this.props.handleAddGift} onClick={this.close.bind(this)}/>
+              <AddGiftForm current_user_id={this.props.current_user_id} events={this.props.events} friend={this.props.friend} onSubmit={this.props.handleAddGift} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

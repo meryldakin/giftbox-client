@@ -17,10 +17,10 @@ class AddFriendToListModal extends Component {
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Add Friends to Event List</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
+            <Image wrapped size='medium' src='https://react.semantic-ui.com/assets/images/avatar/large/daniel.jpg' />
             <Modal.Description>
               <Header>Pick some friends!</Header>
-              <AddFriendToListForm event={this.props.event}  friendships={this.props.friendships} onSubmit={this.props.handleAddFriendsToEventList} onClick={this.close.bind(this)}/>
+              <AddFriendToListForm current_user_id={this.props.current_user_id} event={this.props.event}  friendships={this.props.friendships} onSubmit={this.props.handleAddFriendsToEventList} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

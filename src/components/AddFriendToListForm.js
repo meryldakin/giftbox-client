@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { Form, Button, TextArea, Radio, Message, Checkbox } from 'semantic-ui-react'
+import { Form, Button, TextArea, Radio, Dropdown } from 'semantic-ui-react'
 
 
 class AddFriendToListForm extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       friend_ids: [],
-      event_id: 0
+      event_id: 0,
+      current_user_id: props.current_user_id
      }
   }
 
@@ -18,26 +19,12 @@ class AddFriendToListForm extends Component {
     })
   }
 
-  handleChange = (friendId) =>  {
-    var friendIndex = this.state.friend_ids.indexOf(friendId)
-
-    if (friendIndex === -1) {
-      // add friend
+  handleChange = (e, {name, value}) =>  {
+    console.log(e, {name, value})
       this.setState(prevState => {
-        return {friend_ids: [...prevState.friend_ids, friendId]}
+        return {friend_ids: value}
       })
-
-    } else {
-      //remove friend
-      this.setState(prevState => {
-        return {
-          friend_ids: [
-            ...prevState.friend_ids.slice(0, friendIndex),
-            ...prevState.friend_ids.slice(friendIndex + 1)
-          ]
-        }
-      })
-    }
+    console.log(this.state)
   }
 
   handleSubmit = e => {
@@ -48,28 +35,22 @@ class AddFriendToListForm extends Component {
 
 
   render() {
-    console.log("props from freind list form", this.props)
-    console.log('state from friend list form', this.state)
+
     let friendNames = this.props.friendships.map( friendship => {
       let fullName = `${friendship.friend.firstName} ${friendship.friend.lastName}`
-      return (
-        <Form.Field label={fullName} name="friend_id" value={friendship.friend.id} control={Checkbox} onChange={() => this.handleChange(friendship.friend.id)}/>
-      )
+      return ( Object.assign({}, { key: friendship.friend.id, value: friendship.friend.id, text: fullName }) )
+
     })
     const { name, date, category } = this.state
     return (
-      <div>
+
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group grouped>
-
-          {friendNames}
-
-          </Form.Group>
-          <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Add Friends to List" onClick={this.close} />
-          </Form.Group>
+          <Form.Field>
+          <Dropdown placeholder='Search and select friends to add to list' name="friend_ids" fluid multiple search selection options={friendNames} onChange={this.handleChange}/>
+          </Form.Field>
+          <Button color="blue" icon='checkmark' labelPosition='right' content="Add Friends to List" onClick={this.close} />
         </Form>
-      </div>
+
     )
   }
 }

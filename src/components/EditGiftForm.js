@@ -3,8 +3,8 @@ import { withRouter } from 'react-router'
 import { Form, Button, Dropdown } from 'semantic-ui-react'
 
 class EditGiftForm extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       item: "",
       event_list_id: "",
@@ -13,7 +13,8 @@ class EditGiftForm extends Component {
       friend_id: 0,
       exchange_id: 0,
       gift_id: "",
-      celebration_id: ""
+      celebration_id: "",
+      current_user_id: props.current_user_id
 
      }
   }
@@ -52,21 +53,13 @@ class EditGiftForm extends Component {
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group widths='equal'>
+
             <Form.Input placeholder='Item' name='item' value={item} onChange={this.handleChange} />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input placeholder='Price' name='price' value={price} onChange={this.handleChange} />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input placeholder='Link' name='link' value={link} onChange={this.handleChange}  />
-          </Form.Group>
-          <Form.Group>
+            <Form.Input placeholder='Link or Store' name='link' value={link} onChange={this.handleChange}  />
             <Dropdown placeholder='Select Event List' name='event_list_id' fluid search selection options={eventList} onChange={this.handleChange}/>
-          </Form.Group>
-          <Form.Group>
-            <Button positive icon='checkmark' labelPosition='right' content="Save Gift" onClick={this.close} />
-          </Form.Group>
+            <br/>
+            <Button color="blue" icon='checkmark' labelPosition='right' content="Save Gift" onClick={this.close} />
+
         </Form>
       </div>
     )

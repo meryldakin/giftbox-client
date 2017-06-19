@@ -29,7 +29,7 @@ class NavBar extends Component {
           <Menu.Menu position='right'>
             <Menu.Item>
               <AddFriendModal addFriend={this.props.addFriend} current_user_id={this.props.current_user_id}/>
-              <AddEventModal handleAddEvent={this.props.handleAddEvent}  />
+              <AddEventModal current_user_id={this.props.current_user_id}  handleAddEvent={this.props.handleAddEvent}  />
             </Menu.Item>
             <Menu.Item>
               <Button onClick={this.logout} >Log Out</Button>

@@ -20,7 +20,7 @@ class AddEventModal extends Component {
             <Image wrapped size='medium' src='http://worldartsme.com/images/gold-sparkle-clipart-1.jpg' />
             <Modal.Description>
               <Header>Details</Header>
-              <AddEventForm onSubmit={this.props.handleAddEvent} onClick={this.close.bind(this)}/>
+              <AddEventForm current_user_id={this.props.current_user_id} onSubmit={this.props.handleAddEvent} onClick={this.close.bind(this)}/>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

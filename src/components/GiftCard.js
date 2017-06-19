@@ -11,8 +11,8 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class GiftCard extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       purchased: false
     }
@@ -21,6 +21,7 @@ export default class GiftCard extends React.Component {
   componentDidMount(){
     this.setState({
       purchased: this.props.exchange.completed
+
     })
   }
 
@@ -36,7 +37,7 @@ export default class GiftCard extends React.Component {
       let event = this.props.eventList
       let exchange_id = this.props.exchange.id
       let completed = this.props.exchange.completed
-
+      let deleteGift = this.props.handleDeleteGift
       return (
         <div>
           <Segment >
@@ -44,7 +45,7 @@ export default class GiftCard extends React.Component {
               <Grid.Row >
                 <Grid.Column width={4}>
                   <Grid.Row>
-                  <Item.Image size='tiny' src='http://www.bills.com.au/wp-content/themes/bills/images/gift-img.png' />
+                  <Item.Image size='tiny' src={ gift.image ? gift.image : "http://www.bills.com.au/wp-content/themes/bills/images/gift-img.png" } />
                   </Grid.Row>
                 </Grid.Column>
                 <Grid.Column width={8}>
@@ -59,13 +60,12 @@ export default class GiftCard extends React.Component {
                   <h4>Give it for: <Link to={`/events/${event.id}`}>{event.name}</Link></h4>
                   </Grid.Row>
                   <Grid.Row >
-                  <h4>Get it from: Target</h4>
+                  <h4>Get it from: {gift.link ? gift.link : null}</h4>
                   </Grid.Row>
                 </Grid.Column>
                 <Grid.Column width={4}>
                   <Grid.Row >
-                    <Grid.Column >
-                      <div className="inline-block float-right">
+                    <Grid.Column>
                         <GiftEditModal
                         celebration={this.props.celebration}
                         events={this.props.events}
@@ -74,12 +74,10 @@ export default class GiftCard extends React.Component {
                         event={event}
                         completed={completed}
                         handleEditGift={this.props.handleEditGift}
-                        friend={this.props.friend} />
-                      </div>
-                      <div className="inline-block float-right">
-                        <a href="#" onClick={function(){this.props.handleDeleteGift({exchange_id: exchange_id})}}><Icon name="delete"/></a>
-                      </div>
-                    </Grid.Column>
+                        friend={this.props.friend}
+                        current_user_id={this.props.current_user_id} />
+                        <a href="#" onClick={function(){deleteGift({exchange_id: exchange_id})}}><Icon name="delete"/></a>
+                        </Grid.Column>
                   </Grid.Row>
                   <Grid.Row>
                     <Segment basic padded>

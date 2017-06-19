@@ -62,6 +62,7 @@ class GiftboxContainer extends Component {
   }
 
   handleEditSubmit = (state, friendID) => {
+    console.log(state)
     editFriend(state)
     .then( data => {
       this.setState(prevState => {
@@ -85,8 +86,10 @@ class GiftboxContainer extends Component {
     )})
     }
 
-  handleDeleteFriend = (id) => {
-    deleteFriend(id)
+  handleDeleteFriend = (idsFromFriendPage) => {
+    let id = idsFromFriendPage.id
+
+    deleteFriend({current_user_id: this.props.current_user_id, id: id})
     .then( data => {
       this.setState(prevState => {
         return {
@@ -97,6 +100,7 @@ class GiftboxContainer extends Component {
   }
 
   handleAddGift = (stateFromAddGift) => {
+    console.log("state from add gift", stateFromAddGift)
     addGift(stateFromAddGift)
     .then( data => {
       this.setState(prevState => {
@@ -130,7 +134,8 @@ class GiftboxContainer extends Component {
 
   handleDeleteGift = (exchange_id) => {
     console.log("exchange_id from deleete GIFT", exchange_id)
-    deleteGift(exchange_id)
+    let exchange = exchange_id.exchange_id
+    deleteGift({exchange_id: exchange, current_user_id: this.props.current_user_id})
     .then( data => {
       this.setState(prevState => {
         return {
@@ -145,6 +150,8 @@ class GiftboxContainer extends Component {
   }
 
   handlePurchasedGifts = (event, propsFromGift) => {
+    console.log(event, propsFromGift)
+    console.log("giftbox state", this.state)
     let checked = propsFromGift.checked
     let exchange_id = propsFromGift.value
     editExchangeCompleted({exchange_id: exchange_id, checked: checked})
@@ -153,13 +160,14 @@ class GiftboxContainer extends Component {
         eventLists: data.exchanges
       })
     })
-    fetchFriends()
+    fetchFriends(this.props.current_user_id)
       .then( data => this.setState({
         friendships: data.user.friendships
       }))
   }
 
   handleAddEvent = (eventState) => {
+    console.log("EVENT STATE", eventState)
     addEvent(eventState)
     .then( data => {
       this.setState(prevState => {
@@ -168,7 +176,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchFriends()
+    fetchFriends(this.props.current_user_id)
       .then( data => this.setState({
         friendships: data.user.friendships
       }))
@@ -184,7 +192,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchFriends()
+    fetchFriends(this.props.current_user_id)
       .then( data => this.setState({
         friendships: data.user.friendships
       }))
@@ -200,7 +208,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchFriends()
+    fetchFriends(this.props.current_user_id)
       .then( data => this.setState({
         friendships: data.user.friendships
       }))
@@ -215,7 +223,7 @@ handleDeleteFriendFromList = (celebration_id) => {
       }
     })
   })
-  fetchFriends()
+  fetchFriends(this.props.current_user_id)
     .then( data => this.setState({
       friendships: data.user.friendships
     }))
@@ -230,7 +238,7 @@ handleCompletedList = (completedBoolean, event_id) => {
       }
     })
   })
-  fetchFriends()
+  fetchFriends(this.props.current_user_id)
     .then( data => this.setState({
       friendships: data.user.friendships
     }))
@@ -252,9 +260,9 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
             <FriendsPage
               events={this.state.eventLists}
               friendships={this.state.friendships}
-              handleEdit={this.handleEditSubmit.bind(this)}
+              handleEdit={this.handleEditSubmit}
               handlePurchasedGifts={this.handlePurchasedGifts}
-              handleDelete={this.handleDeleteFriend.bind(this)}
+              handleDelete={this.handleDeleteFriend}
               handleAddGift={this.handleAddGift}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
@@ -274,7 +282,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
               handleEditEvent={this.handleEditEvent}
               handleCompletedList={this.handleCompletedList}
-              current_user_id={this.state.current_user_id}
+              current_user_id={this.props.current_user_id}
             /> } />
           <Route exact path="/" render={() =>
 

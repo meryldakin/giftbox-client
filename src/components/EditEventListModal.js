@@ -20,7 +20,7 @@ class EditEventListModal extends Component {
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Edit Event List</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='http://www.britishmuseumshoponline.org/content/ebiz/britishmuseumonlineshop/invt/I./I./f./cmcp42340/cmc-viking-toy-duck_productlarge.jpg' />
+            <Image wrapped size='medium' src='http://worldartsme.com/images/gold-sparkle-clipart-1.jpg' />
             <Modal.Description>
               <Header>Details</Header>
               <EditEventListForm

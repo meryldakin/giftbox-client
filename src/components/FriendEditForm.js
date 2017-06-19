@@ -15,7 +15,8 @@ class FriendEditForm extends Component {
       lastName: props.friend.lastName,
       birthday: moment(props.friend.birthday),
       notes: props.friend.notes,
-      events: props.events
+      events: props.events,
+      current_user_id: props.current_user_id
     }
   }
   handleDate = (date) => {

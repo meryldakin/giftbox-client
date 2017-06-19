@@ -7,9 +7,9 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class AddEventForm extends Component {
-  constructor(){
-    super()
-    this.state = { name: '', date: moment(), category: '', user_id: 1 } //passing User ID as 1 for now
+  constructor(props){
+    super(props)
+    this.state = { name: '', date: moment(), category: '', current_user_id: props.current_user_id } //passing User ID as 1 for now
   }
 
   handleDate = (date) => {

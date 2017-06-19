@@ -36,6 +36,8 @@ class EventListShow extends React.Component {
         let giftCards = celebrations.map( c => {
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
+              console.log("c.exchanges," , c.exchanges)
+              console.log("e", e)
               return (
 
                 <GiftCard
@@ -49,7 +51,8 @@ class EventListShow extends React.Component {
                 exchange={e}
                 handleEditGift={this.props.handleEditGift}
                 handlePurchasedGifts={this.props.handlePurchasedGifts}
-                handleDeleteGift={this.props.handleDeleteGift} />
+                handleDeleteGift={this.props.handleDeleteGift}
+                current_user_id={this.props.current_user_id}/>
 
               )
             })
@@ -65,7 +68,7 @@ class EventListShow extends React.Component {
             <h2><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link> </h2>
             </div>
             <div className="float-right">
-            <AddGiftModal events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
+            <AddGiftModal current_user_id={this.props.current_user_id} events={this.props.events} friend={f} handleAddGift={this.props.handleAddGift} />
             </div>
             <br/>
             <br/>
@@ -86,7 +89,6 @@ class EventListShow extends React.Component {
           : false } ).reduce( (cum, curr) => {
             return cum.concat(curr)
           }, [])
-
       let completedList = exchangeCompletedArray.includes(false) || exchangeCompletedArray.length === 0 ? false : true
 
       // END LOGIC FOR LIST COMPLETED
@@ -104,16 +106,17 @@ class EventListShow extends React.Component {
                 event_date={event.date}
                 event_category={event.category}
                 event_id={event.id}
-                handleEditEvent={this.props.handleEditEvent}/></div>
+                handleEditEvent={this.props.handleEditEvent}
+                current_user_id={this.props.current_user_id}/></div>
                 </Item.Extra>
                 <Item.Header><h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1></Item.Header>
-                <Item.Description><h3><Icon name="calendar"/>{moment(event.date).format("dddd, MMMM Do, YYYY")}</h3>
+                <Item.Description><h3><Icon name="calendar"/>{event.date !== null ? moment(event.date).format("dddd MMMM Do, YYYY") : "Anytime!"}</h3>
                 </Item.Description>
               </Item.Content>
             </Item>
           </Item.Group>
         </Segment>
-        <AddFriendToListModal event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
+        <AddFriendToListModal current_user_id={this.props.current_user_id} event={this.props.event} friendships={this.props.friendships} handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}/>
         {friends}
         </div>
 
