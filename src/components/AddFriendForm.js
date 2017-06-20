@@ -14,7 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 class AddFriendForm extends Component {
   constructor(props){
     super(props)
-    this.state = { first_name: '', last_name: '', birthday: moment(), notes: '', events: [], current_user_id: props.current_user_id }
+    this.state = { first_name: '', last_name: '', birthday: '', notes: '', events: [], current_user_id: props.current_user_id }
   }
 
   handleDate = (date) => {
@@ -59,7 +59,7 @@ class AddFriendForm extends Component {
             </Form.Field>
             <Form.Field>
             <label>Birthday</label>
-            <DatePicker placeholder='Birthday' onChange={this.handleDate} />
+            <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
             </Form.Field>
 
 

@@ -9,7 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 class AddEventForm extends Component {
   constructor(props){
     super(props)
-    this.state = { name: '', date: moment(), category: '', current_user_id: props.current_user_id } //passing User ID as 1 for now
+    this.state = { name: '', date: '', category: '', current_user_id: props.current_user_id } //passing User ID as 1 for now
   }
 
   handleDate = (date) => {
@@ -45,7 +45,7 @@ class AddEventForm extends Component {
             </Form.Field>
             <Form.Field>
             <label>Event Date</label>
-            <DatePicker  onChange={this.handleDate} />
+            <DatePicker selected={this.state.date} onChange={this.handleDate} />
             </Form.Field>
           </Form.Group>
           <Form.Field>

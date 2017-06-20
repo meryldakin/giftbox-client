@@ -16,6 +16,7 @@ import EditEventListModal from './EditEventListModal'
 
 
 class EventListShow extends React.Component {
+
   constructor(props){
     super(props)
     this.state ={
@@ -25,6 +26,7 @@ class EventListShow extends React.Component {
   }
 
   render(){
+    let current_user_id = this.props.current_user_id
     console.log("EVENTLIST SHOW PROPS", this.props)
     if(this.props.event){
       let event = this.props.event
@@ -34,10 +36,10 @@ class EventListShow extends React.Component {
       // RENDERS OUT THE GIFT CARDS WITH PROPER DATA
       let friends = this.props.event.friends.map( f => {
         let giftCards = celebrations.map( c => {
+          
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
-              console.log("c.exchanges," , c.exchanges)
-              console.log("e", e)
+
               return (
 
                 <GiftCard
@@ -59,10 +61,11 @@ class EventListShow extends React.Component {
           }
         })
         let friendCelebration = celebrations.find( c =>  c.friendship.friend_id === f.id )
+        console.log("friendCelebration", friendCelebration)
         return (
           <Segment >
             <div className="float-right">
-              <a href="#" textAlign="right" onClick={function(){handleRemove ({celebration_id: friendCelebration.id})}} ><Icon name="delete"/></a>
+              <a href="#" textAlign="right" onClick={function(){handleRemove ({celebration_id: friendCelebration.id, current_user_id: current_user_id})}} ><Icon name="delete"/></a>
             </div>
             <div className="float-left">
             <h2><Link to={`/friends/${f.id}`}>{f.firstName} {f.lastName}</Link> </h2>
@@ -93,12 +96,17 @@ class EventListShow extends React.Component {
 
       // END LOGIC FOR LIST COMPLETED
 
+      //time til event
+
+
+      // end of time til event
+
       return (
         <div>
         <Segment basic>
           <Item.Group>
             <Item>
-              <Item.Image size='small' src='http://worldartsme.com/images/gold-sparkle-clipart-1.jpg' />
+              <h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1>
               <Item.Content verticalAlign='middle'>
                 <Item.Extra>
                 <div className="float-right"><EditEventListModal
@@ -109,8 +117,9 @@ class EventListShow extends React.Component {
                 handleEditEvent={this.props.handleEditEvent}
                 current_user_id={this.props.current_user_id}/></div>
                 </Item.Extra>
-                <Item.Header><h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1></Item.Header>
+                <Item.Header><h1>{event.name}</h1></Item.Header>
                 <Item.Description><h3><Icon name="calendar"/>{event.date !== null ? moment(event.date).format("dddd MMMM Do, YYYY") : "Anytime!"}</h3>
+                <h2 className="gold-font">{moment(event.date).fromNow()}!</h2>
                 </Item.Description>
               </Item.Content>
             </Item>

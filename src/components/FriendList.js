@@ -21,7 +21,7 @@ export default function FriendList(props){
     let formattedlist = sortedList.map( (friend, i) => {
       if (!!friend){
         return (<Segment vertical key={i}>
-          <Link to={`/friends/${friend.id}`}>{friend.firstName} {friend.lastName}</Link>
+          <p><Link to={`/friends/${friend.id}`}>{friend.firstName} {friend.lastName}</Link></p>
           </Segment>)
       } else {
         return <LoaderThing/>

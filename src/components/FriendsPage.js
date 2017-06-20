@@ -19,7 +19,7 @@ class FriendsPage extends React.Component {
     if(this.props.friendships){
       if (this.props.friendships.length > 0) {
         return (
-          <div>
+          <div >
             <Container>
               <Grid>
                 <Grid.Row>
@@ -28,7 +28,7 @@ class FriendsPage extends React.Component {
                       <FriendList friends={this.props.friendships}/>
                     </div>
                   </Grid.Column>
-                  <Grid.Column width={12}>
+                  <Grid.Column className="animated fadeIn" width={12}>
                     <Route render={ ({match}) => {
                       const friend = this.props.friendships.find(friendship => friendship.friend.id === parseInt(this.props.match.params.id))
                       return <Friend

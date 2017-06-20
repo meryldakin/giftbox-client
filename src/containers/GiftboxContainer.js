@@ -103,6 +103,7 @@ class GiftboxContainer extends Component {
     console.log("state from add gift", stateFromAddGift)
     addGift(stateFromAddGift)
     .then( data => {
+      console.log("data after add gift", data)
       this.setState(prevState => {
         return {
           friendships: data.users
@@ -110,9 +111,12 @@ class GiftboxContainer extends Component {
       })
     })
     fetchEventLists()
-      .then( data => this.setState({
+      .then( data => {
+        this.setState({
         eventLists: data.event_lists
-      }))
+      })
+    })
+
 
   }
 
@@ -170,9 +174,10 @@ class GiftboxContainer extends Component {
     console.log("EVENT STATE", eventState)
     addEvent(eventState)
     .then( data => {
+
       this.setState(prevState => {
         return {
-          eventLists: data.celebrations
+          eventLists: data.event_lists
         }
       })
     })
@@ -304,11 +309,11 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
                     icon='labeled' >
                     <FriendList friends={this.state.friendships}/>
                   </Sidebar>
-                <Sidebar.Pusher>
+                <Sidebar.Pusher className="animated fadeIn">
                     <Segment basic padded>
                     </Segment>
                     <Segment basic padded textAlign='center'>
-                      <h1 className="title">GIFTBOX</h1>
+                      <h1 className="title" >GIFTBOX</h1>
                     <div>
                     <Button.Group>
                       <Button basic onClick={this.toggleFriendVisibility}>Friends</Button>

@@ -2,6 +2,8 @@ import React from 'react'
 import { Header, Icon } from 'semantic-ui-react'
 
 import LoaderThing from './LoaderThing'
+import giftboxSurprise from '../images/giftboxSurprise.png'
+import box from '../images/box.png'
 
 export default class ListComplete extends React.Component {
 
@@ -11,12 +13,12 @@ export default class ListComplete extends React.Component {
       if (this.props.completedList === true){
         // this.props.handleCompletedList(true, this.props.event_id)
         return (
-          <div>{this.props.name} <Icon name="check"/></div>
+          <div className="animated bounceIn"><img src={giftboxSurprise}/></div>
         )
       } else {
         // this.props.handleCompletedList(false, this.props.event_id)
         return(
-          <div>{this.props.name} <Icon name="square outline"/></div>
+          <div className="animated flipInX"><img src={box}/></div>
         )
       }
 

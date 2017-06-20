@@ -13,7 +13,7 @@ class FriendEditForm extends Component {
       id: props.friend.id,
       firstName: props.friend.firstName,
       lastName: props.friend.lastName,
-      birthday: moment(props.friend.birthday),
+      birthday: props.friend.birthday === null ? null : moment(props.friend.birthday),
       notes: props.friend.notes,
       events: props.events,
       current_user_id: props.current_user_id
@@ -39,6 +39,7 @@ class FriendEditForm extends Component {
   }
 
   render() {
+    console.log("edit friends", this.props)
     const { id, firstName, lastName, birthday, notes, events } = this.state
     return (
 
@@ -55,7 +56,7 @@ class FriendEditForm extends Component {
             </Form.Field>
             <Form.Field>
             <label>Birthday:</label>
-            <DatePicker selected={this.state.birthday} onChange={this.handleDate} />
+            <DatePicker selected={this.state.birthday } onChange={this.handleDate} />
             </Form.Field>
           </Form.Group>
           <Form.Field>

@@ -86,9 +86,9 @@ export default class GiftCard extends React.Component {
                   <Grid.Row >
 
                       <Form>
-                      Acquired:
+                      
                       <Checkbox
-
+                      label="Got it!"
                       toggle
                       checked={this.state.purchased}
                       value={exchange_id}

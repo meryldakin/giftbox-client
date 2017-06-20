@@ -9,6 +9,7 @@ import GiftTable from './GiftTable'
 import EventsFriend from './EventsFriend'
 import FriendEditForm from './FriendEditForm'
 import LoaderThing from './LoaderThing'
+import rightChevronGold from '../images/rightChevronGold.png'
 
 class Friend extends React.Component {
 
@@ -28,8 +29,8 @@ class Friend extends React.Component {
         let celebrations = this.props.friend.celebrations
 
         return (
-          <div>
-              <Grid >
+          <div >
+              <Grid className="animated fadeIn">
                 <Grid.Row>
                   <Grid.Column width={2}>
                   </Grid.Column>
@@ -53,6 +54,7 @@ class Friend extends React.Component {
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column width={2}>
+
                   </Grid.Column>
                   <Grid.Column width={10}>
                     <Switch>
@@ -78,6 +80,7 @@ class Friend extends React.Component {
                     </Switch>
                   </Grid.Column>
                   <Grid.Column width={4}>
+                    <Link to="/events/2"><img src={rightChevronGold}/></Link>
                   </Grid.Column>
               </Grid.Row>
             </Grid>

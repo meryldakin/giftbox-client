@@ -1,11 +1,13 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 // import { withRouter } from 'react-router'
-import { Container, Grid } from 'semantic-ui-react'
+import { Container, Grid, Segment } from 'semantic-ui-react'
 import EventList from './EventList'
 import EventListShow from './EventListShow'
 import EventCategory from './EventCategory'
 import LoaderThing from './LoaderThing'
+import leftChevronGold from '../images/leftChevronGold.png'
+
 
 class EventsPage extends React.Component {
   constructor(){
@@ -26,10 +28,21 @@ class EventsPage extends React.Component {
         if (eventsList.length > 0) {
           return (
             <div>
-                <Grid>
+                <Grid >
                   <Grid.Column floated="right" width={2}>
+                  <Segment basic very padded>
+                  </Segment>
+                  <Segment basic very padded>
+                  </Segment>
+                  <Segment basic padded>
+                  </Segment>
+                  <Segment basic padded>
+                  </Segment>
+
+                  <Link to="/friends/148"><img src={leftChevronGold}/></Link>
+
                   </Grid.Column>
-                  <Grid.Column floated="right" width={8}>
+                  <Grid.Column floated="right" width={8} className="animated fadeIn">
                     <Route exact path='/events/category/:category' render={ ({match}) => {
                       const category = eventsList.find(event => event.category === match.params.category)
                       const eventsInCategory = eventsList.filter(event => event.category === match.params.category)
