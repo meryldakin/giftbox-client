@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 // import { withRouter } from 'react-router'
-import { Container, Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import EventList from './EventList'
 import EventListShow from './EventListShow'
 import EventCategory from './EventCategory'
@@ -10,10 +10,6 @@ import leftChevronGold from '../images/leftChevronGold.png'
 
 
 class EventsPage extends React.Component {
-  constructor(){
-    super()
-  }
-
   render(){
     console.log("eventspage props", this.props)
     if(this.props){

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { Form, Button, TextArea, Dropdown, Message } from 'semantic-ui-react'
+import { Form, Button, Dropdown } from 'semantic-ui-react'
 
 import DatePicker from 'react-datepicker';
 import moment from 'moment';

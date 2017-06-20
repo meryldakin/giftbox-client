@@ -30,7 +30,7 @@ class App extends Component {
           return
         }
         localStorage.setItem('jwt', res.token)
-        console.log("data from login" , res)
+      
         this.setState({
             current_user_id: res.user.id
           })
@@ -46,7 +46,7 @@ class App extends Component {
           return
         }
         localStorage.setItem('jwt', res.token)
-        console.log("data from login" , res)
+
         this.setState({
             current_user_id: res.user.id
           })
@@ -58,7 +58,7 @@ class App extends Component {
     if (localStorage.jwt && this.state.current_user_id === '') {
        decodeToken({token: localStorage.jwt})
        .then( data => {
-         console.log("decoder data", data)
+
          this.setState({
            current_user_id: data
          })

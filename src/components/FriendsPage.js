@@ -10,12 +10,8 @@ import LoaderThing from './LoaderThing'
 import Friend from './Friend'
 
 class FriendsPage extends React.Component {
-  constructor(){
-    super()
-  }
-
   render(){
-    console.log("PROPS FRIENDPAGE", this.props)
+
     if(this.props.friendships){
       if (this.props.friendships.length > 0) {
         return (

@@ -1,6 +1,4 @@
 import React from 'react'
-import { Header, Icon } from 'semantic-ui-react'
-
 import LoaderThing from './LoaderThing'
 import giftboxSurprise from '../images/giftboxSurprise.png'
 import box from '../images/box.png'

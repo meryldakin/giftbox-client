@@ -1,8 +1,7 @@
 import React from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
-import { Grid, Header, Form, Button, Icon, Segment, Item } from 'semantic-ui-react'
+import { Icon, Segment, Item } from 'semantic-ui-react'
 import moment from 'moment';
 
 
@@ -36,7 +35,7 @@ class EventListShow extends React.Component {
       // RENDERS OUT THE GIFT CARDS WITH PROPER DATA
       let friends = this.props.event.friends.map( f => {
         let giftCards = celebrations.map( c => {
-          
+
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
 

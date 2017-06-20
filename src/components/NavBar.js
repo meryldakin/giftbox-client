@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Button, Menu, Icon, Segment } from 'semantic-ui-react'
+import { Button, Menu, Segment } from 'semantic-ui-react'
 
 import AddFriendModal from './AddFriendModal'
 import AddEventModal from './AddEventModal'
 import giftbox_white from './giftbox_white.png'
 
 class NavBar extends Component {
-  state = { activeItem: 'Dashboard' }
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-    this.props.history.push('/')
-  }
 
   logout = () => {
     localStorage.clear()
@@ -22,7 +15,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const { activeItem } = this.state
+
 
     return (
       <div>

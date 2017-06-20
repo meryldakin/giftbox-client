@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {Icon, Segment, Header, Grid, Container, Checkbox, Form, Item } from 'semantic-ui-react'
+import {Icon, Segment,  Grid, Checkbox, Form, Item } from 'semantic-ui-react'
 
 import GiftEditModal from './GiftEditModal'
 import LoaderThing from './LoaderThing'
 
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
-
-import 'react-datepicker/dist/react-datepicker.css';
 
 export default class GiftCard extends React.Component {
   constructor(props){
@@ -86,7 +83,7 @@ export default class GiftCard extends React.Component {
                   <Grid.Row >
 
                       <Form>
-                      
+
                       <Checkbox
                       label="Got it!"
                       toggle

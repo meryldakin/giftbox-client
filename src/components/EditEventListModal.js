@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Header, Image, Modal, Icon, Form } from 'semantic-ui-react'
+import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 
 import EditEventListForm from './EditEventListForm'

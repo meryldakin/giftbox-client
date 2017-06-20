@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Grid, Header, Form, Button, Icon, Segment, Item } from 'semantic-ui-react'
+import { Grid, Icon, Item } from 'semantic-ui-react'
 import moment from 'moment';
 
 import GiftTable from './GiftTable'
@@ -20,7 +20,7 @@ class Friend extends React.Component {
 
   render(){
 
-    console.log("PROPS FROM FRIEND", this.props)
+
     if(this.props.friend){
       if (this.props.friend.friend.id === 0){
         return (<LoaderThing/>)

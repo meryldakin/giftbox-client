@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import {Header, Grid, Container, Button, Icon } from 'semantic-ui-react'
 
 import GiftCard from './GiftCard'
 import AddGiftModal from './AddGiftModal'
@@ -15,7 +13,7 @@ class GiftTable extends Component {
 
 
   render(){
-    console.log("props from GIFTTABLE", this.props)
+
     let celebrations = this.props.celebrations.filter( c => {
       return c.exchanges.length > 0
     })
@@ -39,7 +37,7 @@ class GiftTable extends Component {
         })
       })
 
-    console.log("CELEBRATIONS", giftCards)
+
 
     return (
       <div>

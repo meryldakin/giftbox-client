@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import { Switch, Route} from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { Container, Grid, Header, Segment, Button, Sidebar, Menu, Icon, Image } from 'semantic-ui-react'
+import { Container, Segment, Button, Sidebar,  } from 'semantic-ui-react'
 
 import EventList from '../components/EventList'
 import FriendList from '../components/FriendList'
-import GiftList from '../components/GiftList'
 import FriendsPage from '../components/FriendsPage'
 import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventsPage'
 
 import {
   decodeToken,
-  fetchGifts,
   fetchFriends,
   fetchEventLists,
   addFriend,
@@ -21,7 +19,6 @@ import {
   addGift,
   editGift,
   editExchange,
-  editCelebration,
   deleteGift,
   addEvent,
   editEvent,
@@ -37,7 +34,6 @@ class GiftboxContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      gifts: [],
       friendships: [],
       eventLists: [],
       current_user_id: props.current_user_id,
@@ -48,7 +44,6 @@ class GiftboxContainer extends Component {
   }
 
   makeFetches = (res) => {
-    fetchGifts().then( data => this.setState({ gifts: data.gifts }))
     fetchFriends(res).then( data => this.setState({ friendships: data.user.friendships }))
     fetchEventLists(res).then( data => this.setState({ eventLists: data.event_lists }))
   }
@@ -56,13 +51,13 @@ class GiftboxContainer extends Component {
   componentDidMount(){
     decodeToken({token: localStorage.jwt})
     .then( res => {
-      console.log(res)
+
       this.makeFetches(res)
     })
   }
 
   handleEditSubmit = (state, friendID) => {
-    console.log(state)
+
     editFriend(state)
     .then( data => {
       this.setState(prevState => {
@@ -100,10 +95,10 @@ class GiftboxContainer extends Component {
   }
 
   handleAddGift = (stateFromAddGift) => {
-    console.log("state from add gift", stateFromAddGift)
+
     addGift(stateFromAddGift)
     .then( data => {
-      console.log("data after add gift", data)
+
       this.setState(prevState => {
         return {
           friendships: data.users
@@ -137,25 +132,28 @@ class GiftboxContainer extends Component {
   }
 
   handleDeleteGift = (exchange_id) => {
-    console.log("exchange_id from deleete GIFT", exchange_id)
+
     let exchange = exchange_id.exchange_id
     deleteGift({exchange_id: exchange, current_user_id: this.props.current_user_id})
     .then( data => {
       this.setState(prevState => {
         return {
-          friendships: data.users
+          event_lists: data.users
         }
       })
-    })
-    fetchEventLists(this.props.current_user_id)
-      .then( data => this.setState({
-        eventLists: data.event_lists
-      }))
+    }).then(
+      fetchFriends(this.props.current_user_id)
+      .then( data => {
+        return this.setState(prevState => {
+          return {
+            friendships: data.user
+          }
+        })
+      })
+    )
   }
 
   handlePurchasedGifts = (event, propsFromGift) => {
-    console.log(event, propsFromGift)
-    console.log("giftbox state", this.state)
     let checked = propsFromGift.checked
     let exchange_id = propsFromGift.value
     editExchangeCompleted({exchange_id: exchange_id, checked: checked, current_user_id: this.props.current_user_id})
@@ -171,7 +169,7 @@ class GiftboxContainer extends Component {
   }
 
   handleAddEvent = (eventState) => {
-    console.log("EVENT STATE", eventState)
+
     addEvent(eventState)
     .then( data => {
 
@@ -188,7 +186,7 @@ class GiftboxContainer extends Component {
   }
 
   handleEditEvent = (eventState) => {
-    // console.log("HANDLE EDIT EVENT", eventState)
+
     editEvent(eventState)
     .then( data => {
       this.setState(prevState => {
@@ -254,7 +252,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
 
   render(){
     const { friends_visible, events_visible } = this.state
-    console.log("props from GIFTBOX", this.props, this.state)
+
     return (
       <Container>
 
@@ -281,8 +279,6 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
               friendships={this.state.friendships}
               handleAddFriendsToEventList={this.handleAddFriendsToEventList}
               handleAddGift={this.handleAddGift}
-              handleEditGift={this.handleEditGift}
-              handleDeleteGift={this.handleDeleteGift}
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
               handleEditEvent={this.handleEditEvent}

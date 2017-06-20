@@ -1,19 +1,9 @@
 import React from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
-
-
-import { Grid, Header, Form, Button, Icon } from 'semantic-ui-react'
-
-
-import LoaderThing from './LoaderThing'
-
-
+import { Link } from 'react-router-dom'
 
 class EventCategory extends React.Component {
 
   render(){
-    console.log("events category props" , this.props)
     let eventsInCategory = this.props.eventsInCategory
     let formattedEvents = eventsInCategory.map( (event, i) => {
       return (
