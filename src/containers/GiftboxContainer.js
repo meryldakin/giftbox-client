@@ -50,7 +50,7 @@ class GiftboxContainer extends Component {
   makeFetches = (res) => {
     fetchGifts().then( data => this.setState({ gifts: data.gifts }))
     fetchFriends(res).then( data => this.setState({ friendships: data.user.friendships }))
-    fetchEventLists().then( data => this.setState({ eventLists: data.event_lists }))
+    fetchEventLists(res).then( data => this.setState({ eventLists: data.event_lists }))
   }
 
   componentDidMount(){
@@ -110,7 +110,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchEventLists()
+    fetchEventLists(this.props.current_user_id)
       .then( data => {
         this.setState({
         eventLists: data.event_lists
@@ -130,7 +130,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchEventLists()
+    fetchEventLists(this.props.current_user_id)
       .then( data => this.setState({
         eventLists: data.event_lists
       }))
@@ -147,7 +147,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchEventLists()
+    fetchEventLists(this.props.current_user_id)
       .then( data => this.setState({
         eventLists: data.event_lists
       }))
@@ -158,7 +158,7 @@ class GiftboxContainer extends Component {
     console.log("giftbox state", this.state)
     let checked = propsFromGift.checked
     let exchange_id = propsFromGift.value
-    editExchangeCompleted({exchange_id: exchange_id, checked: checked})
+    editExchangeCompleted({exchange_id: exchange_id, checked: checked, current_user_id: this.props.current_user_id})
     .then( data => {
       this.setState({
         eventLists: data.exchanges

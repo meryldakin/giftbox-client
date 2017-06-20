@@ -42,8 +42,8 @@ export function fetchFriends(params){
   return fetch(`http://localhost:3000/users/${params}`)
     .then( res => res.json() )
 }
-export function fetchEventLists(){
-  return fetch("http://localhost:3000/event_lists")
+export function fetchEventLists(params){
+  return fetch(`http://localhost:3000/event_lists/users/${params}`)
     .then( res => res.json() )
 }
 

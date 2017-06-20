@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import './App.css'
+import {Container, Grid} from 'semantic-ui-react'
 
 import GiftboxContainer from './containers/GiftboxContainer'
 import Login from './components/Login'
@@ -72,8 +73,21 @@ class App extends Component {
       <Switch>
         <Route exact path="/login" render={() =>
           <div>
-          <Login handleLogin={this.handleLogin} />
-          <SignUp handleSignUp={this.handleSignUp}/>
+          <Container>
+            <Grid >
+              <Grid.Row centered>
+                <h1 className="title">GIFTBOX</h1>
+              </Grid.Row>
+              <Grid.Row columns={2}>
+                <Grid.Column floated="right">
+                  <Login handleLogin={this.handleLogin} />
+                </Grid.Column>
+                <Grid.Column>
+                  <SignUp handleSignUp={this.handleSignUp}/>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
           </div>
         }/>
         <Route path="/" render={() => <AuthedGiftboxContainer current_user_id={this.state.current_user_id}/>} />

@@ -28,7 +28,7 @@ class NavBar extends Component {
       <div>
       <Segment inverted>
         <Menu size='huge' inverted secondary>
-        <Menu.Item onClick={this.handleItemClick} ><img src={giftbox_white} />
+        <Menu.Item onClick={this.handleItemClick} ><img src={giftbox_white} /> Welcome, {this.props.current_user_id}
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item>
