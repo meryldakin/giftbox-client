@@ -58,7 +58,7 @@ const reducer = (state=defaultState, action) => {
         loading: true
       }
     case 'EDIT_FRIEND':
-      const removalIndex = state.friendships.findIndex(friend => friend.id === action.payload.id);
+      const removalIndex = state.friendships.findIndex(friendship => friendship.friend.id === action.payload.friendship.friend.id);
       return{
         ...state,
         friendships:  [
