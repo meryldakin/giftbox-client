@@ -13,20 +13,11 @@ import AddFriendToListModal from './AddFriendToListModal'
 import EditEventListModal from './EditEventListModal'
 
 
-
 class EventListShow extends React.Component {
-
-  constructor(props){
-    super(props)
-    this.state ={
-      listComplete: false,
-      exchanges: []
-    }
-  }
 
   render(){
     let current_user_id = this.props.current_user_id
-    console.log("EVENTLIST SHOW PROPS", this.props)
+
     if(this.props.event){
       let event = this.props.event
       let celebrations = this.props.event.celebrations
@@ -35,7 +26,10 @@ class EventListShow extends React.Component {
       // RENDERS OUT THE GIFT CARDS WITH PROPER DATA
       let friends = this.props.event.friends.map( f => {
         let giftCards = celebrations.map( c => {
+        if( typeof(c.friendship) === 'undefined'){
+          // debugger
 
+        }
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
 
@@ -80,32 +74,14 @@ class EventListShow extends React.Component {
         )
       })
       // END OF RENDERING OUT GIFT CARDS
-      // LOGIC FOR LIST COMPLETED
-      let exchanges = this.props.event.celebrations.map( c => {
-        return c.exchanges
-      })
 
-      let exchangeCompletedArray = exchanges.map( exs => {
-        return exs.length > 0 ? exs.map( ex => {
-          return ex.completed === false ? false : true  } )
-          : false } ).reduce( (cum, curr) => {
-            return cum.concat(curr)
-          }, [])
-      let completedList = exchangeCompletedArray.includes(false) || exchangeCompletedArray.length === 0 ? false : true
-
-      // END LOGIC FOR LIST COMPLETED
-
-      //time til event
-
-
-      // end of time til event
 
       return (
         <div>
         <Segment basic>
           <Item.Group>
             <Item>
-              <h1><ListComplete name={event.name} completedList={completedList} handleCompletedList={this.props.handleCompletedList}/></h1>
+              <h1><ListComplete name={event.name} celebrations={this.props.event.celebrations} handleCompletedList={this.handleCompletedList}/></h1>
               <Item.Content verticalAlign='middle'>
                 <Item.Extra>
                 <div className="float-right"><EditEventListModal

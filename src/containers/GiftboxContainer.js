@@ -117,16 +117,13 @@ class GiftboxContainer extends Component {
     this.props.editEvent(eventState)
   }
 
+  handleCompletedList = (completedBoolean, event_id) => {
+    this.props.editCompletedList({completed: completedBoolean, event_list_id: event_id})
+  }
+
   handleAddFriendsToEventList = (eventListParams) => {
-    findOrCreateCelebrations(eventListParams)
-    .then( data => {
-      this.setState(prevState => {
-        return {
-          eventLists: data.celebrations
-        }
-      })
-    })
-    this.props.fetchFriends(this.props.current_user_id)
+    this.props.findOrCreateCelebrations(eventListParams)
+
   }
 
 handleDeleteFriendFromList = (celebration_id) => {
@@ -135,18 +132,6 @@ handleDeleteFriendFromList = (celebration_id) => {
     this.setState(prevState => {
     return {
       eventLists: data.celebrations
-      }
-    })
-  })
-  this.props.fetchFriends(this.props.current_user_id)
-}
-
-handleCompletedList = (completedBoolean, event_id) => {
-  editCompletedList({completed: completedBoolean, event_list_id: event_id})
-  .then( data => {
-    this.setState(prevState => {
-    return {
-      eventLists: data.event_lists
       }
     })
   })
@@ -188,7 +173,6 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDeleteFriendFromList={this.handleDeleteFriendFromList}
               handleEditEvent={this.handleEditEvent}
-              handleCompletedList={this.handleCompletedList}
               current_user_id={this.props.current_user_id}
             /> } />
           <Route exact path="/" render={() =>

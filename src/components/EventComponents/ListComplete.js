@@ -6,15 +6,21 @@ import box from '../../images/box.png'
 export default class ListComplete extends React.Component {
 
   render(){
-    console.log("list complete component", this.props)
     if(this.props){
-      if (this.props.completedList === true){
-        // this.props.handleCompletedList(true, this.props.event_id)
+        let exchanges = this.props.celebrations.map( c => c.exchanges )
+        let exchangeCompletedArray = exchanges.map( exs => {
+          return exs.length > 0 ? exs.map( ex => {
+            return ex.completed === false ? false : true  } )
+            : false } ).reduce( (cum, curr) => {
+              return cum.concat(curr)
+            }, [])
+        let completedList = exchangeCompletedArray.includes(false) || exchangeCompletedArray.length === 0 ? false : true
+
+      if (completedList === true){
         return (
           <div className="animated bounceIn"><img src={giftboxSurprise}/></div>
         )
       } else {
-        // this.props.handleCompletedList(false, this.props.event_id)
         return(
           <div className="animated flipInX"><img src={box}/></div>
         )

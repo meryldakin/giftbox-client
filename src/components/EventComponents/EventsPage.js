@@ -61,7 +61,6 @@ class EventsPage extends React.Component {
                           handleAddFriendsToEventList={this.props.handleAddFriendsToEventList}
                           handleDeleteFriendFromList={this.props.handleDeleteFriendFromList}
                           handleEditEvent={this.props.handleEditEvent}
-                          handleCompletedList={this.props.handleCompletedList}
                           current_user_id={this.props.current_user_id}
                           />)
                       }}/>

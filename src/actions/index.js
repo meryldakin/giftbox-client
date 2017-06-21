@@ -89,3 +89,23 @@ export function editEvent(params){
     })
   }
 }
+
+export function editCompletedList(params){
+  return function(dispatch){
+    dispatch({type: "START_EDIT_COMPLETED_LIST"})
+    apiHelpers.editEvent(params)
+    .then( data => {
+      dispatch({type: "EDIT_COMPLETED_LIST", payload: data})
+    })
+  }
+}
+
+export function findOrCreateCelebrations(params){
+  return function(dispatch){
+    dispatch({type: "START_FIND_CREATE_CELEBRATIONS"})
+    apiHelpers.findOrCreateCelebrations(params)
+    .then( data => {
+      dispatch({type: "FIND_CREATE_CELEBRATIONS", payload: data})
+    })
+  }
+}

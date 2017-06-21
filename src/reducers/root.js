@@ -94,19 +94,54 @@ const reducer = (state=defaultState, action) => {
           event_lists: [...state.event_lists, action.payload.event_list],
           loading: false
         }
-        case "START_EDIT_EVENT":
+      case "START_EDIT_EVENT":
+        return {
+          ...state,
+          loading: true
+        }
+      case 'EDIT_EVENT':
+        const eventEditIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
+        return{
+          ...state,
+          event_lists:  [
+            ...state.event_lists.slice(0, eventEditIndex),
+            action.payload.event_list,
+            ...state.event_lists.slice(eventEditIndex + 1),
+          ],
+          loading: false
+        }
+      case "START_EDIT_COMPLETED_LIST":
+        return {
+          ...state,
+          loading: true
+        }
+      case 'EDIT_COMPLETED_LIST':
+        const eventCompletedIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
+        return {
+          ...state,
+          event_lists:  [
+            ...state.event_lists.slice(0, eventCompletedIndex),
+            action.payload.event_list,
+            ...state.event_lists.slice(eventCompletedIndex + 1),
+          ],
+          loading: false
+        }
+        case "START_FIND_CREATE_CELEBRATIONS":
           return {
             ...state,
             loading: true
           }
-        case 'EDIT_EVENT':
-          const eventEditIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
+        case 'FIND_CREATE_CELEBRATIONS':
+          const eventIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
+          // find the event to add celebrations to
+          // add celebrations to that event if they dont exist already
+
           return{
             ...state,
-            event_lists:  [
-              ...state.event_lists.slice(0, eventEditIndex),
+            event_lists: [
+              ...state.event_lists.slice(0, eventIndex),
               action.payload.event_list,
-              ...state.event_lists.slice(eventEditIndex + 1),
+              ...state.event_lists.slice(eventIndex + 1),
             ],
             loading: false
           }
