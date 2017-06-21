@@ -2,7 +2,7 @@ import React from 'react'
 // import { Route } from 'react-router-dom'
 
 import {Form, Button, Segment, Image} from 'semantic-ui-react'
-import {giftbox} from "../images/giftbox.png"
+import {giftbox} from "../../images/giftbox.png"
 
 class Login extends React.Component {
 

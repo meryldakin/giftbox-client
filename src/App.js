@@ -6,8 +6,8 @@ import './App.css'
 import {Container, Grid} from 'semantic-ui-react'
 
 import GiftboxContainer from './containers/GiftboxContainer'
-import Login from './components/Login'
-import SignUp from './components/SignUp'
+import Login from './components/LoginComponents/Login'
+import SignUp from './components/LoginComponents/SignUp'
 import { logIn, decodeToken, signUp } from './api'
 import isAuthenticated from './components/hocs/isAuthenticated'
 
@@ -30,7 +30,7 @@ class App extends Component {
           return
         }
         localStorage.setItem('jwt', res.token)
-      
+
         this.setState({
             current_user_id: res.user.id
           })

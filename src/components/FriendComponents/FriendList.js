@@ -6,7 +6,7 @@ import {Segment} from 'semantic-ui-react'
 
 
 
-import LoaderThing from './LoaderThing'
+import LoaderThing from '../LoaderThing'
 
 export default function FriendList(props){
   if (props.friends){

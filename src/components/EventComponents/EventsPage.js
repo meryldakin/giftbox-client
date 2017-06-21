@@ -5,8 +5,8 @@ import { Grid, Segment } from 'semantic-ui-react'
 import EventList from './EventList'
 import EventListShow from './EventListShow'
 import EventCategory from './EventCategory'
-import LoaderThing from './LoaderThing'
-import leftChevronGold from '../images/leftChevronGold.png'
+import LoaderThing from '../LoaderThing'
+import leftChevronGold from '../../images/leftChevronGold.png'
 
 
 class EventsPage extends React.Component {

@@ -5,11 +5,11 @@ import { withRouter } from 'react-router'
 import { Grid, Icon, Item } from 'semantic-ui-react'
 import moment from 'moment';
 
-import GiftTable from './GiftTable'
-import EventsFriend from './EventsFriend'
+import GiftTable from '../GiftComponents/GiftTable'
+import EventsFriend from '../EventComponents/EventsFriend'
 import FriendEditForm from './FriendEditForm'
-import LoaderThing from './LoaderThing'
-import rightChevronGold from '../images/rightChevronGold.png'
+import LoaderThing from '../LoaderThing'
+import rightChevronGold from '../../images/rightChevronGold.png'
 
 class Friend extends React.Component {
 

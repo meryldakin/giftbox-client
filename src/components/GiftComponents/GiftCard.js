@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {Icon, Segment,  Grid, Checkbox, Form, Item } from 'semantic-ui-react'
 
 import GiftEditModal from './GiftEditModal'
-import LoaderThing from './LoaderThing'
+import LoaderThing from '../LoaderThing'
 
 import moment from 'moment';
 

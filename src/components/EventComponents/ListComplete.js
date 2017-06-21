@@ -1,7 +1,7 @@
 import React from 'react'
-import LoaderThing from './LoaderThing'
-import giftboxSurprise from '../images/giftboxSurprise.png'
-import box from '../images/box.png'
+import LoaderThing from '../LoaderThing'
+import giftboxSurprise from '../../images/giftboxSurprise.png'
+import box from '../../images/box.png'
 
 export default class ListComplete extends React.Component {
 

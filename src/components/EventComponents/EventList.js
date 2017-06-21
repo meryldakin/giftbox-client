@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import LoaderThing from './LoaderThing'
+import LoaderThing from '../LoaderThing'
 import moment from 'moment';
 
 

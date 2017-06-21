@@ -3,11 +3,11 @@ import { Switch, Route} from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { Container, Segment, Button, Sidebar,  } from 'semantic-ui-react'
 
-import EventList from '../components/EventList'
-import FriendList from '../components/FriendList'
-import FriendsPage from '../components/FriendsPage'
+import EventList from '../components/EventComponents/EventList'
+import FriendList from '../components/FriendComponents/FriendList'
+import FriendsPage from '../components/FriendComponents/FriendsPage'
 import NavBar from '../components/NavBar'
-import EventsPage from '../components/EventsPage'
+import EventsPage from '../components/EventComponents/EventsPage'
 
 import {
   decodeToken,

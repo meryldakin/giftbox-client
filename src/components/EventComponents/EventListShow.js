@@ -5,10 +5,10 @@ import { Icon, Segment, Item } from 'semantic-ui-react'
 import moment from 'moment';
 
 
-import LoaderThing from './LoaderThing'
+import LoaderThing from '../LoaderThing'
 import ListComplete from './ListComplete'
-import GiftCard from './GiftCard'
-import AddGiftModal from './AddGiftModal'
+import GiftCard from '../GiftComponents/GiftCard'
+import AddGiftModal from '../GiftComponents/AddGiftModal'
 import AddFriendToListModal from './AddFriendToListModal'
 import EditEventListModal from './EditEventListModal'
 

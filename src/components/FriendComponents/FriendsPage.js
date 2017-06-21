@@ -5,8 +5,8 @@ import { Container, Grid } from 'semantic-ui-react'
 
 
 
-import FriendList from '../components/FriendList'
-import LoaderThing from './LoaderThing'
+import FriendList from './FriendList'
+import LoaderThing from '../LoaderThing'
 import Friend from './Friend'
 
 class FriendsPage extends React.Component {

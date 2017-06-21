@@ -3,8 +3,8 @@ import { withRouter } from 'react-router'
 
 import { Button, Menu, Segment } from 'semantic-ui-react'
 
-import AddFriendModal from './AddFriendModal'
-import AddEventModal from './AddEventModal'
+import AddFriendModal from './FriendComponents/AddFriendModal'
+import AddEventModal from './EventComponents/AddEventModal'
 import giftbox_white from './giftbox_white.png'
 
 class NavBar extends Component {
