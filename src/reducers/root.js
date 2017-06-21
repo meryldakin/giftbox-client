@@ -83,6 +83,33 @@ const reducer = (state=defaultState, action) => {
         ],
         loading: false
       }
+      case "START_ADD_EVENT":
+        return {
+          ...state,
+          loading: true
+        }
+      case 'ADD_EVENT':
+        return{
+          ...state,
+          event_lists: [...state.event_lists, action.payload.event_list],
+          loading: false
+        }
+        case "START_EDIT_EVENT":
+          return {
+            ...state,
+            loading: true
+          }
+        case 'EDIT_EVENT':
+          const eventEditIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
+          return{
+            ...state,
+            event_lists:  [
+              ...state.event_lists.slice(0, eventEditIndex),
+              action.payload.event_list,
+              ...state.event_lists.slice(eventEditIndex + 1),
+            ],
+            loading: false
+          }
     default:
       return state
   }

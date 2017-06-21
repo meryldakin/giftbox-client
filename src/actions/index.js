@@ -69,3 +69,23 @@ export function deleteFriend(params){
     })
   }
 }
+
+export function addEvent(params){
+  return function(dispatch){
+    dispatch({type: "START_ADD_EVENT"})
+    apiHelpers.addEvent(params)
+    .then( data => {
+      dispatch({type: "ADD_EVENT", payload: data})
+    })
+  }
+}
+
+export function editEvent(params){
+  return function(dispatch){
+    dispatch({type: "START_EDIT_EVENT"})
+    apiHelpers.editEvent(params)
+    .then( data => {
+      dispatch({type: "EDIT_EVENT", payload: data})
+    })
+  }
+}

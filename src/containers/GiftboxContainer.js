@@ -55,10 +55,8 @@ class GiftboxContainer extends Component {
   }
 
   handleAddGift = (stateFromAddGift) => {
-
     addGift(stateFromAddGift)
     .then( data => {
-
       this.setState(prevState => {
         return {
           friendships: data.users
@@ -112,32 +110,12 @@ class GiftboxContainer extends Component {
   }
 
   handleAddEvent = (eventState) => {
-
-    addEvent(eventState)
-    .then( data => {
-
-      this.setState(prevState => {
-        return {
-          eventLists: data.event_lists
-        }
-      })
-    })
-    this.props.fetchFriends(this.props.current_user_id)
-
+    this.props.addEvent(eventState)
   }
 
   handleEditEvent = (eventState) => {
-
-    editEvent(eventState)
-    .then( data => {
-      this.setState(prevState => {
-        return {
-          eventLists: data.event_lists
-        }
-      })
-    })
-    this.props.fetchFriends(this.props.current_user_id)
-    }
+    this.props.editEvent(eventState)
+  }
 
   handleAddFriendsToEventList = (eventListParams) => {
     findOrCreateCelebrations(eventListParams)
