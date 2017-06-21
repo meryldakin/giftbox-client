@@ -9,6 +9,7 @@ import {Segment} from 'semantic-ui-react'
 import LoaderThing from '../LoaderThing'
 
 export default function FriendList(props){
+  console.log("props from friend list ", props)
   if (props.friends){
     let friendsList = props.friends.map( friendship => friendship.friend )
 

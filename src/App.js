@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
+import { connect } from 'react-redux'
+
+
 import './App.css'
 import {Container, Grid} from 'semantic-ui-react'
 
 import GiftboxContainer from './containers/GiftboxContainer'
 import Login from './components/LoginComponents/Login'
 import SignUp from './components/LoginComponents/SignUp'
-import { logIn, decodeToken, signUp } from './api'
+import { logIn, signUp } from './api'
 import isAuthenticated from './components/hocs/isAuthenticated'
+import * as actions from './actions'
 
 const AuthedGiftboxContainer = isAuthenticated(GiftboxContainer)
 
@@ -56,14 +60,17 @@ class App extends Component {
 
   componentDidMount(){
     if (localStorage.jwt && this.state.current_user_id === '') {
-       decodeToken({token: localStorage.jwt})
-       .then( data => {
+      this.props.fetchCurrentUser({token: localStorage.jwt})
+    }
+    console.log("after fetch user")
+  }
 
-         this.setState({
-           current_user_id: data
-         })
-        }
-       )
+  componentDidUpdate(){
+    console.log("update component")
+    if(this.props.current_user_id > 0 && this.props.friendships === 0){
+      console.log("current user exists")
+      this.props.fetchFriends(this.props.current_user_id)
+      this.props.fetchEventLists(this.props.current_user_id)
     }
   }
 
@@ -90,10 +97,19 @@ class App extends Component {
           </Container>
           </div>
         }/>
-        <Route path="/" render={() => <AuthedGiftboxContainer current_user_id={this.state.current_user_id}/>} />
+        <Route path="/" render={() => <AuthedGiftboxContainer />} />
       </Switch>
     )
   }
 }
 
-export default withRouter(App)
+const mapStateToProps = (state) => {
+  return {
+    current_user_id: state.current_user_id,
+    friendships: state.friendships,
+    event_lists: state.event_lists,
+    loading: state.loading
+  }
+}
+
+export default withRouter(connect(mapStateToProps, actions)(App))

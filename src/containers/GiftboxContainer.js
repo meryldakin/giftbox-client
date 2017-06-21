@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Switch, Route} from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { Container, Segment, Button, Sidebar,  } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import * as actions from '../actions'
 
 import EventList from '../components/EventComponents/EventList'
 import FriendList from '../components/FriendComponents/FriendList'
@@ -10,7 +12,7 @@ import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventComponents/EventsPage'
 
 import {
-  decodeToken,
+  // fetchCurrentUser,
   fetchFriends,
   fetchEventLists,
   addFriend,
@@ -34,9 +36,7 @@ class GiftboxContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      friendships: [],
       eventLists: [],
-      current_user_id: props.current_user_id,
       events_visible: false,
       friends_visible: false
     }
@@ -44,42 +44,23 @@ class GiftboxContainer extends Component {
   }
 
   makeFetches = (res) => {
-    fetchFriends(res).then( data => this.setState({ friendships: data.user.friendships }))
     fetchEventLists(res).then( data => this.setState({ eventLists: data.event_lists }))
   }
 
   componentDidMount(){
-    decodeToken({token: localStorage.jwt})
-    .then( res => {
-
-      this.makeFetches(res)
-    })
   }
 
   handleEditSubmit = (state, friendID) => {
-
-    editFriend(state)
-    .then( data => {
-      this.setState(prevState => {
-        return {
-          friendships: data.users
-        }
-      })
-      this.props.history.push(`/friends/${friendID}`)
-    })
+    this.props.editFriend(state)
+    this.props.history.push(`/friends/${friendID}`)
   }
 
 
-  handleAddFriend = (state) => {
-      addFriend(state)
-      .then( data => {
-        this.setState(prevState => {
-          return {
-            friendships: data.users
-          }
-      }, this.props.history.push(`/friends/${data.users[data.users.length-1].friend.id}`)
-    )})
-    }
+  handleAddFriend = (friendInfo) => {
+      this.props.addFriend(friendInfo)
+      console.log(friendInfo)
+      this.props.history.push(`/friends/${this.props.friendships[this.props.friendships.length - 1].friend.id}`)
+  }
 
   handleDeleteFriend = (idsFromFriendPage) => {
     let id = idsFromFriendPage.id
@@ -262,7 +243,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
           <Route path="/friends/:id" children={() =>
             <FriendsPage
               events={this.state.eventLists}
-              friendships={this.state.friendships}
+              friendships={this.props.friendships}
               handleEdit={this.handleEditSubmit}
               handlePurchasedGifts={this.handlePurchasedGifts}
               handleDelete={this.handleDeleteFriend}
@@ -273,10 +254,10 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
             /> } />
           <Route path="/events" children={() =>
             <EventsPage
-              events={this.state.eventLists}
+              events={this.props.event_lists}
               handleEditGift={this.handleEditGift}
               handleDeleteGift={this.handleDeleteGift}
-              friendships={this.state.friendships}
+              friendships={this.props.friendships}
               handleAddFriendsToEventList={this.handleAddFriendsToEventList}
               handleAddGift={this.handleAddGift}
               handlePurchasedGifts={this.handlePurchasedGifts}
@@ -295,7 +276,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
                     direction='right'
                     visible={events_visible}
                     icon='labeled' >
-                    <EventList events={this.state.eventLists}/>
+                    <EventList events={this.props.event_lists}/>
                   </Sidebar>
                   <Sidebar
                     animation='overlay'
@@ -303,7 +284,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
                     direction='left'
                     visible={friends_visible}
                     icon='labeled' >
-                    <FriendList friends={this.state.friendships}/>
+                    <FriendList friends={this.props.friendships}/>
                   </Sidebar>
                 <Sidebar.Pusher className="animated fadeIn">
                     <Segment basic padded>
@@ -338,4 +319,14 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
 
 
 }
-export default withRouter(GiftboxContainer)
+
+const mapStateToProps = (state) => (
+  {
+    loading: state.loading,
+    current_user_id: state.current_user_id,
+    friendships: state.friendships,
+    event_lists: state.event_lists
+  }
+)
+
+export default withRouter(connect(mapStateToProps, actions)(GiftboxContainer))

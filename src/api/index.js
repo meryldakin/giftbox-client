@@ -1,5 +1,4 @@
-export function decodeToken(params){
-  console.log(params)
+export function fetchCurrentUser(params){
   return fetch(`http://localhost:3000/decode_token`, {
     headers: {
       'Accept': 'application/json',
@@ -34,10 +33,6 @@ export function signUp(params){
 }
 
 
-export function fetchGifts(){
-  return fetch("http://localhost:3000/gifts")
-    .then( res => res.json() )
-}
 export function fetchFriends(params){
   return fetch(`http://localhost:3000/users/${params}`)
     .then( res => res.json() )
@@ -58,6 +53,8 @@ export function addFriend(params){
     body: JSON.stringify(params)
   }).then( res => res.json() )
 }
+
+
 export function editFriend(params){
   return fetch("http://localhost:3000/edit_friend", {
     headers: {
