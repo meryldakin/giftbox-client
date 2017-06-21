@@ -59,3 +59,13 @@ export function editFriend(params){
     })
   }
 }
+
+export function deleteFriend(params){
+  return function(dispatch){
+    dispatch({type: "START_DELETE_FRIEND"})
+    apiHelpers.deleteFriend(params)
+    .then( data => {
+      dispatch({type: "DELETE_FRIEND", payload: data})
+    })
+  }
+}

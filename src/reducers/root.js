@@ -58,13 +58,28 @@ const reducer = (state=defaultState, action) => {
         loading: true
       }
     case 'EDIT_FRIEND':
-      const removalIndex = state.friendships.findIndex(friendship => friendship.friend.id === action.payload.friendship.friend.id);
+      const friendEditIndex = state.friendships.findIndex(friendship => friendship.friend.id === action.payload.friendship.friend.id);
       return{
         ...state,
         friendships:  [
-          ...state.friendships.slice(0, removalIndex),
+          ...state.friendships.slice(0, friendEditIndex),
           action.payload.friendship,
-          ...state.friendships.slice(removalIndex + 1),
+          ...state.friendships.slice(friendEditIndex + 1),
+        ],
+        loading: false
+      }
+    case "START_DELETE_FRIEND":
+      return {
+        ...state,
+        loading: true
+      }
+    case 'DELETE_FRIEND':
+      const friendRemovalIndex = state.friendships.findIndex(friendship => friendship.friend.id === action.payload);
+      return{
+        ...state,
+        friendships:  [
+          ...state.friendships.slice(0, friendRemovalIndex),
+          ...state.friendships.slice(friendRemovalIndex + 1),
         ],
         loading: false
       }

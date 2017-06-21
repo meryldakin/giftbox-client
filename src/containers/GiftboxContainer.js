@@ -12,9 +12,6 @@ import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventComponents/EventsPage'
 
 import {
-  // fetchCurrentUser,
-  fetchFriends,
-  fetchEventLists,
   addFriend,
   editFriend,
   deleteFriend,
@@ -28,9 +25,6 @@ import {
   deleteFriendFromList,
   editExchangeCompleted,
   editCompletedList } from '../api'
-// import isAuthenticated from '../components/hocs/isAuthenticated'
-//
-// const AuthedFriendsPage = isAuthenticated(FriendsPage)
 
 class GiftboxContainer extends Component {
   constructor(props){
@@ -43,13 +37,6 @@ class GiftboxContainer extends Component {
 
   }
 
-  makeFetches = (res) => {
-    fetchEventLists(res).then( data => this.setState({ eventLists: data.event_lists }))
-  }
-
-  componentDidMount(){
-  }
-
   handleEditSubmit = (state, friendID) => {
     this.props.editFriend(state)
     this.props.history.push(`/friends/${friendID}`)
@@ -58,21 +45,13 @@ class GiftboxContainer extends Component {
 
   handleAddFriend = (friendInfo) => {
       this.props.addFriend(friendInfo)
-      console.log(friendInfo)
       this.props.history.push(`/friends/${this.props.friendships[this.props.friendships.length - 1].friend.id}`)
   }
 
   handleDeleteFriend = (idsFromFriendPage) => {
     let id = idsFromFriendPage.id
-
-    deleteFriend({current_user_id: this.props.current_user_id, id: id})
-    .then( data => {
-      this.setState(prevState => {
-        return {
-          friendships: data.users
-        }
-      }, this.props.history.push(`/friends/${data.users[0].friend.id}}`))
-    })
+    this.props.deleteFriend({current_user_id: this.props.current_user_id, id: id})
+    this.props.history.push(`/friends/${this.props.friendships[0].friend.id}}`)
   }
 
   handleAddGift = (stateFromAddGift) => {
@@ -86,12 +65,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchEventLists(this.props.current_user_id)
-      .then( data => {
-        this.setState({
-        eventLists: data.event_lists
-      })
-    })
+    this.props.fetchEventLists(this.props.current_user_id)
 
 
   }
@@ -106,10 +80,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchEventLists(this.props.current_user_id)
-      .then( data => this.setState({
-        eventLists: data.event_lists
-      }))
+    this.props.fetchEventLists(this.props.current_user_id)
   }
 
   handleDeleteGift = (exchange_id) => {
@@ -123,14 +94,7 @@ class GiftboxContainer extends Component {
         }
       })
     }).then(
-      fetchFriends(this.props.current_user_id)
-      .then( data => {
-        return this.setState(prevState => {
-          return {
-            friendships: data.user
-          }
-        })
-      })
+      this.props.fetchFriends(this.props.current_user_id)
     )
   }
 
@@ -143,10 +107,8 @@ class GiftboxContainer extends Component {
         eventLists: data.exchanges
       })
     })
-    fetchFriends(this.props.current_user_id)
-      .then( data => this.setState({
-        friendships: data.user.friendships
-      }))
+    this.props.fetchFriends(this.props.current_user_id)
+
   }
 
   handleAddEvent = (eventState) => {
@@ -160,10 +122,8 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchFriends(this.props.current_user_id)
-      .then( data => this.setState({
-        friendships: data.user.friendships
-      }))
+    this.props.fetchFriends(this.props.current_user_id)
+
   }
 
   handleEditEvent = (eventState) => {
@@ -176,11 +136,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchFriends(this.props.current_user_id)
-      .then( data => this.setState({
-        friendships: data.user.friendships
-      }))
-
+    this.props.fetchFriends(this.props.current_user_id)
     }
 
   handleAddFriendsToEventList = (eventListParams) => {
@@ -192,10 +148,7 @@ class GiftboxContainer extends Component {
         }
       })
     })
-    fetchFriends(this.props.current_user_id)
-      .then( data => this.setState({
-        friendships: data.user.friendships
-      }))
+    this.props.fetchFriends(this.props.current_user_id)
   }
 
 handleDeleteFriendFromList = (celebration_id) => {
@@ -207,10 +160,7 @@ handleDeleteFriendFromList = (celebration_id) => {
       }
     })
   })
-  fetchFriends(this.props.current_user_id)
-    .then( data => this.setState({
-      friendships: data.user.friendships
-    }))
+  this.props.fetchFriends(this.props.current_user_id)
 }
 
 handleCompletedList = (completedBoolean, event_id) => {
@@ -222,10 +172,7 @@ handleCompletedList = (completedBoolean, event_id) => {
       }
     })
   })
-  fetchFriends(this.props.current_user_id)
-    .then( data => this.setState({
-      friendships: data.user.friendships
-    }))
+  this.props.fetchFriends(this.props.current_user_id)
 }
 
 toggleEventVisibility = () => this.setState({ events_visible: !this.state.events_visible })
