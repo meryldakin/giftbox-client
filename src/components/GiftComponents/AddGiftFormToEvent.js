@@ -93,7 +93,7 @@ class AddGiftForm extends Component {
             <div>
               {this.state.image === '' ? null :
               <div>
-                <p>{this.state.image.name}</p>
+                <p>{this.state.uploadedFile.name}</p>
                 <img src={this.state.image} />
               </div>}
             </div>

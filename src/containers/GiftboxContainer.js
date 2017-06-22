@@ -69,17 +69,12 @@ class GiftboxContainer extends Component {
     this.props.fetchEventLists(this.props.current_user_id)
   }
 
-  handlePurchasedGifts = (event, propsFromGift) => {
+  handlePurchasedGifts = (propsFromGift) => {
+    console.log("PROPS FROM GIFT", propsFromGift)
     let checked = propsFromGift.checked
-    let exchange_id = propsFromGift.value
-    editExchangeCompleted({exchange_id: exchange_id, checked: checked, current_user_id: this.props.current_user_id})
-    .then( data => {
-      this.setState({
-        eventLists: data.exchanges
-      })
-    })
-    this.props.fetchFriends(this.props.current_user_id)
-
+    let event = propsFromGift.event
+    let exchange_id = propsFromGift.exchange_id
+    this.props.editExchangeCompleted({exchange_id: exchange_id, event: event, checked: checked})
   }
 
   handleAddEvent = (eventState) => {
@@ -168,7 +163,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
                     <Button.Group>
                       <Button basic onClick={this.toggleFriendVisibility}>Friends</Button>
                       <Button.Or />
-                      <Button basic onClick={this.toggleEventVisibility}>Event Lists</Button>
+                      <Button basic onClick={this.toggleEventVisibility}>Gift Lists</Button>
                     </Button.Group>
                     </div>
                     <Segment basic padded>

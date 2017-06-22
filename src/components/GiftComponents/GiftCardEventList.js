@@ -7,7 +7,7 @@ import LoaderThing from '../LoaderThing'
 
 import moment from 'moment';
 
-class GiftCard extends React.Component {
+class GiftCardEventList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -54,9 +54,6 @@ class GiftCard extends React.Component {
                   <Grid.Row >
                     <Segment basic>
                     </Segment>
-                  </Grid.Row>
-                  <Grid.Row>
-                  <h4>Give it for: <Link to={event ? `/events/${event.id}` : '#' }>{event ? event.name : null}</Link></h4>
                   </Grid.Row>
                   <Grid.Row >
                   <h4>Get it from: {gift.link ? gift.link : null}</h4>
@@ -110,4 +107,4 @@ class GiftCard extends React.Component {
 
 }
 
-export default GiftCard
+export default GiftCardEventList

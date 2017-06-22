@@ -45,9 +45,9 @@ class AddFriendToListForm extends Component {
     return (
 
         <Form onSubmit={this.handleSubmit}>
-          <Form.Select>
-          <Dropdown placeholder='Search and select friends to add to list' name="friend_ids" fluid multiple search selection options={friendNames} onChange={this.handleChange}/>
-          </Form.Select>
+
+          <Dropdown placeholder='Select friends' name="friend_ids" fluid multiple search selection options={friendNames} onChange={this.handleChange}/>
+
           <Button color="blue" icon='checkmark' labelPosition='right' content="Add Friends to List" onClick={this.close} />
         </Form>
 

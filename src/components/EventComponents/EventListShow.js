@@ -14,8 +14,33 @@ import EditEventListModal from './EditEventListModal'
 
 
 class EventListShow extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      complete: false
+    }
+  }
+
+  checkComplete = () => {
+    let exchanges = this.props.event.celebrations.map( c => c.exchanges )
+    let exchangeCompletedArray = exchanges.map( exs => {
+      return exs.length > 0 ? exs.map( ex => {
+        return ex.completed === false ? false : true  } )
+        : false } ).reduce( (cum, curr) => {
+          return cum.concat(curr)
+        }, [])
+    let completedList = exchangeCompletedArray.includes(false) || exchangeCompletedArray.length === 0 ? false : true
+    this.setState({
+      complete: completedList
+    })
+  }
+
+  componentDidMount(){
+    this.checkComplete()
+  }
 
   render(){
+    console.log("EVENT LIST SHOW PROPS", this.props)
     let current_user_id = this.props.current_user_id
 
     if(this.props.event){
@@ -26,8 +51,11 @@ class EventListShow extends React.Component {
       // RENDERS OUT THE GIFT CARDS WITH PROPER DATA
       let friends = this.props.event.friends.map( f => {
         let giftCards = celebrations.map( c => {
-        if( typeof(c.friendship) === 'undefined'){
-        }
+        if( typeof(c.friendship) === 'undefined' || c.friendship === null){
+          return null
+        } else {
+
+
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
 
@@ -47,12 +75,12 @@ class EventListShow extends React.Component {
                 handleDeleteGift={this.props.handleDeleteGift}
                 current_user_id={this.props.current_user_id}/>
 
-              )
-            })
+                )
+              })
+            }
           }
         })
         let friendCelebration = celebrations.find( c =>  c.friendship.friend_id === f.id )
-        console.log("friendCelebration", friendCelebration)
         return (
           <Segment >
             <div className="float-right">
@@ -79,7 +107,7 @@ class EventListShow extends React.Component {
         <Segment basic>
           <Item.Group>
             <Item>
-              <h1><ListComplete name={event.name} celebrations={this.props.event.celebrations} handleCompletedList={this.handleCompletedList}/></h1>
+              <h1><ListComplete completedList={this.state.complete}/></h1>
               <Item.Content verticalAlign='middle'>
                 <Item.Extra>
                 <div className="float-right"><EditEventListModal
@@ -92,7 +120,7 @@ class EventListShow extends React.Component {
                 </Item.Extra>
                 <Item.Header><h1>{event.name}</h1></Item.Header>
                 <Item.Description><h3><Icon name="calendar"/>{event.date !== null ? moment(event.date).format("dddd MMMM Do, YYYY") : "Anytime!"}</h3>
-                <h2 className="gold-font">{moment(event.date).fromNow()}!</h2>
+                <h2 className="gold-font">{event.date ? moment(event.date).fromNow() : null }</h2>
                 </Item.Description>
               </Item.Content>
             </Item>

@@ -125,7 +125,7 @@ export function addGift(params){
     dispatch({type: "START_ADD_GIFT"})
     apiHelpers.addGift(params)
     .then( data => {
-      dispatch({type: "ADD_GIFT", payload: data})
+      dispatch({type: "ADD_GIFT", payload: data, event_list_id: params.event_list_id})
     })
   }
 }
@@ -136,6 +136,16 @@ export function deleteGift(params){
     apiHelpers.deleteGift(params)
     .then( data => {
       dispatch({type: "DELETE_GIFT", payload: data})
+    })
+  }
+}
+
+export function editExchangeCompleted(params){
+  return function(dispatch){
+    dispatch({type: "START_EXCHANGE_COMPLETED"})
+    apiHelpers.editExchangeCompleted(params)
+    .then( data => {
+      dispatch({type: "EXCHANGE_COMPLETED", payload: data})
     })
   }
 }

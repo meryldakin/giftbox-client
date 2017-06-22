@@ -165,12 +165,27 @@ const reducer = (state=defaultState, action) => {
           }
         case 'ADD_GIFT':
           const friendshipGiftIndex = state.friendships.findIndex(friendship => friendship.id === action.payload.friendship.id);
+          const eventListAddGift = state.event_lists.findIndex(event => event.id === action.event_list_id)
+          const addedGift = action.payload.friendship.celebrations.find( c => {
+            return c.event_list.id === action.event_list_id
+          })
+          console.log("ADDED GIFT", addedGift)
+          console.log(" eventListAddGift",  eventListAddGift)
           return{
             ...state,
             friendships: [
               ...state.friendships.slice(0, friendshipGiftIndex),
               action.payload.friendship,
               ...state.friendships.slice(friendshipGiftIndex + 1),
+            ],
+            event_lists: [
+              ...state.event_lists.slice(0, eventListAddGift),
+              state.event_lists[eventListAddGift],
+              // Object.assign({},
+              //   state.event_lists[eventListAddGift],
+              //   addedGift
+              // ),
+              ...state.event_lists.slice(eventListAddGift + 1),
             ],
             loading: false
           }
@@ -190,6 +205,22 @@ const reducer = (state=defaultState, action) => {
             ],
             loading: false
           }
+          case "START_EXCHANGE_COMPLETED":
+            return {
+              ...state,
+              loading: true
+            }
+          case 'EXCHANGE_COMPLETED':
+            const exchangeCompletedIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.id);
+            return {
+              ...state,
+              event_lists:  [
+                ...state.event_lists.slice(0, exchangeCompletedIndex),
+                action.payload,
+                ...state.event_lists.slice(exchangeCompletedIndex + 1),
+              ],
+              loading: false
+            }
 
     default:
       return state

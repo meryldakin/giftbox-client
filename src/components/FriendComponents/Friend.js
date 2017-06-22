@@ -80,7 +80,8 @@ class Friend extends React.Component {
                     </Switch>
                   </Grid.Column>
                   <Grid.Column width={4}>
-                    <Link to="/events/2"><img src={rightChevronGold}/></Link>
+                    <Link to="/events/2"><img src={rightChevronGold}/>
+                    <h3 className="gold-font">To Gift Lists</h3></Link>
                   </Grid.Column>
               </Grid.Row>
             </Grid>

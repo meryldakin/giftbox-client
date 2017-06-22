@@ -35,7 +35,8 @@ class EventsPage extends React.Component {
                   <Segment basic padded>
                   </Segment>
 
-                  <Link to="/friends/148"><img src={leftChevronGold}/></Link>
+                  <Link to="/friends/148"><img src={leftChevronGold}/>
+                  <h3 className="gold-font"> To Friends List </h3></Link>
 
                   </Grid.Column>
                   <Grid.Column floated="right" width={8} className="animated fadeIn">
