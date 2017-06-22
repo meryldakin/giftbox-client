@@ -115,7 +115,7 @@ export function deleteFriendFromList(params){
     dispatch({type: "START_DELETE_FRIEND_FROM_LIST"})
     apiHelpers.deleteFriendFromList(params)
     .then( data => {
-      dispatch({type: "DELETE_FRIEND_FROM_LIST", payload: data})
+      dispatch({type: "DELETE_FRIEND_FROM_LIST", payload: data, event_list: params.event})
     })
   }
 }

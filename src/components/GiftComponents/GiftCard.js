@@ -75,7 +75,7 @@ class GiftCard extends React.Component {
                         handleEditGift={this.props.handleEditGift}
                         friend={friend}
                         current_user_id={this.props.current_user_id} />
-                        <a href="#" onClick={function(){deleteGift({exchange_id: exchange_id, friend: friend})}}><Icon name="delete"/></a>
+                        <a href="#" onClick={function(){deleteGift({exchange_id: exchange_id, friend: friend, event: event})}}><Icon name="delete"/></a>
                         </Grid.Column>
                   </Grid.Row>
                   <Grid.Row>

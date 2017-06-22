@@ -196,12 +196,16 @@ const reducer = (state=defaultState, action) => {
           }
         case 'DELETE_GIFT':
           const deleteGiftIndex = state.friendships.findIndex(friendship => friendship.id === action.payload.friendship.id);
+
           return{
             ...state,
             friendships: [
               ...state.friendships.slice(0, deleteGiftIndex),
               action.payload.friendship,
               ...state.friendships.slice(deleteGiftIndex + 1),
+            ],
+            event_lists: [
+              ...state.event_lists
             ],
             loading: false
           }

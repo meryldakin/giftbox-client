@@ -14,7 +14,7 @@ import EventsPage from '../components/EventComponents/EventsPage'
 import {
   editGift,
   editExchange,
-  editExchangeCompleted,
+editExchangeCompleted,
   } from '../api'
 
 class GiftboxContainer extends Component {
@@ -65,7 +65,7 @@ class GiftboxContainer extends Component {
   handleDeleteGift = (dataFromGift) => {
     let friend = dataFromGift.friend
     let exchange = dataFromGift.exchange_id
-    this.props.deleteGift({exchange_id: exchange, current_user_id: this.props.current_user_id, friend: friend})
+    this.props.deleteGift({exchange_id: exchange, current_user_id: this.props.current_user_id, friend: friend, event: dataFromGift.event})
     this.props.fetchEventLists(this.props.current_user_id)
   }
 
@@ -74,7 +74,7 @@ class GiftboxContainer extends Component {
     let checked = propsFromGift.checked
     let event = propsFromGift.event
     let exchange_id = propsFromGift.exchange_id
-    this.props.editExchangeCompleted({exchange_id: exchange_id, event: event, checked: checked})
+    editExchangeCompleted({exchange_id: exchange_id, event: event, checked: checked})
   }
 
   handleAddEvent = (eventState) => {

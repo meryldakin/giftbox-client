@@ -29,7 +29,7 @@ class EditGiftForm extends Component {
     this.setState({
       item: this.props.gift.item,
       event_list_id: this.props.event.id,
-      price: this.props.gift.price,
+      image: this.props.gift.image,
       link: this.props.gift.link,
       friend_id: this.props.friend.id,
       exchange_id: this.props.exchange_id,
@@ -99,7 +99,7 @@ class EditGiftForm extends Component {
             <div>
               {this.state.image === '' ? null :
               <div>
-                <p>{this.state.uploadedFile.name}</p>
+                <p>{this.state.image.name}</p>
                 <img src={this.state.image} />
               </div>}
             </div>
