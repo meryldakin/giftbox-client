@@ -123,19 +123,10 @@ class GiftboxContainer extends Component {
 
   handleAddFriendsToEventList = (eventListParams) => {
     this.props.findOrCreateCelebrations(eventListParams)
-
   }
 
 handleDeleteFriendFromList = (celebration_id) => {
-  deleteFriendFromList(celebration_id)
-  .then( data => {
-    this.setState(prevState => {
-    return {
-      eventLists: data.celebrations
-      }
-    })
-  })
-  this.props.fetchFriends(this.props.current_user_id)
+  this.props.deleteFriendFromList(celebration_id)
 }
 
 toggleEventVisibility = () => this.setState({ events_visible: !this.state.events_visible })

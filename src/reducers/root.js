@@ -133,9 +133,6 @@ const reducer = (state=defaultState, action) => {
           }
         case 'FIND_CREATE_CELEBRATIONS':
           const eventIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
-          // find the event to add celebrations to
-          // add celebrations to that event if they dont exist already
-
           return{
             ...state,
             event_lists: [
@@ -145,6 +142,23 @@ const reducer = (state=defaultState, action) => {
             ],
             loading: false
           }
+        case 'START_DELETE_FRIEND_FROM_LIST':
+          return {
+            ...state,
+            loading: true
+          }
+        case 'DELETE_FRIEND_FROM_LIST':
+          const eventDeleteIndex = state.event_lists.findIndex(event_list => event_list.id === action.payload.event_list.id);
+          return {
+            ...state,
+            event_lists: [
+              ...state.event_lists.slice(0, eventDeleteIndex),
+              action.payload.event_list,
+              ...state.event_lists.slice(eventDeleteIndex + 1),
+            ],
+            loading: false
+          }
+
     default:
       return state
   }
