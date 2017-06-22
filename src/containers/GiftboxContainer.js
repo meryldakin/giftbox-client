@@ -21,7 +21,6 @@ class GiftboxContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      eventLists: [],
       events_visible: false,
       friends_visible: false
     }

@@ -7,7 +7,7 @@ import LoaderThing from '../LoaderThing'
 
 import moment from 'moment';
 
-export default class GiftCard extends React.Component {
+class GiftCard extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -108,3 +108,5 @@ export default class GiftCard extends React.Component {
   }
 
 }
+
+export default GiftCard
