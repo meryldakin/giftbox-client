@@ -158,6 +158,38 @@ const reducer = (state=defaultState, action) => {
             ],
             loading: false
           }
+        case "START_ADD_GIFT":
+          return {
+            ...state,
+            loading: true
+          }
+        case 'ADD_GIFT':
+          const friendshipGiftIndex = state.friendships.findIndex(friendship => friendship.id === action.payload.friendship.id);
+          return{
+            ...state,
+            friendships: [
+              ...state.friendships.slice(0, friendshipGiftIndex),
+              action.payload.friendship,
+              ...state.friendships.slice(friendshipGiftIndex + 1),
+            ],
+            loading: false
+          }
+        case "START_DELETE_GIFT":
+          return {
+            ...state,
+            loading: true
+          }
+        case 'DELETE_GIFT':
+          const deleteGiftIndex = state.friendships.findIndex(friendship => friendship.id === action.payload.friendship.id);
+          return{
+            ...state,
+            friendships: [
+              ...state.friendships.slice(0, deleteGiftIndex),
+              action.payload.friendship,
+              ...state.friendships.slice(deleteGiftIndex + 1),
+            ],
+            loading: false
+          }
 
     default:
       return state

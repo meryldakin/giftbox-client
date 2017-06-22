@@ -12,19 +12,10 @@ import NavBar from '../components/NavBar'
 import EventsPage from '../components/EventComponents/EventsPage'
 
 import {
-  addFriend,
-  editFriend,
-  deleteFriend,
-  addGift,
   editGift,
   editExchange,
-  deleteGift,
-  addEvent,
-  editEvent,
-  findOrCreateCelebrations,
-  deleteFriendFromList,
   editExchangeCompleted,
-  editCompletedList } from '../api'
+  } from '../api'
 
 class GiftboxContainer extends Component {
   constructor(props){
@@ -55,17 +46,8 @@ class GiftboxContainer extends Component {
   }
 
   handleAddGift = (stateFromAddGift) => {
-    addGift(stateFromAddGift)
-    .then( data => {
-      this.setState(prevState => {
-        return {
-          friendships: data.users
-        }
-      })
-    })
+    this.props.addGift(stateFromAddGift)
     this.props.fetchEventLists(this.props.current_user_id)
-
-
   }
 
   handleEditGift = (stateFromEditGiftForm, friendID) => {
@@ -81,19 +63,11 @@ class GiftboxContainer extends Component {
     this.props.fetchEventLists(this.props.current_user_id)
   }
 
-  handleDeleteGift = (exchange_id) => {
-
-    let exchange = exchange_id.exchange_id
-    deleteGift({exchange_id: exchange, current_user_id: this.props.current_user_id})
-    .then( data => {
-      this.setState(prevState => {
-        return {
-          event_lists: data.users
-        }
-      })
-    }).then(
-      this.props.fetchFriends(this.props.current_user_id)
-    )
+  handleDeleteGift = (dataFromGift) => {
+    let friend = dataFromGift.friend
+    let exchange = dataFromGift.exchange_id
+    this.props.deleteGift({exchange_id: exchange, current_user_id: this.props.current_user_id, friend: friend})
+    this.props.fetchEventLists(this.props.current_user_id)
   }
 
   handlePurchasedGifts = (event, propsFromGift) => {
@@ -143,7 +117,7 @@ toggleFriendVisibility = () => this.setState({ friends_visible: !this.state.frie
         <Switch>
           <Route path="/friends/:id" children={() =>
             <FriendsPage
-              events={this.state.eventLists}
+              events={this.props.event_lists}
               friendships={this.props.friendships}
               handleEdit={this.handleEditSubmit}
               handlePurchasedGifts={this.handlePurchasedGifts}

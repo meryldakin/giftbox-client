@@ -119,3 +119,23 @@ export function deleteFriendFromList(params){
     })
   }
 }
+
+export function addGift(params){
+  return function(dispatch){
+    dispatch({type: "START_ADD_GIFT"})
+    apiHelpers.addGift(params)
+    .then( data => {
+      dispatch({type: "ADD_GIFT", payload: data})
+    })
+  }
+}
+
+export function deleteGift(params){
+  return function(dispatch){
+    dispatch({type: "START_DELETE_GIFT"})
+    apiHelpers.deleteGift(params)
+    .then( data => {
+      dispatch({type: "DELETE_GIFT", payload: data})
+    })
+  }
+}

@@ -30,6 +30,7 @@ export default class GiftCard extends React.Component {
 
   render (){
     if (this.props){
+      let friend = this.props.friend
       let gift = this.props.gift
       let event = this.props.eventList
       let exchange_id = this.props.exchange.id
@@ -71,9 +72,9 @@ export default class GiftCard extends React.Component {
                         event={event}
                         completed={completed}
                         handleEditGift={this.props.handleEditGift}
-                        friend={this.props.friend}
+                        friend={friend}
                         current_user_id={this.props.current_user_id} />
-                        <a href="#" onClick={function(){deleteGift({exchange_id: exchange_id})}}><Icon name="delete"/></a>
+                        <a href="#" onClick={function(){deleteGift({exchange_id: exchange_id, friend: friend})}}><Icon name="delete"/></a>
                         </Grid.Column>
                   </Grid.Row>
                   <Grid.Row>

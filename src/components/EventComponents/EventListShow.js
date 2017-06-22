@@ -27,8 +27,6 @@ class EventListShow extends React.Component {
       let friends = this.props.event.friends.map( f => {
         let giftCards = celebrations.map( c => {
         if( typeof(c.friendship) === 'undefined'){
-          // debugger
-
         }
           if (c.friendship.friend_id === f.id) {
             return c.exchanges.map( e => {
